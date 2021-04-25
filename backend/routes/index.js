@@ -1,5 +1,8 @@
 const express = require('express');
 const router = express.Router();
+const apiRouter = require('./api');
+
+router.use('/', apiRouter);
 
 // Test Route
 router.get('/hello/world', function (req, res) {
@@ -8,8 +11,3 @@ router.get('/hello/world', function (req, res) {
 });
 
 module.exports = router;
-// router.get('/hello/world', function (req, res) {
-//     console.log(`-------------------------------------------------------`, req.csrfToken)
-//     res.cookie('XSRF-TOKEN', req.csrfToken());
-//     res.send('Hello World!');
-// })
