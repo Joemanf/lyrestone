@@ -1,27 +1,27 @@
 import React from 'react';
-import { Redirect } from 'react-router';
-import { TransformWrapper, TransformComponent } from "react-zoom-pan-pinch";
+import { NavLink } from 'react-router-dom';
+// import { Redirect } from 'react-router';
 
 import './Splash.css'
+import logo from '../../images/lyrestone.png'
 
 
 function Splash() {
 
-    const clickRedir = () => {
-        return <Redirect to={'/hey'} />
-    }
     return (
-        <div className='border'>
-            <TransformWrapper>
-                <TransformComponent>
-                    <div>
-                        <div className='red'>Yeah</div>
-                        <div>Okay</div>
-                        <div>Sure</div>
-                        <div>AMARO.</div>
+        <div className='wrap'>
+            <div className='logo_links_container'>
+                <div className='logo_container'>
+                    <div className='logo_container_inner'>
+                        <img src={logo} alt='lyrestone logo' className='logo_image'></img>
                     </div>
-                </TransformComponent>
-            </TransformWrapper>
+                    <h1 className='logo_text'>Lyrestone</h1>
+                </div>
+                <div className='links'>
+                    <NavLink to='/login'>Log In</NavLink>
+                    <NavLink to='/signup'>Sign Up</NavLink>
+                </div>
+            </div>
         </div>
     )
 }

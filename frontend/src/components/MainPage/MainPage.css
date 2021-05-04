@@ -1,0 +1,9 @@
+.greater_border {
+    border: 1px solid white;
+    margin: 0 auto;
+    padding: .5em;
+    display: grid;
+    grid-template-columns: 1fr 4fr;
+    width: 95%;
+    height: 90vh;
+}

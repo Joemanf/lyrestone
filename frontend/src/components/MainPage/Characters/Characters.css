@@ -1,0 +1,10 @@
+.characters_container {
+    border: 1px solid green;
+    margin: .5em;
+}
+
+.character_header{
+    display: flex;
+    justify-content: space-between;
+    margin: .5em 1em;
+}

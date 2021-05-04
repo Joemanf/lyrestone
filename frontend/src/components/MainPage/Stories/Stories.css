@@ -1,0 +1,10 @@
+.stories_container {
+    border: 1px solid red;
+    margin: .5em;
+}
+
+.story_header{
+    display: flex;
+    justify-content: space-between;
+    margin: .5em 1em;
+}
