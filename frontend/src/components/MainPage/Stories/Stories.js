@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 import './Stories.css'
 
@@ -12,14 +13,6 @@ function Stories() {
                 <button>Make a story</button>
             </div>
         </div>
-        // <div className='characters_container'>
-        //     <div className='character_header'>
-        //         <h2>
-        //             Characters:
-        //         </h2>
-        //         <button disabled={true}>Add a character</button>
-        //     </div>
-        // </div>
     )
 }
 

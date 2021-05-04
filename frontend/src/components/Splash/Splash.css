@@ -37,6 +37,11 @@ body{
     animation-iteration-count: 1;
     animation-fill-mode: forwards;
     position: relative;
+    transition: all .2s ease-out;
+}
+
+.logo_text:hover{
+    text-shadow: 1px 1px 3px gray;
 }
 
 @keyframes lyrestone_text_intro {
@@ -117,4 +122,12 @@ body{
     text-decoration: none;
     border: 1px solid white;
     padding: .5em;
+    position: relative;
+    top: 0;
+    transition: all .2s ease-out;
+}
+
+.links a:hover {
+    box-shadow: 0 0 8px white;
+    top: 3px;
 }
