@@ -42,18 +42,54 @@ export const restoreUser = () => async dispatch => {
 
 // Sign up user
 export const signup = (user) => async (dispatch) => {
-    const { username, email, password } = user;
-    const response = await csrfFetch("/api/users", {
-        method: "POST",
-        body: JSON.stringify({
-            username,
-            email,
-            password,
-        }),
-    });
-    const data = await response.json();
-    dispatch(setUser(data.user));
-    return response;
+    const { image, username, email, password } = user;
+    // const formData = new FormData();
+    // formData.append("username", username);
+    // formData.append("email", email);
+    // formData.append("password", password);
+
+    // // for multiple files
+    // if (images && images.length !== 0) {
+    //     for (let i = 0; i < images.length; i++) {
+    //         formData.append("images", images[i]);
+    //     }
+    // }
+
+    // // for single file
+    // if (image) formData.append("image", image);
+
+    if (image) {
+        console.log('Time to hit', image)
+        const response = await csrfFetch("/api/users", {
+            method: "POST",
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                username,
+                email,
+                password,
+                image
+            }),
+        });
+        console.log('Time to work')
+        const data = await response.json();
+        dispatch(setUser(data.user));
+        return response;
+    }
+    else {
+        const response = await csrfFetch("/api/users", {
+            method: "POST",
+            header: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                username,
+                email,
+                password,
+                // throw a placeholder image here
+            }),
+        });
+        const data = await response.json();
+        dispatch(setUser(data.user));
+        return response;
+    }
 };
 
 // Log out

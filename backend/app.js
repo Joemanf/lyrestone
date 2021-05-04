@@ -4,6 +4,7 @@ const cors = require('cors'); // Cross-Origin Resource Sharing, used for 2 serve
 const csurf = require('csurf');
 const helmet = require('helmet'); // Sets different http headers, like a helmet
 const cookieParser = require('cookie-parser');
+// const bodyParser = require("body-parser"); // Body Parser is deprecated
 const { ValidationError } = require('sequelize');
 
 const { environment } = require('./config');
@@ -16,7 +17,8 @@ const app = express();
 // Basic Middleware
 app.use(morgan('dev'));
 app.use(cookieParser());
-app.use(express.json());
+app.use(express.urlencoded({ extended: false })); // Body Parser is deprecated
+app.use(express.json()); // Body Parser is deprecated
 
 // Security Middleware
 if (!isProduction) {

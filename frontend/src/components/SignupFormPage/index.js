@@ -10,6 +10,7 @@ function SignupFormPage() {
     const sessionUser = useSelector((state) => state.session.user); // Grabbing logged in user
     const [email, setEmail] = useState("");
     const [username, setUsername] = useState("");
+    const [image, setImage] = useState(null)
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
     const [errors, setErrors] = useState([]);
@@ -20,13 +21,19 @@ function SignupFormPage() {
         e.preventDefault();
         if (password === confirmPassword) {
             setErrors([]);
-            return dispatch(sessionActions.signup({ email, username, password }))
+            return dispatch(sessionActions.signup({ image, email, username, password }))
                 .catch(async (res) => {
-                    const data = await res.json();
+                    console.log('res in signup', res)
+                    const data = await res.json(); // Bug here (Maybe), fix later
                     if (data && data.errors) setErrors(data.errors);
                 });
         }
         return setErrors(['Confirm Password field must be the same as the Password field']);
+    };
+
+    const updateFile = (e) => {
+        const file = e.target.files[0];
+        if (file) setImage(file);
     };
 
     return (
@@ -51,6 +58,9 @@ function SignupFormPage() {
                     onChange={(e) => setUsername(e.target.value)}
                     required
                 />
+            </label>
+            <label>
+                <input type="file" onChange={updateFile} />
             </label>
             <label>
                 Password
