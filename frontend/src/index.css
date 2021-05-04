@@ -10,6 +10,24 @@
 	/* vertical-align: baseline; */
 }
 
+button {
+	background-color: #191919;
+	color: white;
+	border: 1px solid white;
+	/* box-shadow: 0 0 4px white; */
+	cursor: pointer;
+	font-size: large;
+	position: relative;
+	transition: all .2s ease-out;
+	box-shadow: 0;
+    top: 0;
+}
+
+button:hover{
+	box-shadow: 0 0 8px white;
+    top: 3px;
+}
+
 /* The following is from:
    http://meyerweb.com/eric/tools/css/reset/ 
    v2.0 | 20110126
