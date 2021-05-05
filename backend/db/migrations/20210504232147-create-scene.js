@@ -15,7 +15,7 @@ module.exports = {
       },
       title: {
         allowNull: false,
-        type: Sequelize.STRING(50)
+        type: Sequelize.STRING(100)
       },
       body: {
         allowNull: false,
