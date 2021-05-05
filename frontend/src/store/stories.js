@@ -16,24 +16,30 @@ const getStories = (story) => {
 export const getAllStories = () => async (dispatch) => {
     const response = await csrfFetch('/api/stories');
     const data = await response.json();
-    dispatch(getStories(data));
+    console.log('Data in getAllStories', data)
+    dispatch(getStories(data.stories));
     return response;
 };
 
 
 // Reducer
-const initialState = { stories: null };
+const initialState = { stories: {} };
 
-const sessionReducer = (state = initialState, action) => {
+const storiesReducer = (state = initialState, action) => {
     let newState;
     switch (action.type) {
         case GET_STORIES:
+            console.log('Action payload', action.payload)
             newState = Object.assign({}, state); // Always copy, never alter
-            newState.stories = action.payload;
+            action.payload.forEach(story => {
+                console.log(newState.stories, story.id)
+                newState.stories[story.id] = story;
+            })
+            console.log('THE NEW STATE: ', newState)
             return newState;
         default:
             return state;
     }
 };
 
-export default sessionReducer;
+export default storiesReducer;
