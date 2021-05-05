@@ -9,6 +9,7 @@ module.exports = (sequelize, DataTypes) => {
   }, {});
   Choice.associate = function (models) {
     // associations can be defined here
+    Choice.belongsTo(models.Scene, { foreignKey: 'sceneId' })
   };
   return Choice;
 };
