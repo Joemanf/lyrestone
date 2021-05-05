@@ -8,6 +8,14 @@ module.exports = (sequelize, DataTypes) => {
   }, {});
   Story.associate = function (models) {
     // associations can be defined here
+    const columnMapping = {
+      through: 'CharacterStory', // This is the model name referencing the join table.
+      otherKey: 'characterId',
+      foreignKey: 'storyId'
+    }
+    Story.belongsToMany(models.Character, columnMapping);
+    Story.belongsTo(models.User, { foreignKey: 'userId' });
+    Story.hasMany(models.Scene, { foreignKey: 'storyId' });
   };
   return Story;
 };

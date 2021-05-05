@@ -8,6 +8,14 @@ module.exports = (sequelize, DataTypes) => {
   }, {});
   Scene.associate = function (models) {
     // associations can be defined here
+    Scene.belongsTo(models.Story, { foreignKey: 'storyId' });
+    Scene.hasMany(models.Choice, { foreignKey: 'sceneId' });
+    Scene.belongsToMany(models.Scene, { // Come back to this
+      through: "Choice",
+      otherKey: "nextSceneId",
+      foreignKey: "sceneId",
+      as: "nextScene",
+    });
   };
   return Scene;
 };
