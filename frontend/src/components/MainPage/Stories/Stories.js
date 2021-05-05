@@ -31,13 +31,17 @@ function Stories() {
             </div>
             <div>
                 {storiesArr.map(story => (
-                    <div>
-                        <div className='story_title'>{story.title}</div>
-                        <div className='story_desc'>{story.description}</div>
-                        <div>
-                            <img src={story.thumbnail} className='story_img'></img>
+                    <Link to={`/stories/${story.id}`} >
+                        <div className='story_container'>
+                            <div className='story_title_desc'>
+                                <h3 className='story_title'>{story.title}</h3>
+                                <div className='story_desc'>{story.description}</div>
+                            </div>
+                            <div className='story_img_container'>
+                                <img src={story.thumbnail} className='story_img'></img>
+                            </div>
                         </div>
-                    </div>
+                    </Link>
                 )
                 )}
             </div>
