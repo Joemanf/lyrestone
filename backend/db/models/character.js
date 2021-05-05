@@ -2,6 +2,7 @@
 module.exports = (sequelize, DataTypes) => {
   const Character = sequelize.define('Character', {
     name: DataTypes.STRING(30),
+    class: DataTypes.STRING(20),
     userId: DataTypes.INTEGER,
     strength: DataTypes.INTEGER,
     dexterity: DataTypes.INTEGER,
