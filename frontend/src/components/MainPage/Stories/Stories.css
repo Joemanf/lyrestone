@@ -8,3 +8,27 @@
     justify-content: space-between;
     margin: .5em 1em;
 }
+
+.story_container {
+    border: 1px solid white;
+    margin: .5em;
+    display: flex;
+    justify-content: space-between;
+}
+
+.story_title_desc {
+    margin: .5em;
+}
+
+.story_img_container {
+    width: 10em;
+    height: 10em;
+    border: 1px solid burlywood;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.story_img{
+    width: 100%;
+}
