@@ -11,7 +11,6 @@ function Stories() {
     const stories = useSelector(state => state.stories.stories)
 
     const storiesArr = []
-
     for (let key in stories) {
         storiesArr.push(stories[key])
     }
@@ -21,6 +20,7 @@ function Stories() {
     useEffect(() => {
         dispatch(getAllStories())
     }, [dispatch])
+
     return (
         <div className='stories_container'>
             <div className='story_header'>
@@ -38,7 +38,7 @@ function Stories() {
                                 <div className='story_desc'>{story.description}</div>
                             </div>
                             <div className='story_img_container'>
-                                <img src={story.thumbnail} className='story_img'></img>
+                                <img src={story.thumbnail} alt={story.title} className='story_img'></img>
                             </div>
                         </div>
                     </Link>
