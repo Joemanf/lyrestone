@@ -2,7 +2,8 @@ import { csrfFetch } from './csrf';
 
 // Actions
 const GET_CHARACTERS = 'characters/getCharacters';
-const SELECT_CHARACTER = 'characters/selectACharacter'
+const SELECT_CHARACTER = 'characters/selectACharacter';
+const REMOVE_CHARACTER_FROM_STORE = 'characters/removeCharacterFromStore'
 
 const getCharacters = (character) => {
     return {
@@ -15,6 +16,12 @@ export const selectACharacter = (character) => {
     return {
         type: SELECT_CHARACTER,
         payload: character,
+    }
+}
+
+export const clearSelectedCharacter = () => {
+    return {
+        type: REMOVE_CHARACTER_FROM_STORE
     }
 }
 
@@ -37,19 +44,20 @@ const charactersReducer = (state = initialState, action) => {
     let newState;
     switch (action.type) {
         case GET_CHARACTERS:
-            console.log('Action payload get characters', action.payload)
             newState = Object.assign({}, state); // Always copy, never alter
             action.payload.forEach(character => {
                 console.log(newState.characters, character.id)
                 newState.characters[character.id] = character;
             })
-            console.log('THE NEW STATE IN CHARACTERS: ', newState)
             return newState;
         case SELECT_CHARACTER:
             newState = Object.assign({}, state); // Always copy, never alter
-            console.log('Selected Char Action Payload', action.payload)
             newState.selectedChar[action.payload.id] = action.payload
-            console.log('THE NEW STATE IIINNNN SELECT CHARACTER: ', newState)
+            return newState;
+        case REMOVE_CHARACTER_FROM_STORE:
+            newState = Object.assign({}, state); // Always copy, never alter
+            newState.selectedChar = {}
+            console.log("IT'S! THE! NEW!", newState)
             return newState;
         default:
             return state;

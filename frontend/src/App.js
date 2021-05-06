@@ -7,6 +7,7 @@ import * as sessionActions from "./store/session";
 import Navigation from "./components/Navigation";
 import Splash from "./components/Splash"
 import MainPage from "./components/MainPage";
+import Story from "./components/Story";
 
 function App() {
   const dispatch = useDispatch();
@@ -32,6 +33,9 @@ function App() {
           </Route>
           <Route path="/home">
             <MainPage />
+          </Route>
+          <Route path="/stories/:storyId">
+            <Story />
           </Route>
         </Switch>
       )}

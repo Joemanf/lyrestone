@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getAllUserCharacters, selectACharacter } from '../../../store/characters';
+import { clearSelectedCharacter, getAllUserCharacters, selectACharacter } from '../../../store/characters';
 // import { Link } from 'react-router-dom';
 // import { getAllStories } from '../../../store/stories';
 
@@ -27,6 +27,7 @@ function Characters() {
     }, [dispatch])
 
     const selectCharacter = (characterId) => {
+        dispatch(clearSelectedCharacter())
         setSelected(characterId)
         console.log(characters[characterId])
         dispatch(selectACharacter(characters[characterId])) // I'm Working here
