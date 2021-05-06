@@ -8,189 +8,216 @@ module.exports = {
         sceneId: 1,
         nextSceneId: 2,
         isWinning: false,
-        killsPlayer: false
+        killsPlayer: false,
+        conditionals: '111111',
       },
       { // 2
         body: 'Enter the castle',
         sceneId: 1,
         nextSceneId: 3,
         isWinning: null,
-        killsPlayer: false
+        killsPlayer: false,
+        conditionals: '111111',
       },
       { // 3
         body: 'Knock on the gate',
         sceneId: 3,
         nextSceneId: 4,
         isWinning: null,
-        killsPlayer: false
+        killsPlayer: false,
+        conditionals: '111111',
       },
       { // 4
         body: 'Climb the gate',
         sceneId: 3,
         nextSceneId: 6,
         isWinning: null,
-        killsPlayer: false
+        killsPlayer: false,
+        conditionals: '661111',
       },
       { // 5
         body: 'Fight!',
         sceneId: 4,
         nextSceneId: 5,
         isWinning: null,
-        killsPlayer: false
+        killsPlayer: false,
+        conditionals: '111111',
       },
       { // 6
         body: 'Run away!',
         sceneId: 4,
         nextSceneId: 7,
         isWinning: false,
-        killsPlayer: false
+        killsPlayer: false,
+        conditionals: '111111',
       },
       { // 7
         body: 'Continue on',
         sceneId: 5,
         nextSceneId: 10,
         isWinning: null,
-        killsPlayer: false
+        killsPlayer: false,
+        conditionals: '111111',
       },
       { // 8
         body: 'Sneak attack!',
         sceneId: 6,
         nextSceneId: 8,
         isWinning: null,
-        killsPlayer: false
+        killsPlayer: false,
+        conditionals: '111111',
       },
       { // 9
         body: 'Sneak around!',
         sceneId: 6,
         nextSceneId: 9,
         isWinning: null,
-        killsPlayer: false
+        killsPlayer: false,
+        conditionals: '181111',
       },
       { // 10
         body: 'Continue on',
         sceneId: 8,
         nextSceneId: 10,
         isWinning: null,
-        killsPlayer: false
+        killsPlayer: false,
+        conditionals: '111111',
       },
       { // 11
         body: 'Continue on',
         sceneId: 9,
         nextSceneId: 10,
         isWinning: null,
-        killsPlayer: false
+        killsPlayer: false,
+        conditionals: '111111',
       },
       { // 12
         body: 'Charge!!',
         sceneId: 10,
         nextSceneId: 11,
         isWinning: null,
-        killsPlayer: false
+        killsPlayer: false,
+        conditionals: '111111',
       },
       { // 13
         body: 'Find a way to turn it all off',
         sceneId: 10,
         nextSceneId: 12,
         isWinning: null,
-        killsPlayer: false
+        killsPlayer: false,
+        conditionals: '111651',
       },
       { // 14
         body: `You've seen this before. Use your wits`,
         sceneId: 10,
         nextSceneId: 13,
         isWinning: null,
-        killsPlayer: false
+        killsPlayer: false,
+        conditionals: '181171',
       },
       { // 15
         body: `Is that a door?`,
         sceneId: 10,
         nextSceneId: 14,
         isWinning: null,
-        killsPlayer: false
+        killsPlayer: false,
+        conditionals: '111181',
       },
       { // 16
         body: `Into the lair...`,
         sceneId: 11,
         nextSceneId: 15,
         isWinning: null,
-        killsPlayer: false
+        killsPlayer: false,
+        conditionals: '111111',
       },
       { // 17
         body: `Into the lair...`,
         sceneId: 12,
         nextSceneId: 15,
         isWinning: null,
-        killsPlayer: false
+        killsPlayer: false,
+        conditionals: '111111',
       },
       { // 18
         body: `Into the lair...`,
         sceneId: 13,
         nextSceneId: 15,
         isWinning: null,
-        killsPlayer: false
+        killsPlayer: false,
+        conditionals: '111111',
       },
       { // 19
         body: `Into the lair...`,
         sceneId: 14,
         nextSceneId: 15,
         isWinning: null,
-        killsPlayer: false
+        killsPlayer: false,
+        conditionals: '111111',
       },
       { // 20
         body: `Kill the beast`,
         sceneId: 15,
         nextSceneId: 16,
         isWinning: false,
-        killsPlayer: true
+        killsPlayer: true,
+        conditionals: '111111',
       },
       { // 21
         body: `Ask about the trophies`,
         sceneId: 15,
         nextSceneId: 17,
         isWinning: null,
-        killsPlayer: false
+        killsPlayer: false,
+        conditionals: '111111',
       },
       { // 22
-        body: `Ask about the trophies`,
+        body: `Run away`,
         sceneId: 15,
         nextSceneId: 20,
         isWinning: null,
-        killsPlayer: false
+        killsPlayer: false,
+        conditionals: '111111',
       },
       { // 23
         body: `Arm wrestle the dragon`,
         sceneId: 17,
         nextSceneId: 18,
         isWinning: null,
-        killsPlayer: false
+        killsPlayer: false,
+        conditionals: '811116',
       },
       { // 24
         body: `Convince the dragon to stop pillaging Waterville in exchange for trophies`,
         sceneId: 17,
         nextSceneId: 19,
         isWinning: null,
-        killsPlayer: false
+        killsPlayer: false,
+        conditionals: '111117',
       },
       { // 25
         body: `Run away`,
         sceneId: 17,
         nextSceneId: 20,
         isWinning: false,
-        killsPlayer: false
+        killsPlayer: false,
+        conditionals: '111111',
       },
       { // 26
         body: `And then...`,
         sceneId: 18,
         nextSceneId: 21,
         isWinning: true,
-        killsPlayer: false
+        killsPlayer: false,
+        conditionals: '111111',
       },
       { // 27
         body: `And then...`,
         sceneId: 19,
         nextSceneId: 21,
         isWinning: true,
-        killsPlayer: false
+        killsPlayer: false,
+        conditionals: '111111',
       },
     ], {});
   },

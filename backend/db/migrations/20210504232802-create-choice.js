@@ -28,6 +28,11 @@ module.exports = {
         allowNull: false,
         type: Sequelize.BOOLEAN
       },
+      conditionals: {
+        allowNull: false,
+        type: Sequelize.STRING,
+        defaultValue: '111111'
+      },
       createdAt: {
         allowNull: false,
         defaultValue: Sequelize.fn('now'),
