@@ -13,7 +13,7 @@ function LoginFormPage() {
     const [errors, setErrors] = useState([]);
 
     if (sessionUser) return (
-        <Redirect to="/home" /> // Change to history.push might fix the store
+        <Redirect to="/home" />
     );
 
     const handleSubmit = (e) => {
@@ -25,6 +25,12 @@ function LoginFormPage() {
                 const data = await res.json();
                 if (data && data.errors) setErrors(data.errors);
             });
+    }
+
+    const loginAsDemo = (e) => {
+        setCredential('Demo-lition');
+        setPassword('password');
+        return dispatch(sessionActions.login({ credential, password }))
     }
 
     return (
@@ -58,6 +64,7 @@ function LoginFormPage() {
             </div>
             <div className='login_container'>
                 <button type="submit">Log In</button>
+                <button onClick={loginAsDemo}>Try it out</button>
             </div>
         </form>
     );
