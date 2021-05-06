@@ -11,7 +11,7 @@
 
 .story_container {
     border: 1px solid white;
-    margin: .5em;
+    margin: 1em;
     display: flex;
     justify-content: space-between;
 }

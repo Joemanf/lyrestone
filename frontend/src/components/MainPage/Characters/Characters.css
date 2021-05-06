@@ -1,3 +1,8 @@
+.character_container_greater{
+    box-shadow: 0;
+    transition: all .5s ease-out;
+}
+
 .characters_container {
     border: 1px solid green;
     margin: .5em;
@@ -7,4 +12,32 @@
     display: flex;
     justify-content: space-between;
     margin: .5em 1em;
+}
+
+.character_container{
+    border: 1px solid orchid;
+    margin: 1em;
+    display: flex;
+    justify-content: space-between;
+}
+
+.selected {
+    box-shadow: 0 0 8px red;
+}
+
+.character_name_class{
+    margin: .5em;
+}
+
+.character_img_container {
+    width: 10em;
+    height: 10em;
+    border: 1px solid burlywood;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.character_img{
+    width: 100%;
 }

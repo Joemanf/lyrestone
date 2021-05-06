@@ -50,6 +50,19 @@ const restoreUser = (req, res, next) => {
     })
 }
 
+const getCurrentUserId = (req) => {
+    const { token } = req.cookies;
+
+    return jwt.verify(token, secret, null, async (err, jwtPayload) => {
+        if (err) {
+            return false;
+        }
+        const { id } = jwtPayload.data;
+
+        return id;
+    });
+}
+
 // If there is no current user, return an error
 const requireAuth = [
     restoreUser,
@@ -64,4 +77,4 @@ const requireAuth = [
     },
 ];
 
-module.exports = { setTokenCookie, restoreUser, requireAuth };
+module.exports = { setTokenCookie, restoreUser, getCurrentUserId, requireAuth };
