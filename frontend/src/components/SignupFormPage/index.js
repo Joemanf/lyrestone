@@ -15,13 +15,19 @@ function SignupFormPage() {
     const [confirmPassword, setConfirmPassword] = useState("");
     const [errors, setErrors] = useState([]);
 
-    if (sessionUser) return <Redirect to="/" />;
+    if (sessionUser) return <Redirect to="/home" />; // Change to history.push might fix the store
 
     const handleSubmit = (e) => {
         e.preventDefault();
         if (password === confirmPassword) {
             setErrors([]);
-            return dispatch(sessionActions.signup({ image, email, username, password }))
+            return dispatch(sessionActions.signup({ email, username, password, image, }))
+                .then(() => {
+                    setUsername("");
+                    setEmail("");
+                    setPassword("");
+                    setImage(null);
+                })
                 .catch(async (res) => {
                     console.log('res in signup', res)
                     const data = await res.json(); // Bug here (Maybe), fix later
