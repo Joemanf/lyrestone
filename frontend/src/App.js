@@ -34,8 +34,11 @@ function App() {
           <Route path="/home">
             <MainPage />
           </Route>
-          <Route path="/stories/:storyId">
+          <Route exact path="/stories/:storyId">
             <Story />
+          </Route>
+          <Route path="/stories/:storyId/:sceneId">
+            <div>Okay</div>
           </Route>
         </Switch>
       )}

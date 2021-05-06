@@ -14,6 +14,7 @@ router.get('/', asyncHandler(async (req, res, next) => {
 }))
 
 router.get('/:storyId', asyncHandler(async (req, res, next) => {
+    const storyId = req.params.storyId
     const story = await Story.findByPk(storyId, {
         include: {
             model: Scene,
