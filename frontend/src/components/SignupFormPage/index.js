@@ -21,7 +21,13 @@ function SignupFormPage() {
         e.preventDefault();
         if (password === confirmPassword) {
             setErrors([]);
-            return dispatch(sessionActions.signup({ image, email, username, password }))
+            return dispatch(sessionActions.signup({ email, username, password, image, }))
+                .then(() => {
+                    setUsername("");
+                    setEmail("");
+                    setPassword("");
+                    setImage(null);
+                })
                 .catch(async (res) => {
                     console.log('res in signup', res)
                     const data = await res.json(); // Bug here (Maybe), fix later

@@ -22,6 +22,7 @@ export const login = (user) => async (dispatch) => {
     const { credential, password } = user; // Credential is either email or username
     const response = await csrfFetch('/api/session', {
         method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
             credential,
             password,
@@ -42,11 +43,11 @@ export const restoreUser = () => async dispatch => {
 
 // Sign up user
 export const signup = (user) => async (dispatch) => {
-    const { image, username, email, password } = user;
-    // const formData = new FormData();
-    // formData.append("username", username);
-    // formData.append("email", email);
-    // formData.append("password", password);
+    let { image, username, email, password } = user;
+    const formData = new FormData();
+    formData.append("username", username);
+    formData.append("email", email);
+    formData.append("password", password);
 
     // // for multiple files
     // if (images && images.length !== 0) {
@@ -55,20 +56,22 @@ export const signup = (user) => async (dispatch) => {
     //     }
     // }
 
-    // // for single file
-    // if (image) formData.append("image", image);
+    // for single file
+    formData.append("image", image);
 
     if (image) {
+        user.image = { buffer: image.data, originalname: image.name, lastModified: image.lastModified, size: image.size, type: image.type, webkitRelativePath: image.webkitRelativePath }
         console.log('Time to hit', image)
+        console.log('VERIFYYYY', Buffer.from(image, 'base64'))
+        console.log('USER???', JSON.stringify(user))
         const response = await csrfFetch("/api/users", {
             method: "POST",
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-                username,
-                email,
-                password,
-                image
-            }),
+            body: JSON.stringify(user),
+            headers: {
+                "Content-Type": "multipart/form-data",
+                'Something_random': 'Something_less_random'
+            },
+            // body: JSON.stringify(formData),
         });
         console.log('Time to work')
         const data = await response.json();
