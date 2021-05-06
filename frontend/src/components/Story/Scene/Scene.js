@@ -15,10 +15,7 @@ function Scene() {
 
     const choicesArr = scene.Choices;
 
-    console.log('testing Scene', scene)
-
     useEffect(() => {
-        console.log('Will it?')
         dispatch(clearCurrentScene())
         dispatch(getCurrentScene(parseInt(param.sceneId))).then(() => setSceneLoaded(true))
         setSceneChange(false)
