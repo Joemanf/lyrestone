@@ -23,9 +23,9 @@ function Stories() {
 
     console.log('Stories here:', stories)
 
-    useEffect(() => {
-        dispatch(getAllStories())
-    }, [dispatch])
+    // useEffect(() => {
+    //     dispatch(getAllStories())
+    // }, [dispatch])
 
     return (
         <div className='stories_container'>

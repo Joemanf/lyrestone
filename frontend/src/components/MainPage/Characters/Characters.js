@@ -22,9 +22,9 @@ function Characters() {
 
     console.log('Wait a second, ', characters, `It's an array`)
 
-    useEffect(() => {
-        dispatch(getAllUserCharacters())
-    }, [dispatch])
+    // useEffect(() => {
+    //     dispatch(getAllUserCharacters())
+    // }, [dispatch])
 
     const selectCharacter = (characterId) => {
         dispatch(clearSelectedCharacter())
