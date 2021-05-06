@@ -13,7 +13,7 @@ function LoginFormPage() {
     const [errors, setErrors] = useState([]);
 
     if (sessionUser) return (
-        <Redirect to="/" />
+        <Redirect to="/home" /> // Change to history.push might fix the store
     );
 
     const handleSubmit = (e) => {
