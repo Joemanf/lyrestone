@@ -1,13 +1,10 @@
-import React, { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import React from 'react';
+import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { getAllStories } from '../../../store/stories';
 
 import './Stories.css'
 
 function Stories() {
-    const dispatch = useDispatch();
-
     const stories = useSelector(state => state.stories.stories);
     const selectedCharacter = useSelector(state => state.characters.selectedChar);
 
@@ -22,10 +19,6 @@ function Stories() {
     }
 
     console.log('Stories here:', stories)
-
-    useEffect(() => {
-        dispatch(getAllStories())
-    }, [dispatch])
 
     return (
         <div className='stories_container'>

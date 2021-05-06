@@ -8,6 +8,7 @@ import Navigation from "./components/Navigation";
 import Splash from "./components/Splash"
 import MainPage from "./components/MainPage";
 import Story from "./components/Story";
+import Scene from "./components/Story/Scene/Scene";
 
 function App() {
   const dispatch = useDispatch();
@@ -34,8 +35,11 @@ function App() {
           <Route path="/home">
             <MainPage />
           </Route>
-          <Route path="/stories/:storyId">
+          <Route exact path="/stories/:storyId">
             <Story />
+          </Route>
+          <Route path="/stories/:storyId/:sceneId">
+            <Scene />
           </Route>
         </Switch>
       )}

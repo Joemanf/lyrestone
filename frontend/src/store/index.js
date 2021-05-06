@@ -1,6 +1,7 @@
 import { createStore, combineReducers, applyMiddleware, compose } from "redux";
 import thunk from "redux-thunk";
 import charactersReducer from "./characters";
+import scenesReducer from "./scenes";
 import sessionReducer from './session';
 import storiesReducer from "./stories";
 
@@ -8,6 +9,7 @@ const rootReducer = combineReducers({
   session: sessionReducer,
   stories: storiesReducer,
   characters: charactersReducer,
+  scenes: scenesReducer
 });
 
 let enhancer;
