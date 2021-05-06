@@ -1,12 +1,15 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
-// import { Redirect } from 'react-router';
+import { NavLink, Redirect } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 import './Splash.css'
 import logo from '../../images/lyrestone.png'
 
 
 function Splash() {
+    const sessionUser = useSelector((state) => state.session.user); // Grabbing logged in user
+
+    if (sessionUser) return <Redirect to="/home" />; // Change to history.push might fix the store
 
     return (
         <div className='wrap'>

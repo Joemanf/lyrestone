@@ -13,7 +13,7 @@ function LoginFormPage() {
     const [errors, setErrors] = useState([]);
 
     if (sessionUser) return (
-        <Redirect to="/" />
+        <Redirect to="/home" /> // Change to history.push might fix the store
     );
 
     const handleSubmit = (e) => {
@@ -21,6 +21,7 @@ function LoginFormPage() {
         setErrors([]);
         return dispatch(sessionActions.login({ credential, password }))
             .catch(async (res) => {
+                console.log('res in login', res)
                 const data = await res.json();
                 if (data && data.errors) setErrors(data.errors);
             });
