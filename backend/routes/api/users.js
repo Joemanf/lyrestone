@@ -9,7 +9,7 @@ const { singleMulterUpload, singlePublicFileUpload } = require('../../awsS3');
 
 const router = express.Router();
 
-// Email Validators
+// Sign up Validators
 const validateSignup = [
     check('email')
         .exists({ checkFalsy: true })
