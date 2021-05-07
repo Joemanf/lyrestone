@@ -21,15 +21,11 @@ function Scene() {
     const selectedCharacter = selectedCharacterTemp[characterId];
     const choicesArr = scene.Choices;
 
-
-
     useEffect(() => {
         dispatch(clearCurrentScene())
         dispatch(getCurrentScene(parseInt(param.sceneId))).then(() => setSceneLoaded(true))
         setSceneChange(false)
     }, [dispatch, sceneChange])
-
-
 
     if (!selectedCharacter) {
         return <Redirect to='/' />
