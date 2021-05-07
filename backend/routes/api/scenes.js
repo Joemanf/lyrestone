@@ -6,19 +6,17 @@ const { Scene, Choice } = require('../../db/models')
 
 const router = express.Router();
 
-router.get('/:sceneId', asyncHandler(async (req, res, next) => {
-    const sceneId = req.params.sceneId
-    const currentScene = await Scene.findByPk(sceneId, {
-        include: Choice
+// Get all scenes associated with a story (for making a story)
+router.get('/:storyId', asyncHandler(async (req, res, next) => {
+    const storyId = req.params.storyId;
+    const allScenes = await Scene.findAll({
+        where: storyId
     })
-    return res.json({ currentScene })
+    return res.json({ allScenes })
 }))
 
-// router.get('/', asyncHandler(async (req, res, next) => {
-//     // const userId = await getCurrentUserId(req)
-//     // console.log('!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!', userId)
-//     const stories = await Story.findAll();
-//     return res.json({ stories })
-// }))
+router.post('/', asyncHandler(async (req, res, next) => {
+
+}))
 
 module.exports = router;
