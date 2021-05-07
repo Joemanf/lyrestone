@@ -10,6 +10,7 @@ module.exports = {
         isWinning: false,
         killsPlayer: false,
         conditionals: '111111',
+        changeHealth: 0,
       },
       { // 2
         body: 'Enter the castle',
@@ -18,6 +19,7 @@ module.exports = {
         isWinning: null,
         killsPlayer: false,
         conditionals: '111111',
+        changeHealth: 0
       },
       { // 3
         body: 'Knock on the gate',
@@ -26,6 +28,7 @@ module.exports = {
         isWinning: null,
         killsPlayer: false,
         conditionals: '111111',
+        changeHealth: 0
       },
       { // 4
         body: 'Climb the gate',
@@ -34,6 +37,7 @@ module.exports = {
         isWinning: null,
         killsPlayer: false,
         conditionals: '661111',
+        changeHealth: 0
       },
       { // 5
         body: 'Fight!',
@@ -42,6 +46,7 @@ module.exports = {
         isWinning: null,
         killsPlayer: false,
         conditionals: '111111',
+        changeHealth: -5
       },
       { // 6
         body: 'Run away!',
@@ -50,6 +55,7 @@ module.exports = {
         isWinning: false,
         killsPlayer: false,
         conditionals: '111111',
+        changeHealth: 0
       },
       { // 7
         body: 'Continue on',
@@ -58,6 +64,7 @@ module.exports = {
         isWinning: null,
         killsPlayer: false,
         conditionals: '111111',
+        changeHealth: 0
       },
       { // 8
         body: 'Sneak attack!',
@@ -66,6 +73,7 @@ module.exports = {
         isWinning: null,
         killsPlayer: false,
         conditionals: '111111',
+        changeHealth: -2
       },
       { // 9
         body: 'Sneak around!',
@@ -74,6 +82,7 @@ module.exports = {
         isWinning: null,
         killsPlayer: false,
         conditionals: '181111',
+        changeHealth: 0
       },
       { // 10
         body: 'Continue on',
@@ -82,6 +91,7 @@ module.exports = {
         isWinning: null,
         killsPlayer: false,
         conditionals: '111111',
+        changeHealth: 0
       },
       { // 11
         body: 'Continue on',
@@ -90,6 +100,7 @@ module.exports = {
         isWinning: null,
         killsPlayer: false,
         conditionals: '111111',
+        changeHealth: 0
       },
       { // 12
         body: 'Charge!!',
@@ -98,6 +109,7 @@ module.exports = {
         isWinning: null,
         killsPlayer: false,
         conditionals: '111111',
+        changeHealth: -10
       },
       { // 13
         body: 'Find a way to turn it all off',
@@ -106,6 +118,7 @@ module.exports = {
         isWinning: null,
         killsPlayer: false,
         conditionals: '111651',
+        changeHealth: 0
       },
       { // 14
         body: `You've seen this before. Use your wits`,
@@ -114,6 +127,7 @@ module.exports = {
         isWinning: null,
         killsPlayer: false,
         conditionals: '181171',
+        changeHealth: -4
       },
       { // 15
         body: `Is that a door?`,
@@ -122,6 +136,7 @@ module.exports = {
         isWinning: null,
         killsPlayer: false,
         conditionals: '111181',
+        changeHealth: 0
       },
       { // 16
         body: `Into the lair...`,
@@ -130,6 +145,7 @@ module.exports = {
         isWinning: null,
         killsPlayer: false,
         conditionals: '111111',
+        changeHealth: 0
       },
       { // 17
         body: `Into the lair...`,
@@ -138,6 +154,7 @@ module.exports = {
         isWinning: null,
         killsPlayer: false,
         conditionals: '111111',
+        changeHealth: 0
       },
       { // 18
         body: `Into the lair...`,
@@ -146,6 +163,7 @@ module.exports = {
         isWinning: null,
         killsPlayer: false,
         conditionals: '111111',
+        changeHealth: 0
       },
       { // 19
         body: `Into the lair...`,
@@ -154,6 +172,7 @@ module.exports = {
         isWinning: null,
         killsPlayer: false,
         conditionals: '111111',
+        changeHealth: 0
       },
       { // 20
         body: `Kill the beast`,
@@ -162,6 +181,7 @@ module.exports = {
         isWinning: false,
         killsPlayer: true,
         conditionals: '111111',
+        changeHealth: 0
       },
       { // 21
         body: `Ask about the trophies`,
@@ -170,6 +190,7 @@ module.exports = {
         isWinning: null,
         killsPlayer: false,
         conditionals: '111111',
+        changeHealth: 0
       },
       { // 22
         body: `Run away`,
@@ -178,6 +199,7 @@ module.exports = {
         isWinning: null,
         killsPlayer: false,
         conditionals: '111111',
+        changeHealth: 0
       },
       { // 23
         body: `Arm wrestle the dragon`,
@@ -186,6 +208,7 @@ module.exports = {
         isWinning: null,
         killsPlayer: false,
         conditionals: '811116',
+        changeHealth: 0
       },
       { // 24
         body: `Convince the dragon to stop pillaging Waterville in exchange for trophies`,
@@ -194,6 +217,7 @@ module.exports = {
         isWinning: null,
         killsPlayer: false,
         conditionals: '111117',
+        changeHealth: 0
       },
       { // 25
         body: `Run away`,
@@ -202,6 +226,7 @@ module.exports = {
         isWinning: false,
         killsPlayer: false,
         conditionals: '111111',
+        changeHealth: 0
       },
       { // 26
         body: `And then...`,
@@ -210,6 +235,7 @@ module.exports = {
         isWinning: true,
         killsPlayer: false,
         conditionals: '111111',
+        changeHealth: 0
       },
       { // 27
         body: `And then...`,
@@ -218,6 +244,7 @@ module.exports = {
         isWinning: true,
         killsPlayer: false,
         conditionals: '111111',
+        changeHealth: 0
       },
     ], {});
   },
