@@ -60,15 +60,14 @@ export const signup = (user) => async (dispatch) => {
     formData.append("image", image);
 
     if (image) {
-        user.image = { buffer: image.data, originalname: image.name, lastModified: image.lastModified, size: image.size, type: image.type, webkitRelativePath: image.webkitRelativePath }
-        console.log('Time to hit', image)
-        console.log('VERIFYYYY', Buffer.from(image, 'base64'))
-        console.log('USER???', JSON.stringify(user))
-        const response = await csrfFetch("/api/users", {
+        // console.log(formData.get('username'))
+        // console.log(image.data)
+        // user.image = { buffer: image.data, originalname: image.name, lastModified: image.lastModified, size: image.size, type: image.type, webkitRelativePath: image.webkitRelativePath }
+        const response = await csrfFetch("/api/users/signup", {
             method: "POST",
-            body: JSON.stringify(user),
+            body: formData,
             headers: {
-                "Content-Type": "multipart/form-data",
+                "Content-Type": "application/json",
                 'Something_random': 'Something_less_random'
             },
             // body: JSON.stringify(formData),
@@ -79,7 +78,7 @@ export const signup = (user) => async (dispatch) => {
         return response;
     }
     else {
-        const response = await csrfFetch("/api/users", {
+        const response = await csrfFetch("/api/users/signup", {
             method: "POST",
             header: { 'Content-Type': 'application/json' },
             body: JSON.stringify({

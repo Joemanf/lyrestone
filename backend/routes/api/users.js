@@ -32,17 +32,16 @@ const validateSignup = [
 
 // Sign up
 router.post(
-    '/', // Realizing this might be an issue... come back to it
+    '/signup', // Realizing this might be an issue... come back to it
     validateSignup,
     singleMulterUpload("image"),
     asyncHandler(async (req, res) => {
         const { email, password, username } = req.body; // Grab the info from the req
-        console.log('Second backend hit!!!!!!!!!!!!!!!!!!!!!', req.body.image)
         let profileImageUrl;
-        // if (req.file) {
-        profileImageUrl = await singlePublicFileUpload(req.body.image); // Grab the image uploaded b y the user
-        // }
-        // else profileImageUrl = null;
+        if (req.file) {
+            profileImageUrl = await singlePublicFileUpload(req.file); // Grab the image uploaded b y the user
+        }
+        else profileImageUrl = null;
         const user = await User.signup({ email, username, password, profileImageUrl }); // Make yourself
         await setTokenCookie(res, user);
 

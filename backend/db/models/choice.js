@@ -5,7 +5,8 @@ module.exports = (sequelize, DataTypes) => {
     sceneId: DataTypes.INTEGER,
     nextSceneId: DataTypes.INTEGER,
     isWinning: DataTypes.BOOLEAN,
-    killsPlayer: DataTypes.BOOLEAN
+    killsPlayer: DataTypes.BOOLEAN,
+    conditionals: DataTypes.STRING,
   }, {});
   Choice.associate = function (models) {
     // associations can be defined here
