@@ -26,7 +26,9 @@ function Stories() {
                 <h2>
                     Stories:
                 </h2>
-                <button>Make a story</button>
+                <Link to='/create/1'>
+                    <button>Make a story</button>
+                </Link>
             </div>
             <div>
                 {storiesArr.map(story => {
