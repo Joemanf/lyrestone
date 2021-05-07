@@ -1,3 +1,5 @@
+// const fs = require("fs")
+const path = require("path");
 const AWS = require("aws-sdk");
 const NAME_OF_BUCKET = "lyrestone";
 
@@ -8,9 +10,9 @@ const s3 = new AWS.S3({ apiVersion: "2006-03-01" });
 // --------------------------- Public UPLOAD ------------------------
 
 const singlePublicFileUpload = async (file) => {
+    // const fileContent = fs.readFileSync(file);
     const { originalname, mimetype, buffer } = await file;
-    const path = require("path");
-    console.log(buffer)
+
     // name of the file in the S3 bucket will be the date in ms plus the extension name
     const Key = new Date().getTime().toString() + path.extname(originalname);
     const uploadParams = {
@@ -19,6 +21,7 @@ const singlePublicFileUpload = async (file) => {
         Body: buffer,
         ACL: "public-read",
     };
+    // console.log('Upload params!!!!!!!!!!!!!!!\n', uploadParams)
     const result = await s3.upload(uploadParams).promise();
 
     // save the name of the file in the bucket as the key in the database to retrieve for later
@@ -35,11 +38,7 @@ const multiplePublicFileUpload = async (files) => {
 
 // --------------------------- Storage ------------------------
 
-const storage = multer.memoryStorage({
-    destination: function (req, file, callback) {
-        callback(null, "");
-    },
-});
+const storage = multer.memoryStorage();
 
 const singleMulterUpload = (nameOfKey) => {
     // const test = multer({ storage: storage }).single(nameOfKey)

@@ -21,6 +21,7 @@ function SignupFormPage() {
         e.preventDefault();
         if (password === confirmPassword) {
             setErrors([]);
+            console.log(image)
             return dispatch(sessionActions.signup({ email, username, password, image, }))
                 .then(() => {
                     setUsername("");
