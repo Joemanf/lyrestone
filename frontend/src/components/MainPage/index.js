@@ -6,7 +6,7 @@ import './MainPage.css'
 import { useDispatch, useSelector } from 'react-redux';
 import { Redirect } from 'react-router';
 import { getAllStories } from '../../store/stories';
-import { getAllUserCharacters } from '../../store/characters';
+import { getAllUserCharacters, setHP } from '../../store/characters';
 
 function MainPage() {
     const dispatch = useDispatch()
@@ -15,6 +15,7 @@ function MainPage() {
     const [isCharactersLoaded, setIsCharactersLoaded] = useState(false);
 
     useEffect(() => {
+        dispatch(setHP(1))
         dispatch(getAllStories()).then(() => setIsStoriesLoaded(true))
         dispatch(getAllUserCharacters()).then(() => setIsCharactersLoaded(true))
     }, [dispatch])
