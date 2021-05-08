@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { Link, Redirect, useParams } from 'react-router-dom'
 import { setHP, setOriginalCurrentHp } from '../../../store/characters'
 import { clearCurrentScene, getCurrentScene } from '../../../store/scenes'
+import Health from '../../Tests/TestDummyHp'
 
 function Scene() {
     const dispatch = useDispatch()
@@ -24,13 +25,16 @@ function Scene() {
     }
     const selectedCharacter = selectedCharacterTemp[characterId];
 
+    // if (!selectedCharacter) {
+    //     return (<Redirect to='/' />)
+    // }
+
     const choicesArr = scene.Choices;
 
     const maxHealth = () => {
         if (selectedCharacter) {
             return selectedCharacter.constitution + 10
         }
-        else return (<Redirect to='/' />)
     }
 
     const currentHealth = (health, changer) => {
@@ -38,18 +42,16 @@ function Scene() {
         makeHP(newHealth)
     }
 
-    const sceneId = parseInt(param.sceneId)
-
     useEffect(() => {
         console.log('Health here', HP)
         dispatch(setHP(HP))
         dispatch(clearCurrentScene())
         dispatch(getCurrentScene(parseInt(param.sceneId))).then(() => setSceneLoaded(true))
         setSceneChange(false)
-    }, [dispatch, sceneChange])
+    }, [dispatch, sceneChange, HP])
 
     useEffect(() => {
-        if (!currentHP.length) {
+        if (currentHP && !currentHP.length) {
             console.log('Just beat it')
             dispatch(setOriginalCurrentHp(maxHealth()))
         }
@@ -60,9 +62,25 @@ function Scene() {
         return <Redirect to='/' />
     }
 
+    if (currentHP <= 0) {
+        return sceneLoaded && (
+            <div>
+                <div>
+                    <img></img>
+                    <div>Unfortunately, your wounds are too much to sustain your life, and you fall to the floor, dead.</div>
+                </div>
+                <div>
+                    <Link to='/home'>
+                        <h2>Game Over</h2>
+                    </Link>
+                </div>
+            </div>
+        )
+    }
+
     return sceneLoaded && (
         <div>
-            <div>Health: HP / {maxHealth()}</div>
+            <Health />
             <div>{scene.title}</div>
             <div>
                 <img></img>
@@ -112,7 +130,7 @@ function Scene() {
                     </Link>
                 }
             </div>
-        </div>
+        </div >
     )
 }
 

@@ -9,6 +9,7 @@ import Splash from "./components/Splash"
 import MainPage from "./components/MainPage";
 import Story from "./components/Story";
 import Scene from "./components/Story/Scene/Scene";
+import Health from "./components/Tests/TestDummyHp";
 
 function App() {
   const dispatch = useDispatch();
@@ -22,26 +23,30 @@ function App() {
     <>
       <Navigation isLoaded={isLoaded} />
       {isLoaded && (
-        <Switch>
-          <Route exact path='/' >
-            <Splash />
-          </Route>
-          <Route path="/login">
-            <LoginFormPage />
-          </Route>
-          <Route path="/signup">
-            <SignupFormPage />
-          </Route>
-          <Route path="/home">
-            <MainPage />
-          </Route>
-          <Route exact path="/stories/:storyId">
-            <Story />
-          </Route>
-          <Route path="/stories/:storyId/:sceneId">
-            <Scene />
-          </Route>
-        </Switch>
+        <>
+          <Switch>
+            <Route exact path='/' >
+              <Splash />
+            </Route>
+            <Route path="/login">
+              <LoginFormPage />
+            </Route>
+            <Route path="/signup">
+              <SignupFormPage />
+            </Route>
+            <Route path="/home">
+              <MainPage />
+            </Route>
+            <Route exact path="/stories/:storyId">
+              <Story />
+            </Route>
+            <Route path="/stories/:storyId/:sceneId">
+              <Scene />
+            </Route>
+            <Route path="/test">
+            </Route>
+          </Switch>
+        </>
       )}
     </>
   );
