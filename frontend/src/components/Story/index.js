@@ -28,16 +28,6 @@ function Story() {
 
 
     return storyLoaded && (
-        // <div>
-        //     <div>{story.title}</div>
-        //     <div>
-        //         <img></img>
-        //         <div>Text Area</div>
-        //     </div>
-        //     <div>
-        //         Choices
-        //     </div>
-        // </div>
         <div></div>
     )
 }

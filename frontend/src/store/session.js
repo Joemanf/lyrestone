@@ -57,9 +57,9 @@ export const signup = (user) => async (dispatch) => {
     // }
 
     // for single file
-    formData.append("image", image);
 
     if (image) {
+        formData.append("image", image);
         // console.log(formData.get('username'))
         // console.log(image.data)
         // user.image = { buffer: image.data, originalname: image.name, lastModified: image.lastModified, size: image.size, type: image.type, webkitRelativePath: image.webkitRelativePath }

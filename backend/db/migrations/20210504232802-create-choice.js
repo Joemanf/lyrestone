@@ -33,6 +33,10 @@ module.exports = {
         type: Sequelize.STRING,
         defaultValue: '111111'
       },
+      changeHealth: {
+        type: Sequelize.INTEGER,
+        defaultValue: 0,
+      },
       createdAt: {
         allowNull: false,
         defaultValue: Sequelize.fn('now'),

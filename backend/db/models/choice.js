@@ -7,6 +7,7 @@ module.exports = (sequelize, DataTypes) => {
     isWinning: DataTypes.BOOLEAN,
     killsPlayer: DataTypes.BOOLEAN,
     conditionals: DataTypes.STRING,
+    changeHealth: DataTypes.INTEGER,
   }, {});
   Choice.associate = function (models) {
     // associations can be defined here

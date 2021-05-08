@@ -4,6 +4,9 @@ import { csrfFetch } from './csrf';
 const GET_CHARACTERS = 'characters/getCharacters';
 const SELECT_CHARACTER = 'characters/selectACharacter';
 const REMOVE_CHARACTER_FROM_STORE = 'characters/removeCharacterFromStore'
+const SET_HP = 'characters/setHP'
+const SET_ORIGINAL_HP = 'characters/setOriginalHP'
+const REMOVE_HP = 'characters/removeHP'
 
 const getCharacters = (character) => {
     return {
@@ -25,6 +28,26 @@ export const clearSelectedCharacter = () => {
     }
 }
 
+export const setHP = (health) => {
+    return {
+        type: SET_HP,
+        payload: health
+    }
+}
+
+export const setOriginalCurrentHp = (health) => {
+    return {
+        type: SET_ORIGINAL_HP,
+        payload: health
+    }
+}
+
+export const clearHP = () => {
+    return {
+        type: REMOVE_HP
+    }
+}
+
 
 // Thunks
 // Get all the characters associated with a user
@@ -37,8 +60,24 @@ export const getAllUserCharacters = () => async (dispatch) => {
 };
 
 
+const dummyChar = {
+    id: 1,
+    name: "Eugene",
+    class: "Explorer",
+    userId: 1,
+    strength: 8,
+    dexterity: 7,
+    constitution: 8,
+    intelligence: 3,
+    wisdom: 5,
+    charisma: 7,
+    avatar: "https://cdn.discordapp.com/attachments/661999012873764935/839327174892060697/EUGENE_shorter_neck.png",
+    createdAt: "2021-05-07T16:14:17.270Z",
+    updatedAt: "2021-05-07T16:14:17.270Z",
+}
+
 // Reducer
-const initialState = { characters: {}, selectedChar: {} };
+const initialState = { characters: {}, selectedChar: dummyChar, currentHP: 18 };
 
 const charactersReducer = (state = initialState, action) => {
     let newState;
@@ -46,7 +85,6 @@ const charactersReducer = (state = initialState, action) => {
         case GET_CHARACTERS:
             newState = Object.assign({}, state); // Always copy, never alter
             action.payload.forEach(character => {
-                console.log(newState.characters, character.id)
                 newState.characters[character.id] = character;
             })
             return newState;
@@ -57,8 +95,20 @@ const charactersReducer = (state = initialState, action) => {
         case REMOVE_CHARACTER_FROM_STORE:
             newState = Object.assign({}, state); // Always copy, never alter
             newState.selectedChar = {}
-            console.log("IT'S! THE! NEW!", newState)
             return newState;
+        case SET_HP:
+            newState = Object.assign({}, state); // Always copy, never alter
+            newState.currentHP = action.payload
+            console.log('Payload incoming, ', action.payload)
+            return newState;
+        case SET_ORIGINAL_HP:
+            newState = Object.assign({}, state); // Always copy, never alter
+            newState.currentHP = action.payload
+            return newState
+        case REMOVE_HP:
+            newState = Object.assign({}, state); // Always copy, never alter
+            newState.currentHP = {}
+            return newState
         default:
             return state;
     }
