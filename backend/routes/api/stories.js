@@ -6,22 +6,81 @@ const { Story, Scene, Choice } = require('../../db/models')
 
 const router = express.Router();
 
+// Get all stories (for displaying on main page)
 router.get('/', asyncHandler(async (req, res, next) => {
-    // const userId = await getCurrentUserId(req)
-    // console.log('!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!', userId)
     const stories = await Story.findAll();
     return res.json({ stories })
 }))
 
+// Get a story (for playing)
 router.get('/:storyId', asyncHandler(async (req, res, next) => {
     const storyId = req.params.storyId
     const story = await Story.findByPk(storyId, {
         include: {
             model: Scene,
-            include: Choice
+            include: Choice // Might need to clean this up
         },
     })
     return res.json({ story })
+}))
+
+// Save a story to the database
+// Throw in validations
+router.post('/', asyncHandler(async (req, res, next) => {
+    const { userId, title, description, thumbnail } = req.body // might not be thumbnail here
+
+    // Probably put some AWS stuff here
+
+    const story = await Story.create({
+        userId,
+        title,
+        description,
+        thumbnail
+    })
+
+    return res.json({ story })
+}))
+
+router.put('/:storyId', asyncHandler(async (req, res, next) => {
+    const { userId, title, description, thumbnail } = req.body // Might not be thumbnail
+    const storyId = req.params.storyId
+
+    //Might have to do AWS stuff here
+
+    const story = await Story.findByPk(storyId)
+
+    await story.update({
+        userId,
+        title,
+        description,
+        thumbnail,
+    })
+
+    return res.json({ story });
+}))
+
+// Delete a story
+router.delete(`/delete-story`, asyncHandler(async (req, res) => {
+    const { id } = req.body; // Check the ID
+    const deleteStory = await Story.findByPk(id);
+    if (deleteStory) {
+        const deleteScenes = await Scene.findAll({
+            where: { storyId: id }
+        })
+        deleteScenes.forEach(async scene => {
+            if (scene) {
+                const deleteChoices = await Choice.findAll({
+                    where: { sceneId: scene.id }
+                })
+                deleteChoices.forEach(async choice => await choice.destroy())
+                await scene.destroy();
+            }
+        })
+        await deleteStory.destroy()
+    }
+    else {
+        return res.json("Story doesn't exists")
+    }
 }))
 
 module.exports = router;
