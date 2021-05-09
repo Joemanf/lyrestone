@@ -24,6 +24,11 @@ module.exports = {
       backgroundImg: {
         type: Sequelize.TEXT
       },
+      root: {
+        allowNull: false,
+        defaultValue: false,
+        type: Sequelize.BOOLEAN
+      },
       createdAt: {
         allowNull: false,
         defaultValue: Sequelize.fn('now'),

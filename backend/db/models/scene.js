@@ -4,7 +4,8 @@ module.exports = (sequelize, DataTypes) => {
     storyId: DataTypes.INTEGER,
     title: DataTypes.STRING(50),
     body: DataTypes.TEXT,
-    backgroundImg: DataTypes.TEXT
+    backgroundImg: DataTypes.TEXT,
+    root: DataTypes.BOOLEAN,
   }, {});
   Scene.associate = function (models) {
     // associations can be defined here

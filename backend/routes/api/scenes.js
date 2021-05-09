@@ -6,8 +6,17 @@ const { Scene, Choice } = require('../../db/models')
 
 const router = express.Router();
 
+// Get the current scene
+router.get('/:sceneId', asyncHandler(async (req, res, next) => {
+    const sceneId = req.params.sceneId;
+    const currentScene = await Scene.findByPk(sceneId, {
+        include: Choice
+    })
+    return res.json({ currentScene })
+}))
+
 // Get all scenes associated with a story (for making a story)
-router.get('/:storyId', asyncHandler(async (req, res, next) => {
+router.get('/:storyId/:sceneId', asyncHandler(async (req, res, next) => {
     const storyId = req.params.storyId;
     const allScenes = await Scene.findAll({
         where: storyId
@@ -33,11 +42,13 @@ router.post('/', asyncHandler(async (req, res, next) => {
 
 // Edit a scene
 // Throw validators in here
-router.put('/:id', asyncHandler(async (req, res, next) => {
+router.put('/edit/:id', asyncHandler(async (req, res, next) => {
     const { title, body, backgroundImg } = req.body // might not be background image here
     const sceneId = req.params.id
 
     const scene = await Scene.findByPk(sceneId)
+
+    // AWS stuff here?
 
     await scene.update({
         title,
@@ -48,19 +59,13 @@ router.put('/:id', asyncHandler(async (req, res, next) => {
     return res.json({ scene });
 }))
 
-// router.put('/users/:userId', (req, res) => {
-//     const user = getUser(req.params.userId)
-
-//     if (!user) return res.status(404).json({})
-
-//     user.name = req.body.name
-//     res.json(user)
-// })
-
 // Delete a scene
 router.delete(`/delete-scene`, asyncHandler(async (req, res) => {
     const { id } = req.body; // Check the ID
     const deleteScene = await Scene.findByPk(id);
+    if (deleteScene.root) {
+        return res.json("Cannot delete root scene")
+    }
     if (deleteScene) {
         const deleteChoices = await Choice.findAll({
             where: { sceneId: id }

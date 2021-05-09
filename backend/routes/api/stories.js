@@ -38,6 +38,14 @@ router.post('/', asyncHandler(async (req, res, next) => {
         thumbnail
     })
 
+    await Scene.create({
+        storyId: story.id,
+        title: 'Root',
+        body: 'This is the root of the story.',
+        backgroundImg: null,
+        root: true,
+    })
+
     return res.json({ story })
 }))
 
