@@ -44,6 +44,7 @@ function Stories() {
                                     <div className='story_title_desc'>
                                         <h3 className='story_title'>{story.title}</h3>
                                         <div className='story_desc'>{story.description}</div>
+                                        <div>Written By: {story.User.username}</div>
                                     </div>
                                     <div className='story_img_container'>
                                         <img src={story.thumbnail} alt={story.title} className='story_img'></img>
