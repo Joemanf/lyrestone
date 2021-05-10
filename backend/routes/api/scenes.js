@@ -31,25 +31,27 @@ router.post('/:currentSceneId', asyncHandler(async (req, res, next) => {
 
     // Probably put some AWS stuff here
 
+    const currentSceneId = req.params.id
+
     const scene = await Scene.create({
         title: 'New Scene',
         body: 'This is a new scene',
         backgroundImg: null
     })
 
-    // const choice = await Choice.create({
-    //     body, // Should be the same as title of new scene
-    //     sceneId, // Should be the current scene's ID
-    //     nextSceneId, // Will be the id of the scene just created, because if choices are empty that's game over
-    //     isWinning, // false
-    //     killsPlayer, // false
-    //     conditionals, // 111111
-    //     changeHealth, // 0
-    // })
+    const choice = await Choice.create({
+        body: scene.title, // Should be the same as title of new scene
+        sceneId: currentSceneId, // Should be the current scene's ID
+        nextSceneId: scene.id, // Will be the id of the scene just created, because if choices are empty that's game over
+        isWinning: false, // false
+        killsPlayer: false, // false
+        conditionals: '111111', // 111111
+        changeHealth: 0, // 0
+    })
 
     // return res.json({ choice });
 
-    return res.json({ scene });
+    return res.json({ scene, choice });
 }))
 
 // Edit a scene
