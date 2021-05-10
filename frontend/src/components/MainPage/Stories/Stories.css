@@ -22,13 +22,15 @@
 }
 
 .story_title_desc {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
     margin: .5em;
 }
 
 .story_img_container {
     width: 10em;
     height: 10em;
-    border: 1px solid burlywood;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -36,4 +38,12 @@
 
 .story_img{
     width: 100%;
+}
+
+.story_writer_edit{
+    display: flex;
+}
+
+.written_by{
+    margin-right: 1em;
 }

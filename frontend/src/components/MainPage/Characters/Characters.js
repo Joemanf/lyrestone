@@ -44,7 +44,7 @@ function Characters() {
                 </h2>
                     <button disabled={true}>Add a character</button>
                 </div>
-                <div>
+                <div className='main_characters_container'>
                     {charactersArr.map(character => (
                         <div key={character.id} className='character_container_greater'>
                             {character.id === selected ?
@@ -81,7 +81,7 @@ function Characters() {
                         </div>
                     ))}
                 </div>
-                <div>
+                <div className='user_bar'>
                     <div>{user.username}</div>
                     <button onClick={logout}>Log Out</button>
                 </div>
