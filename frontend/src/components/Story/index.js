@@ -21,7 +21,6 @@ function Story() {
                 firstScene = scene
             }
         })
-        console.log('Yeah first scene', firstScene)
         return <Redirect to={`/stories/${story.id}/${firstScene.id}`} />
     }
 

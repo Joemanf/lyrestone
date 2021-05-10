@@ -22,15 +22,9 @@ function Stories() {
         selectedCharArr.push(selectedCharacter[key])
     }
 
-    console.log('Stories here:', stories)
-
     const createStory = async () => {
         const story = await dispatch(makeStory(userId))
-        console.log('This is a STORY!!!', story)
         return history.push(`/create/${story.story.id}`)
-        // return (
-        //     <Redirect to={`/create/${story.id}`} />
-        // )
     }
 
     return (
@@ -41,7 +35,7 @@ function Stories() {
                 </h2>
                 <button onClick={createStory}>Make a story</button>
             </div>
-            <div>
+            <div className='each_story'>
                 {storiesArr.map(story => {
                     if (selectedCharArr.length) {
                         return (

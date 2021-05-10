@@ -18,10 +18,6 @@ function Characters() {
         charactersArr.push(characters[key])
     }
 
-    console.log('SELECTED: ', selected)
-
-    console.log('Wait a second, ', characters, `It's an array`)
-
     // useEffect(() => {
     //     dispatch(getAllUserCharacters())
     // }, [dispatch])
@@ -29,7 +25,6 @@ function Characters() {
     const selectCharacter = (characterId) => {
         dispatch(clearSelectedCharacter())
         setSelected(characterId)
-        console.log(characters[characterId])
         dispatch(selectACharacter(characters[characterId])) // I'm Working here
     }
 
