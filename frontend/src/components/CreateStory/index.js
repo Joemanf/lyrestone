@@ -6,15 +6,18 @@ import { useDispatch, useSelector } from 'react-redux';
 import { editStory, getCurrentStory } from '../../store/stories';
 
 import './CreateStory.css';
+import { clearCurrentScene, getCurrentScene } from '../../store/scenes';
 
 function CreateStory() {
     const dispatch = useDispatch()
     const history = useHistory()
     const { storyId } = useParams()
     const [storyLoaded, setStoryLoaded] = useState(false)
+    const [sceneLoaded, setSceneLoaded] = useState(false)
 
     const user = useSelector(state => state.session.user)
     const story = useSelector(state => state.stories.currentStory);
+    const firstScene = useSelector(state => state.stories.currentStory.Scenes)
 
     const [title, setTitle] = useState(story.title);
     const [description, setDescription] = useState(story.description);
@@ -32,6 +35,13 @@ function CreateStory() {
         setPublished(story.published)
     }, [story])
 
+    useEffect(() => {
+        dispatch(clearCurrentScene())
+        if (firstScene) {
+            dispatch(getCurrentScene(firstScene[0].id)).then(() => setSceneLoaded(true))
+        }
+    }, [dispatch, firstScene])
+
     function handleSubmit(e) { // Double check this function and throw in validators
         e.preventDefault()
         //Make thumbnail dynamic in the future
@@ -40,7 +50,7 @@ function CreateStory() {
         history.push('/home')
     }
 
-    return storyLoaded && (
+    return storyLoaded && sceneLoaded && (
         <>
             <div className='top_create_story'>
                 <div>
