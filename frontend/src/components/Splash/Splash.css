@@ -101,7 +101,7 @@ body{
     position: relative;
     opacity: 0;
     left: -1em;
-    transition: all 1.5s ease-out;
+    transition: all 1s ease-out;
 }
 
 /* @keyframes lyrestone_image_intro {
@@ -140,7 +140,17 @@ body{
     position: relative;
     opacity: 0;
     bottom: -1em;
-    transition: all 1.5s ease-out;
+    transition: all 1s ease-out;
+}
+
+.inner_links button {
+    font-size: 1em;
+    padding: .5em;
+}
+
+.inner_links a {
+    color: white;
+    text-decoration: none;
 }
 
 /* @keyframes lyrestone_links_intro {

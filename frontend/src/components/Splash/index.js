@@ -37,8 +37,12 @@ function Splash() {
                     <h1 className='logo_text'>Lyrestone</h1>
                 </div>
                 <div className='inner_links'>
-                    <NavLink to='/login'>Log In</NavLink>
-                    <NavLink to='/signup'>Sign Up</NavLink>
+                    <button>
+                        <NavLink to='/login'>Log In</NavLink>
+                    </button>
+                    <button>
+                        <NavLink to='/signup'>Sign Up</NavLink>
+                    </button>
                 </div>
             </div>
         </div>

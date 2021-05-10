@@ -10,6 +10,10 @@
 	/* vertical-align: baseline; */
 }
 
+a {
+	color: rgb(252, 99, 99);
+}
+
 button {
 	background-color: #191919;
 	color: white;
@@ -26,10 +30,6 @@ button {
 button:hover{
 	box-shadow: 0 0 8px white;
     top: 3px;
-}
-
-a {
-	color: rgb(252, 99, 99);
 }
 
 /* The following is from:
