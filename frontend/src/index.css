@@ -28,6 +28,10 @@ button:hover{
     top: 3px;
 }
 
+a {
+	color: rgb(252, 99, 99);
+}
+
 /* The following is from:
    http://meyerweb.com/eric/tools/css/reset/ 
    v2.0 | 20110126

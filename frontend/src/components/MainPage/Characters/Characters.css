@@ -14,6 +14,19 @@
     margin: .5em 1em;
 }
 
+.user_bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 6%;
+    padding: .5em;
+}
+
+.main_characters_container{
+    height: 84%;
+    overflow-y: auto;
+}
+
 .character_container{
     border: 1px solid orchid;
     margin: 1em;
@@ -32,7 +45,6 @@
 .character_img_container {
     width: 10em;
     height: 10em;
-    border: 1px solid burlywood;
     display: flex;
     justify-content: center;
     align-items: center;

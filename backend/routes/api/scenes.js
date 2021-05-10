@@ -26,16 +26,28 @@ router.get('/:storyId/:sceneId', asyncHandler(async (req, res, next) => {
 
 // Save a scene
 // Don't forget to throw in validations
-router.post('/', asyncHandler(async (req, res, next) => {
-    const { title, body, backgroundImg } = req.body // might not be background image here
+router.post('/:currentSceneId', asyncHandler(async (req, res, next) => {
+    // const { title, body, backgroundImg } = req.body // might not be background image here
 
     // Probably put some AWS stuff here
 
     const scene = await Scene.create({
-        title,
-        body,
-        backgroundImg
+        title: 'New Scene',
+        body: 'This is a new scene',
+        backgroundImg: null
     })
+
+    // const choice = await Choice.create({
+    //     body, // Should be the same as title of new scene
+    //     sceneId, // Should be the current scene's ID
+    //     nextSceneId, // Will be the id of the scene just created, because if choices are empty that's game over
+    //     isWinning, // false
+    //     killsPlayer, // false
+    //     conditionals, // 111111
+    //     changeHealth, // 0
+    // })
+
+    // return res.json({ choice });
 
     return res.json({ scene });
 }))

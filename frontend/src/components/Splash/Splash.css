@@ -4,9 +4,9 @@ body{
 }
 
 .wrap {
-    animation-name: lyrestone_intro;
+    /* animation-name: lyrestone_intro;
     animation-duration: 5s;
-    animation-iteration-count: 1;
+    animation-iteration-count: 1; */
     animation-fill-mode: forwards;
 }
 
@@ -32,12 +32,28 @@ body{
     padding-left: .5em;
     color: white;
     font-style: italic;
-    animation-name: lyrestone_text_intro;
-    animation-duration: 3s;
-    animation-iteration-count: 1;
-    animation-fill-mode: forwards;
+    -webkit-animation: 3s ease 0s 1 normal forwards running lyrestone_text_intro;
+    -moz-animation: 3s ease 0s 1 normal forwards running lyrestone_text_intro;
+    -ms-animation: 3s ease 0s 1 normal forwards running lyrestone_text_intro;
+    -o-animation: 3s ease 0s 1 normal forwards running lyrestone_text_intro;
+    animation: 3s ease 0s 1 normal forwards running lyrestone_text_intro;
+    /* animation-name: lyrestone_text_intro; */
+    /* animation-duration: 3s; */
+    /* animation-iteration-count: 1; */
+    /* animation-fill-mode: forwards; */
     position: relative;
     transition: all .2s ease-out;
+
+    /* Safari & Chrome */
+    /* -webkit-animation-name:bounce;  */
+    /* Firefox */
+/* -moz-animation-name:bounce;  */
+/* Internet Explorer */
+/* -ms-animation-name:bounce;  */
+/* Opera */
+/* -o-animation-name:bounce;  */
+/* W3C */
+/* animation-name:bounce;  */
 }
 
 .logo_text:hover{
@@ -64,10 +80,15 @@ body{
     box-shadow: 0 0 5px white;
     border-radius: 50%;
     width: 17em;
-    animation-name: lyrestone_image_intro;
+    /* animation-name: lyrestone_image_intro;
     animation-duration: 3s;
     animation-iteration-count: 1;
-    animation-fill-mode: forwards;
+    animation-fill-mode: forwards; */
+    -webkit-animation: 3s ease 0s 1 normal forwards running lyrestone_image_intro;
+    -moz-animation: 3s ease 0s 1 normal forwards running lyrestone_image_intro;
+    -ms-animation: 3s ease 0s 1 normal forwards running lyrestone_image_intro;
+    -o-animation: 3s ease 0s 1 normal forwards running lyrestone_image_intro;
+    animation: 3s ease 0s 1 normal forwards running lyrestone_image_intro;
     position: relative;
     opacity: 0;
     left: -1em;
@@ -93,10 +114,15 @@ body{
     justify-content: space-between;
     width: 10em;
     font-size: 3em;
-    animation-name: lyrestone_links_intro;
-    animation-duration: 3s;
-    animation-iteration-count: 1;
-    animation-fill-mode: forwards;
+    /* animation-name: lyrestone_links_intro; */
+    /* animation-duration: 3s; */
+    /* animation-iteration-count: 1; */
+    /* animation-fill-mode: forwards; */
+    -webkit-animation: 3s ease 0s 1 normal forwards running lyrestone_links_intro;
+    -moz-animation: 3s ease 0s 1 normal forwards running lyrestone_links_intro;
+    -ms-animation: 3s ease 0s 1 normal forwards running lyrestone_links_intro;
+    -o-animation: 3s ease 0s 1 normal forwards running lyrestone_links_intro;
+    animation: 3s ease 0s 1 normal forwards running lyrestone_links_intro;
     position: relative;
     opacity: 0;
     bottom: -1em;

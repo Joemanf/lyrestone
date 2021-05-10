@@ -24,6 +24,10 @@ module.exports = {
       thumbnail: {
         type: Sequelize.TEXT
       },
+      published: {
+        allowNull: false,
+        type: Sequelize.BOOLEAN
+      },
       createdAt: {
         allowNull: false,
         defaultValue: Sequelize.fn('now'),

@@ -100,7 +100,7 @@ function Scene() {
                         selectedCharacter.charisma >= cha
                     ) {
                         return (
-                            <Link to={`/stories/${scene.storyId}/${choice.nextSceneId}`}>
+                            <Link key={choice.id} to={`/stories/${scene.storyId}/${choice.nextSceneId}`}>
                                 <div onClick={() => {
                                     currentHealth(currentHP, choice.changeHealth)
                                     setSceneChange(true)

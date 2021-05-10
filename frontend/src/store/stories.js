@@ -2,6 +2,7 @@ import { csrfFetch } from './csrf';
 
 // Actions
 const GET_STORIES = 'stories/getStories';
+const CLEAR_STORIES = 'stories/clearStories'
 const GET_THIS_STORY = 'stories/getThisStory'
 
 const getStories = (story) => {
@@ -10,6 +11,12 @@ const getStories = (story) => {
         payload: story,
     };
 };
+
+const clearStories = () => {
+    return {
+        type: CLEAR_STORIES
+    }
+}
 
 const getThisStory = (story) => {
     return {
@@ -50,6 +57,28 @@ export const makeStory = (userId) => async (dispatch) => {
     return data
 }
 
+//Edit a story's contents
+export const editStory = (storyId, userId, title, description, thumbnail, published) => async (dispatch) => {
+    // Throw AWS stuff here
+    console.log('hit?????????', storyId, userId, title, description)
+    const response = await csrfFetch(`/api/stories/edit/${storyId}`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+            userId,
+            title,
+            description,
+            thumbnail,
+            published
+        })
+    })
+    const data = await response.json();
+    console.log(data)
+    dispatch()
+    dispatch(getThisStory(data))
+    return data
+}
+
 
 // Reducer
 const initialState = { stories: {}, currentStory: {} };
@@ -63,6 +92,10 @@ const storiesReducer = (state = initialState, action) => {
                 newState.stories[story.id] = story;
             })
             return newState;
+        case CLEAR_STORIES:
+            newState = Object.assign({}, state); // Always copy, never alter
+            newState.stories = {}
+            return newState
         case GET_THIS_STORY:
             newState = Object.assign({}, state); // Always copy, never alter
             newState.currentStory = action.payload

@@ -39,13 +39,17 @@ function Stories() {
                 {storiesArr.map(story => {
                     if (selectedCharArr.length) {
                         return (
-                            <Link to={`/stories/${story.id}`} >
+                            <div key={story.id}>
                                 <div className='story_container'>
                                     <div className='story_title_desc'>
-                                        <h3 className='story_title'>{story.title}</h3>
-                                        <div className='story_desc'>{story.description}</div>
-                                        <div>
-                                            <div>Written By: {story.User.username}</div>
+                                        <div className='story_title_desc_link'>
+                                            <Link to={`/stories/${story.id}`}>
+                                                <h3 className='story_title'>{story.title}</h3>
+                                                <div className='story_desc'>{story.description}</div>
+                                            </Link>
+                                        </div>
+                                        <div className='story_writer_edit'>
+                                            <div className='written_by'>Written By: {story.User.username}</div>
                                             {userId === story.userId ?
                                                 <Link to={`/create/${story.id}`}>Edit</Link>
                                                 :
@@ -57,7 +61,7 @@ function Stories() {
                                         <img src={story.thumbnail} alt={story.title} className='story_img'></img>
                                     </div>
                                 </div>
-                            </Link>
+                            </div>
                         )
                     } else {
                         return (
