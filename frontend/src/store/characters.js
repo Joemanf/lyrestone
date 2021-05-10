@@ -2,6 +2,7 @@ import { csrfFetch } from './csrf';
 
 // Actions
 const GET_CHARACTERS = 'characters/getCharacters';
+const CLEAR_ALL_CHARACTERS = 'characters/clearAllCharacters';
 const SELECT_CHARACTER = 'characters/selectACharacter';
 const REMOVE_CHARACTER_FROM_STORE = 'characters/removeCharacterFromStore'
 const SET_HP = 'characters/setHP'
@@ -14,6 +15,12 @@ const getCharacters = (character) => {
         payload: character,
     };
 };
+
+export const clearAllCharacters = () => {
+    return {
+        type: CLEAR_ALL_CHARACTERS,
+    }
+}
 
 export const selectACharacter = (character) => {
     return {
@@ -54,6 +61,7 @@ export const clearHP = () => {
 export const getAllUserCharacters = () => async (dispatch) => {
     const response = await csrfFetch('/api/characters');
     const data = await response.json();
+    console.log('All Characters: ', data)
     dispatch(getCharacters(data.characters));
     return response;
 };
@@ -87,6 +95,10 @@ const charactersReducer = (state = initialState, action) => {
                 newState.characters[character.id] = character;
             })
             return newState;
+        case CLEAR_ALL_CHARACTERS:
+            newState = Object.assign({}, state); // Always copy, never alter
+            newState.characters = {}
+            return newState
         case SELECT_CHARACTER:
             newState = Object.assign({}, state); // Always copy, never alter
             newState.selectedChar[action.payload.id] = action.payload
