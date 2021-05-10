@@ -85,7 +85,7 @@ module.exports = (sequelize, DataTypes) => {
   };
 
   // Sign up/Sign in
-  User.signup = async function ({ username, email, password }) {
+  User.signup = async function ({ username, email, password, avatar }) {
     const hashedPassword = bcrypt.hashSync(password); // https://www.simplyrecipes.com/thmb/-MJYxdPkePqM7Hm6ovywhlHtDrg=/960x0/filters:no_upscale():max_bytes(150000):strip_icc():format(webp)/__opt__aboutcom__coeus__resources__content_migration__simply_recipes__uploads__2009__03__corned-beef-hash-vertical-a-1200-4118a5d536764c9585c149e77ebb663c.jpg
     // Do you have any idea how far into google I had to go to not find drugs?
     // I didn't even know hash was a drug
@@ -93,6 +93,7 @@ module.exports = (sequelize, DataTypes) => {
       username,
       email,
       hashedPassword,
+      avatar
     });
     return await User.scope('currentUser').findByPk(user.id);
   };
