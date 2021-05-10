@@ -1,22 +1,45 @@
-import React from 'react';
-import { useSelector } from 'react-redux';
+import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { clearCurrentScene, createScene, getCurrentScene } from '../../../store/scenes';
 
 import './SceneDisplay.css'
 
 function SceneDisplay() {
+    const dispatch = useDispatch()
+    const [sceneLoaded, setSceneLoaded] = useState(false);
+    const currentStory = useSelector(state => state.stories.currentStory)
     const currentScene = useSelector(state => state.scenes.currentScene)
-    return (
+
+    function makeScene() {
+        setSceneLoaded(false)
+        dispatch(createScene(currentScene.id, currentStory.id))
+    }
+
+    useEffect(() => {
+        dispatch(clearCurrentScene());
+        dispatch(getCurrentScene(currentScene.id)).then(() => setSceneLoaded(true))
+    }, [sceneLoaded])
+
+    return sceneLoaded && (
         <div>
             <div className='scene_view'>
                 <div>Parent Scene</div>
                 <div>{currentScene.title}</div>
                 <div>
-                    {currentScene.Choices.map(scene => (
+                    {currentScene.Choices ? currentScene.Choices.map(scene => (
                         <div>hey</div>
-                    ))}
+                    ))
+                        :
+                        null}
                 </div>
             </div>
-            <div>Add Scene</div>
+            <div>
+                {currentScene.Choices && currentScene.Choices.length < 4 ?
+                    <button onClick={makeScene}>Add a scene</button>
+                    :
+                    <button className='button_disabled'>Add a scene</button>
+                }
+            </div>
         </div>
     )
 }

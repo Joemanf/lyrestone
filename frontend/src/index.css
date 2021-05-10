@@ -32,6 +32,16 @@ button:hover{
     top: 3px;
 }
 
+.button_disabled {
+	background-color: rgb(65, 65, 65);
+	color: rgb(165, 165, 165);
+}
+
+.button_disabled:hover {
+	box-shadow: none;
+	top: 0;
+}
+
 /* The following is from:
    http://meyerweb.com/eric/tools/css/reset/ 
    v2.0 | 20110126

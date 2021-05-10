@@ -31,15 +31,18 @@ router.post('/:currentSceneId', asyncHandler(async (req, res, next) => {
 
     // Probably put some AWS stuff here
 
-    const currentSceneId = req.params.id
+    const currentSceneId = req.params.currentSceneId
 
     const scene = await Scene.create({
+        storyId: req.body.storyId,
         title: 'New Scene',
         body: 'This is a new scene',
         backgroundImg: null
     })
 
-    const choice = await Choice.create({
+    console.log('CURRENT SCENE ID!!!!!!!!!!!!!!!!!!!!!!!!!!!!', currentSceneId)
+
+    await Choice.create({
         body: scene.title, // Should be the same as title of new scene
         sceneId: currentSceneId, // Should be the current scene's ID
         nextSceneId: scene.id, // Will be the id of the scene just created, because if choices are empty that's game over
@@ -49,9 +52,7 @@ router.post('/:currentSceneId', asyncHandler(async (req, res, next) => {
         changeHealth: 0, // 0
     })
 
-    // return res.json({ choice });
-
-    return res.json({ scene, choice });
+    return res.json({ scene });
 }))
 
 // Edit a scene

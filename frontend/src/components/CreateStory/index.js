@@ -3,7 +3,7 @@ import SceneDisplay from './SceneDisplay/SceneDisplay';
 import ScenesInfo from './SceneInfo/SceneInfo';
 import { useHistory, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { editStory, getCurrentStory } from '../../store/stories';
+import { clearCurrentStory, editStory, getCurrentStory } from '../../store/stories';
 
 import './CreateStory.css';
 import { clearCurrentScene, getCurrentScene } from '../../store/scenes';
@@ -25,6 +25,7 @@ function CreateStory() {
     console.log('The New Story Title: ', title)
 
     useEffect(() => {
+        dispatch(clearCurrentStory())
         dispatch(getCurrentStory(storyId))
             .then(() => setStoryLoaded(true))
     }, [dispatch])

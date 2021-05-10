@@ -24,6 +24,18 @@ export const getCurrentScene = (sceneId) => async (dispatch) => {
     const response = await csrfFetch(`/api/scenes/${sceneId}`);
     const data = await response.json();
     dispatch(getThisScene(data.currentScene));
+    return data;
+};
+
+// Create a scene and its respective choice
+export const createScene = (sceneId, storyId) => async (dispatch) => {
+    const response = await csrfFetch(`/api/scenes/${sceneId}`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ storyId })
+    });
+    const data = await response.json();
+    getCurrentScene(data.scene.id)
     return response;
 };
 

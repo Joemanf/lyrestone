@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Redirect, useParams } from 'react-router-dom'
-import { getCurrentStory } from '../../store/stories'
+import { clearCurrentStory, getCurrentStory } from '../../store/stories'
 
 function Story() {
     const dispatch = useDispatch()
@@ -11,6 +11,7 @@ function Story() {
     const story = useSelector(state => state.stories.currentStory)
 
     useEffect(() => {
+        dispatch(clearCurrentStory())
         dispatch(getCurrentStory(storyId)).then(() => setStoryLoaded(true))
     }, [dispatch])
 

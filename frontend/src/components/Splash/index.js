@@ -14,14 +14,20 @@ function Splash() {
         const image = document.querySelector('.logo_container_inner');
         const links = document.querySelector('.inner_links');
         setTimeout(() => {
-            text.style.top = '0';
-            text.style.opacity = '1';
+            if (text) {
+                text.style.top = '0';
+                text.style.opacity = '1';
+            }
         }, 1000)
         setTimeout(() => {
-            image.style.left = '0';
-            image.style.opacity = '1';
-            links.style.bottom = '0';
-            links.style.opacity = '1';
+            if (image) {
+                image.style.left = '0';
+                image.style.opacity = '1';
+            }
+            if (links) {
+                links.style.bottom = '0';
+                links.style.opacity = '1';
+            }
         }, 4000)
     }, [])
 
