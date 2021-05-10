@@ -23,10 +23,22 @@ function MainPage() {
     if (!sessionUser) return <Redirect to="/" />;
 
     return isStoriesLoaded && isCharactersLoaded && (
-        <div className='greater_border'>
-            <Characters />
-            <Stories />
-        </div>
+        <>
+            <div className='greater_border'>
+                <Characters />
+                <Stories />
+            </div>
+            {/* {sessionUser.id === 1 ? */}
+            <div>
+                <div className={'artists_container'}>
+                    <p className={'artists_title'}>Like the characters' artists?</p>
+                    <a href='https://www.ochrogaster.com/'>Jay Kim's Art</a>
+                    <a href='https://joeisdead.com/'>Read "Joe is Dead" by Lev Levinson</a>
+                </div>
+            </div>
+            {/* : null */}
+            {/* } */}
+        </>
     )
 }
 
