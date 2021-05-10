@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { csrfFetch } from '../../../store/csrf';
 import { clearCurrentScene, createScene, getCurrentScene } from '../../../store/scenes';
 
 import './SceneDisplay.css'
@@ -20,14 +21,30 @@ function SceneDisplay() {
         dispatch(getCurrentScene(currentScene.id)).then(() => setSceneLoaded(true))
     }, [sceneLoaded])
 
+    async function getParents() {
+        const response = await csrfFetch(`/api/scenes/parent/${currentScene.id}`)
+        const data = await response.json();
+        return data.parentScenes
+    }
+
+    const parentsArr = getParents();
+
     return sceneLoaded && (
         <div>
             <div className='scene_view'>
-                <div>Parent Scene</div>
+                <div>
+                    {parentsArr && parentsArr.length ?
+                        parentsArr.map(parent => (
+                            <div key={parent.id}>{parent.body}</div>
+                        ))
+                        :
+                        null
+                    }
+                </div>
                 <div>{currentScene.title}</div>
                 <div>
                     {currentScene.Choices ? currentScene.Choices.map(scene => (
-                        <div>hey</div>
+                        <div>{scene.body}</div>
                     ))
                         :
                         null}

@@ -15,6 +15,15 @@ router.get('/:sceneId', asyncHandler(async (req, res, next) => {
     return res.json({ currentScene })
 }))
 
+// Grab the parent(s)
+router.get('/parent/:id', asyncHandler(async (req, res, next) => {
+    const id = req.params.id;
+    const parentScenes = await Choice.findAll({
+        where: { nextSceneId: id }
+    })
+    return res.json({ parentScenes })
+}))
+
 // Get all scenes associated with a story (for making a story)
 router.get('/:storyId/:sceneId', asyncHandler(async (req, res, next) => {
     const storyId = req.params.storyId;
