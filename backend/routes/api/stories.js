@@ -1,14 +1,16 @@
 const express = require('express');
 const asyncHandler = require('express-async-handler'); // Will wrap async route handlers and custom middlewares
 
-const { Story, Scene, Choice } = require('../../db/models')
+const { Story, Scene, Choice, User } = require('../../db/models')
 // const { getCurrentUserId } = require('../../utils/auth');
 
 const router = express.Router();
 
 // Get all stories (for displaying on main page)
 router.get('/', asyncHandler(async (req, res, next) => {
-    const stories = await Story.findAll();
+    const stories = await Story.findAll({
+        include: User
+    });
     return res.json({ stories })
 }))
 
