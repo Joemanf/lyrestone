@@ -32,17 +32,19 @@ body{
     padding-left: .5em;
     color: white;
     font-style: italic;
-    -webkit-animation: 3s ease 0s 1 normal forwards running lyrestone_text_intro;
-    -moz-animation: 3s ease 0s 1 normal forwards running lyrestone_text_intro;
-    -ms-animation: 3s ease 0s 1 normal forwards running lyrestone_text_intro;
-    -o-animation: 3s ease 0s 1 normal forwards running lyrestone_text_intro;
-    animation: 3s ease 0s 1 normal forwards running lyrestone_text_intro;
+    -webkit-animation: 3s ease 1s 1 normal forwards running lyrestone_text_intro;
+    -moz-animation: 3s ease 1s 1 normal forwards running lyrestone_text_intro;
+    -ms-animation: 3s ease 1s 1 normal forwards running lyrestone_text_intro;
+    -o-animation: 3s ease 1s 1 normal forwards running lyrestone_text_intro;
+    animation: 3s ease 1s 1 normal forwards running lyrestone_text_intro;
     /* animation-name: lyrestone_text_intro; */
     /* animation-duration: 3s; */
     /* animation-iteration-count: 1; */
     /* animation-fill-mode: forwards; */
     position: relative;
-    transition: all .2s ease-out;
+    transition: all 1.5s ease-out;
+    opacity: 0;
+    top: -.3em;
 
     /* Safari & Chrome */
     /* -webkit-animation-name:bounce;  */
@@ -60,7 +62,7 @@ body{
     text-shadow: 1px 1px 3px gray;
 }
 
-@keyframes lyrestone_text_intro {
+/* @keyframes lyrestone_text_intro {
     0% {
         opacity: 0;
         top: -.2em;
@@ -73,7 +75,10 @@ body{
         opacity: 100%;
         top: 0;
     }
-}
+    100% {
+        opacity: 100%;
+    }
+} */
 
 .logo_container_inner{
     display: flex;
@@ -88,17 +93,18 @@ body{
     animation-duration: 3s;
     animation-iteration-count: 1;
     animation-fill-mode: forwards; */
-    -webkit-animation: 3s ease 0s 1 normal forwards running lyrestone_image_intro;
-    -moz-animation: 3s ease 0s 1 normal forwards running lyrestone_image_intro;
-    -ms-animation: 3s ease 0s 1 normal forwards running lyrestone_image_intro;
-    -o-animation: 3s ease 0s 1 normal forwards running lyrestone_image_intro;
-    animation: 3s ease 0s 1 normal forwards running lyrestone_image_intro;
+    -webkit-animation: 3s ease 1s 1 normal forwards running lyrestone_image_intro;
+    -moz-animation: 3s ease 1s 1 normal forwards running lyrestone_image_intro;
+    -ms-animation: 3s ease 1s 1 normal forwards running lyrestone_image_intro;
+    -o-animation: 3s ease 1s 1 normal forwards running lyrestone_image_intro;
+    animation: 3s ease 1s 1 normal forwards running lyrestone_image_intro;
     position: relative;
     opacity: 0;
     left: -1em;
+    transition: all 1.5s ease-out;
 }
 
-@keyframes lyrestone_image_intro {
+/* @keyframes lyrestone_image_intro {
     0% {
         opacity: 0;
         left: -1em;
@@ -115,9 +121,9 @@ body{
         opacity: 100%;
         left: 0;
     }
-}
+} */
 
-.links{
+.inner_links{
     display: flex;
     justify-content: space-between;
     width: 10em;
@@ -126,17 +132,18 @@ body{
     /* animation-duration: 3s; */
     /* animation-iteration-count: 1; */
     /* animation-fill-mode: forwards; */
-    -webkit-animation: 3s ease 0s 1 normal forwards running lyrestone_links_intro;
-    -moz-animation: 3s ease 0s 1 normal forwards running lyrestone_links_intro;
-    -ms-animation: 3s ease 0s 1 normal forwards running lyrestone_links_intro;
-    -o-animation: 3s ease 0s 1 normal forwards running lyrestone_links_intro;
-    animation: 3s ease 0s 1 normal forwards running lyrestone_links_intro;
+    -webkit-animation: 3s ease 1s 1 normal forwards running lyrestone_links_intro;
+    -moz-animation: 3s ease 1s 1 normal forwards running lyrestone_links_intro;
+    -ms-animation: 3s ease 1s 1 normal forwards running lyrestone_links_intro;
+    -o-animation: 3s ease 1s 1 normal forwards running lyrestone_links_intro;
+    animation: 3s ease 1s 1 normal forwards running lyrestone_links_intro;
     position: relative;
     opacity: 0;
     bottom: -1em;
+    transition: all 1.5s ease-out;
 }
 
-@keyframes lyrestone_links_intro {
+/* @keyframes lyrestone_links_intro {
     0% {
         opacity: 0;
         bottom: -1em;
@@ -153,7 +160,7 @@ body{
         opacity: 100%;
         bottom: 0;
     }
-}
+} */
 
 .links a {
     color: white;
