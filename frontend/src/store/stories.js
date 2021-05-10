@@ -50,6 +50,11 @@ export const makeStory = (userId) => async (dispatch) => {
     return data
 }
 
+//Edit a story's contents
+export const editStory = () => async (dispatch) => {
+    const response = await csrfFetch(`/api`)
+}
+
 
 // Reducer
 const initialState = { stories: {}, currentStory: {} };
