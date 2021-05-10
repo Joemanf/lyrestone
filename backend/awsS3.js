@@ -21,7 +21,6 @@ const singlePublicFileUpload = async (file) => {
         Body: buffer,
         ACL: "public-read",
     };
-    // console.log('Upload params!!!!!!!!!!!!!!!\n', uploadParams)
     const result = await s3.upload(uploadParams).promise();
 
     // save the name of the file in the bucket as the key in the database to retrieve for later
@@ -41,8 +40,6 @@ const multiplePublicFileUpload = async (files) => {
 const storage = multer.memoryStorage();
 
 const singleMulterUpload = (nameOfKey) => {
-    // const test = multer({ storage: storage }).single(nameOfKey)
-    // console.log('Multer Tests!!!!!!!!!!!!!!!!!!!!!', test)
     return multer({ storage: storage }).single(nameOfKey);
 }
 
