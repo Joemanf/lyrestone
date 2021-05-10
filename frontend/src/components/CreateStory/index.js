@@ -1,36 +1,54 @@
 import React, { useEffect, useState } from 'react';
 import SceneDisplay from './SceneDisplay/SceneDisplay';
 import ScenesInfo from './SceneInfo/SceneInfo';
-import { useParams } from 'react-router-dom';
+import { useHistory, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { getCurrentStory } from '../../store/stories';
+import { editStory, getCurrentStory } from '../../store/stories';
 
 import './CreateStory.css';
 
 function CreateStory() {
     const dispatch = useDispatch()
+    const history = useHistory()
     const { storyId } = useParams()
     const [storyLoaded, setStoryLoaded] = useState(false)
 
+    const user = useSelector(state => state.session.user)
     const story = useSelector(state => state.stories.currentStory);
 
     const [title, setTitle] = useState(story.title);
     const [description, setDescription] = useState(story.description);
-
+    const [published, setPublished] = useState(story.published);
+    console.log('The New Story Title: ', title)
 
     useEffect(() => {
-        dispatch(getCurrentStory(storyId)).then(() => setStoryLoaded(true))
+        dispatch(getCurrentStory(storyId))
+            .then(() => setStoryLoaded(true))
     }, [dispatch])
+
+    useEffect(() => {
+        setTitle(story.title);
+        setDescription(story.description);
+        setPublished(story.published)
+    }, [story])
+
+    function handleSubmit(e) { // Double check this function and throw in validators
+        e.preventDefault()
+        //Make thumbnail dynamic in the future
+        const thumbnail = 'https://lyrestone.s3.amazonaws.com/lyrestone-dragon.png';
+        dispatch(editStory(story.id, user.id, title, description, thumbnail, published))
+        history.push('/home')
+    }
 
     return storyLoaded && (
         <>
-            <form className='top_create_story'>
+            <div className='top_create_story'>
                 <div>
                     <ScenesInfo />
                 </div>
                 <div>
                     <SceneDisplay />
-                    <div className='story_info_container'>
+                    <form onSubmit={handleSubmit} className='story_info_container'>
                         <div>
                             <div>
                                 <label>Story Name</label>
@@ -49,6 +67,9 @@ function CreateStory() {
                                 />
                             </div>
                         </div>
+                        {/* <div>
+                            <input type='checkbox' value={published} onClick={e => setPublished(!e.target.value)}>Publish?</input>
+                        </div> */}
                         <div>
                             <button type='submit'>Save</button>
                         </div>
@@ -56,9 +77,9 @@ function CreateStory() {
                         {/* <div>
                             <button>Publish</button>
                         </div> */}
-                    </div>
+                    </form>
                 </div>
-            </form>
+            </div>
         </>
     )
 }

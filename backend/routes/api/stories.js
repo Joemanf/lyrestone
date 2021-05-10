@@ -29,16 +29,20 @@ router.get('/:storyId', asyncHandler(async (req, res, next) => {
 // Save a story to the database
 // Throw in validations
 router.post('/', asyncHandler(async (req, res, next) => {
-    const { userId } = req.body // might not be thumbnail here
+    const { userId } = req.body
 
     // Probably put some AWS stuff here
 
+    console.log('HEY THERE!!!!!!!!!!!!!!!!!!!!!!!'
+    )
     const story = await Story.create({
         userId,
         title: 'My Story',
         description: 'Insert Description Here',
-        thumbnail: `https://lyrestone.s3.amazonaws.com/lyrestone-dragon.png`
+        thumbnail: `https://lyrestone.s3.amazonaws.com/lyrestone-dragon.png`,
+        published: false,
     })
+
 
     await Scene.create({
         storyId: story.id,
@@ -51,8 +55,8 @@ router.post('/', asyncHandler(async (req, res, next) => {
     return res.json({ story })
 }))
 
-router.put('/:storyId', asyncHandler(async (req, res, next) => {
-    const { userId, title, description, thumbnail } = req.body // Might not be thumbnail
+router.put('/edit/:storyId', asyncHandler(async (req, res, next) => {
+    const { userId, title, description, thumbnail, published } = req.body // Might not be thumbnail
     const storyId = req.params.storyId
 
     //Might have to do AWS stuff here
@@ -64,6 +68,7 @@ router.put('/:storyId', asyncHandler(async (req, res, next) => {
         title,
         description,
         thumbnail,
+        published,
     })
 
     return res.json({ story });

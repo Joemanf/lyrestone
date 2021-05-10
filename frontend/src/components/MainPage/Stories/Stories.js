@@ -39,7 +39,7 @@ function Stories() {
                 {storiesArr.map(story => {
                     if (selectedCharArr.length) {
                         return (
-                            <Link to={`/stories/${story.id}`} >
+                            <Link key={story.id} to={`/stories/${story.id}`} >
                                 <div className='story_container'>
                                     <div className='story_title_desc'>
                                         <h3 className='story_title'>{story.title}</h3>

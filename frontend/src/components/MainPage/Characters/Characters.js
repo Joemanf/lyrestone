@@ -46,7 +46,7 @@ function Characters() {
                 </div>
                 <div>
                     {charactersArr.map(character => (
-                        <div className='character_container_greater'>
+                        <div key={character.id} className='character_container_greater'>
                             {character.id === selected ?
                                 <div
                                     className='character_container selected'
