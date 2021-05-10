@@ -25,8 +25,6 @@ function Story() {
         return <Redirect to={`/stories/${story.id}/${firstScene.id}`} />
     }
 
-
-
     return storyLoaded && (
         <div></div>
     )

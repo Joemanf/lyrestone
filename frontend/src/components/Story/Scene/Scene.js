@@ -124,9 +124,9 @@ function Scene() {
                 })
                     :
                     <Link to='/home'>
-                        <div>
+                        <h2>
                             Game Over.
-                        </div>
+                        </h2>
                     </Link>
                 }
             </div>

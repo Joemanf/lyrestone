@@ -1,10 +1,14 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { Link, Redirect, useHistory } from 'react-router-dom';
+import { makeStory } from '../../../store/stories';
 
 import './Stories.css'
 
 function Stories() {
+    const dispatch = useDispatch()
+    const history = useHistory();
+    const userId = useSelector(state => state.session.user.id);
     const stories = useSelector(state => state.stories.stories);
     const selectedCharacter = useSelector(state => state.characters.selectedChar);
 
@@ -20,15 +24,22 @@ function Stories() {
 
     console.log('Stories here:', stories)
 
+    const createStory = async () => {
+        const story = await dispatch(makeStory(userId))
+        console.log('This is a STORY!!!', story)
+        return history.push(`/create/${story.story.id}`)
+        // return (
+        //     <Redirect to={`/create/${story.id}`} />
+        // )
+    }
+
     return (
         <div className='stories_container'>
             <div className='story_header'>
                 <h2>
                     Stories:
                 </h2>
-                <Link to='/create/1'>
-                    <button>Make a story</button>
-                </Link>
+                <button onClick={createStory}>Make a story</button>
             </div>
             <div>
                 {storiesArr.map(story => {

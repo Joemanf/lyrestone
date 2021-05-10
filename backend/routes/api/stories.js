@@ -27,15 +27,15 @@ router.get('/:storyId', asyncHandler(async (req, res, next) => {
 // Save a story to the database
 // Throw in validations
 router.post('/', asyncHandler(async (req, res, next) => {
-    const { userId, title, description, thumbnail } = req.body // might not be thumbnail here
+    const { userId } = req.body // might not be thumbnail here
 
     // Probably put some AWS stuff here
 
     const story = await Story.create({
         userId,
-        title,
-        description,
-        thumbnail
+        title: 'My Story',
+        description: 'Insert Description Here',
+        thumbnail: `https://lyrestone.s3.amazonaws.com/lyrestone-dragon.png`
     })
 
     await Scene.create({

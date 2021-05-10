@@ -38,6 +38,20 @@ export const getCurrentStory = (storyId) => async (dispatch) => {
     return response
 }
 
+//Make a new story when the user clicks the button
+export const makeStory = (userId) => async (dispatch) => {
+    const response = await csrfFetch(`/api/stories`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' }, // Change this to FormData and set it up that way
+        body: JSON.stringify({
+            userId,
+        })
+    })
+    const data = await response.json();
+    dispatch(getThisStory(data))
+    return data
+}
+
 
 // Reducer
 const initialState = { stories: {}, currentStory: {} };
