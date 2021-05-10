@@ -32,17 +32,35 @@ const validateSignup = [
 
 // Sign up
 router.post(
-    '/signup', // Realizing this might be an issue... come back to it
-    validateSignup,
+    '/signup',
+    // validateSignup,
     singleMulterUpload("image"),
     asyncHandler(async (req, res) => {
         const { email, password, username } = req.body; // Grab the info from the req
+
+        const valErrs = []
+        if (!email.split('').includes('@') && !email.split('').includes('.') && email.length < 1) {
+            valErrs.push('Please provide a valid email.')
+        }
+        if (username.length < 4) {
+            valErrs.push('Please provide a username with at least 4 characters.')
+        }
+        if (username.split('').includes('@')) {
+            valErrs.push('Username cannot be an email.')
+        }
+        if (password.length < 6) {
+            valErrs.push('Password must be 6 characters or more.')
+        }
         let profileImageUrl;
+        if (valErrs.length) {
+            return res.json({ valErrs })
+        }
         if (req.file) {
             profileImageUrl = await singlePublicFileUpload(req.file); // Grab the image uploaded b y the user
         }
-        else profileImageUrl = null;
-        const user = await User.signup({ email, username, password, profileImageUrl }); // Make yourself
+        else profileImageUrl = 'https://lyrestone.s3.amazonaws.com/lyrestone_anon.png';
+        console.log('profileImageUrl!!!!!!!!!!!!!!!!!', profileImageUrl)
+        const user = await User.signup({ email, username, password, avatar: profileImageUrl }); // Make yourself
         await setTokenCookie(res, user);
 
         return res.json({

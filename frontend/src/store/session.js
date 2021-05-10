@@ -57,37 +57,18 @@ export const signup = (user) => async (dispatch) => {
     // }
 
     // for single file
+    formData.append("image", image);
 
-    if (image) {
-        formData.append("image", image);
-        const response = await csrfFetch("/api/users/signup", {
-            method: "POST",
-            body: formData,
-            headers: {
-                "Content-Type": "application/json",
-                'Something_random': 'Something_less_random'
-            },
-            // body: JSON.stringify(formData),
-        });
-        const data = await response.json();
-        dispatch(setUser(data.user));
-        return response;
-    }
-    else {
-        const response = await csrfFetch("/api/users/signup", {
-            method: "POST",
-            header: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-                username,
-                email,
-                password,
-                // throw a placeholder image here
-            }),
-        });
-        const data = await response.json();
-        dispatch(setUser(data.user));
-        return response;
-    }
+    const response = await csrfFetch("/api/users/signup", {
+        method: "POST",
+        body: formData,
+        headers: {
+            "Content-Type": "multipart/form-data"
+        },
+    });
+    const data = await response.json();
+    dispatch(setUser(data.user));
+    return response;
 };
 
 // Log out
