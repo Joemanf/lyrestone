@@ -9,19 +9,19 @@ const router = express.Router();
 // Create a choice (in conjunction with scene create)
 // Throw any validations in here
 router.post('/:storyId', asyncHandler(async (req, res, next) => {
-    const { body, sceneId, nextSceneId, isWinning, killsPlayer, conditionals, changeHealth } = req.body
+    // const { body, sceneId, nextSceneId, isWinning, killsPlayer, conditionals, changeHealth } = req.body
 
-    const choice = await Choice.create({
-        body,
-        sceneId,
-        nextSceneId,
-        isWinning,
-        killsPlayer,
-        conditionals,
-        changeHealth,
-    })
+    // const choice = await Choice.create({
+    //     body, // Should be the same as title of new scene
+    //     sceneId, // Should be the current scene's ID
+    //     nextSceneId, // Will be the id of the scene just created, because if choices are empty that's game over
+    //     isWinning, // false
+    //     killsPlayer, // false
+    //     conditionals, // 111111
+    //     changeHealth, // 0
+    // })
 
-    return res.json({ choice });
+    // return res.json({ choice });
 }))
 
 router.put('/:id', asyncHandler(async (req, res, next) => {
