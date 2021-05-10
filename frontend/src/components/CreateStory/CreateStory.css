@@ -1,0 +1,5 @@
+.top_create_story{
+    display: flex;
+    border: 1px solid white;
+    justify-content: space-around;
+}

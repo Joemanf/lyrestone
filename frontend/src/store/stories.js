@@ -24,7 +24,6 @@ const getThisStory = (story) => {
 export const getAllStories = () => async (dispatch) => {
     const response = await csrfFetch('/api/stories');
     const data = await response.json();
-    console.log('Data in getAllStories', data)
     dispatch(getStories(data.stories));
     return response;
 };
@@ -33,9 +32,22 @@ export const getAllStories = () => async (dispatch) => {
 export const getCurrentStory = (storyId) => async (dispatch) => {
     const response = await csrfFetch(`/api/stories/${storyId}`);
     const data = await response.json();
-    console.log('Data in getCurrentStory: ', data);
     dispatch(getThisStory(data.story));
     return response
+}
+
+//Make a new story when the user clicks the button
+export const makeStory = (userId) => async (dispatch) => {
+    const response = await csrfFetch(`/api/stories`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' }, // Change this to FormData and set it up that way
+        body: JSON.stringify({
+            userId,
+        })
+    })
+    const data = await response.json();
+    dispatch(getThisStory(data))
+    return data
 }
 
 
@@ -48,13 +60,11 @@ const storiesReducer = (state = initialState, action) => {
         case GET_STORIES:
             newState = Object.assign({}, state); // Always copy, never alter
             action.payload.forEach(story => {
-                console.log(newState.stories, story.id)
                 newState.stories[story.id] = story;
             })
             return newState;
         case GET_THIS_STORY:
             newState = Object.assign({}, state); // Always copy, never alter
-            console.log('Payload in GET_THIS_STORY: ', action.payload)
             newState.currentStory = action.payload
             return newState;
         default:

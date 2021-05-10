@@ -54,7 +54,6 @@ export const clearHP = () => {
 export const getAllUserCharacters = () => async (dispatch) => {
     const response = await csrfFetch('/api/characters');
     const data = await response.json();
-    console.log('Data in getAllUserCharacters', data)
     dispatch(getCharacters(data.characters));
     return response;
 };
@@ -99,7 +98,6 @@ const charactersReducer = (state = initialState, action) => {
         case SET_HP:
             newState = Object.assign({}, state); // Always copy, never alter
             newState.currentHP = action.payload
-            console.log('Payload incoming, ', action.payload)
             return newState;
         case SET_ORIGINAL_HP:
             newState = Object.assign({}, state); // Always copy, never alter

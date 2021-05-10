@@ -23,7 +23,6 @@ export const clearCurrentScene = () => {
 export const getCurrentScene = (sceneId) => async (dispatch) => {
     const response = await csrfFetch(`/api/scenes/${sceneId}`);
     const data = await response.json();
-    console.log('Data in getCurrentScene: ', data)
     dispatch(getThisScene(data.currentScene));
     return response;
 };
@@ -41,9 +40,7 @@ const scenesReducer = (state = initialState, action) => {
             return newState;
         case CLEAR_THIS_SCENE:
             newState = Object.assign({}, state); // Always copy, never alter
-            console.log('Before: ', newState)
             newState.currentScene = {}
-            console.log('After: ', newState)
             return newState;
         default:
             return state;

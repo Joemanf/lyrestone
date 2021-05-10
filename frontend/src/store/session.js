@@ -60,9 +60,6 @@ export const signup = (user) => async (dispatch) => {
 
     if (image) {
         formData.append("image", image);
-        // console.log(formData.get('username'))
-        // console.log(image.data)
-        // user.image = { buffer: image.data, originalname: image.name, lastModified: image.lastModified, size: image.size, type: image.type, webkitRelativePath: image.webkitRelativePath }
         const response = await csrfFetch("/api/users/signup", {
             method: "POST",
             body: formData,
@@ -72,7 +69,6 @@ export const signup = (user) => async (dispatch) => {
             },
             // body: JSON.stringify(formData),
         });
-        console.log('Time to work')
         const data = await response.json();
         dispatch(setUser(data.user));
         return response;

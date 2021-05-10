@@ -9,6 +9,11 @@
     margin: .5em 1em;
 }
 
+.each_story {
+    height: 77.3vh;
+    overflow-y: auto;
+}
+
 .story_container {
     border: 1px solid white;
     margin: 1em;
