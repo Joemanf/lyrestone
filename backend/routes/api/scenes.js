@@ -10,7 +10,8 @@ const router = express.Router();
 router.get('/:sceneId', asyncHandler(async (req, res, next) => {
     const sceneId = req.params.sceneId;
     const currentScene = await Scene.findByPk(sceneId, {
-        include: Choice
+        include: Choice,
+        // order: ['createdAt']
     })
     return res.json({ currentScene })
 }))
@@ -34,7 +35,9 @@ router.post('/parent', asyncHandler(async (req, res, next) => {
     const parentScenes = []
     console.log('sent!!!!!!!!!', req.body)
     // console.log('OOOOFFF!!!!!!!!!!!!!!!!!!!!!!!!!', choice)
-    const scene = await Scene.findByPk(sent.sceneId)
+    const scene = await Scene.findByPk(sent.sceneId, {
+        include: Choice
+    })
     parentScenes.push(scene)
     // console.log('A SCENE YES YES!!!!!!!!!!!!!!', scene)
     console.log('YEAH!!!!!!!!!!!!!!!!!!!!!!!!!!', parentScenes)

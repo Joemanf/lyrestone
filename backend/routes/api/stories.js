@@ -1,7 +1,7 @@
 const express = require('express');
 const asyncHandler = require('express-async-handler'); // Will wrap async route handlers and custom middlewares
 
-const { Story, Scene, Choice, User } = require('../../db/models')
+const { Story, Scene, Choice, User, sequelize } = require('../../db/models')
 // const { getCurrentUserId } = require('../../utils/auth');
 
 const router = express.Router();
@@ -20,9 +20,12 @@ router.get('/:storyId', asyncHandler(async (req, res, next) => {
     const story = await Story.findByPk(storyId, {
         include: {
             model: Scene,
-            include: Choice // Might need to clean this up
         },
+        order: [
+            [{ model: Scene }, 'id', 'ASC'], // THIS PIECE IS VERY, VERY IMPORTANT
+        ],
     })
+    console.log('UGH STORY,,,,,,,,,,,,,,,,,,,,', story.Scenes)
     return res.json({ story })
 }))
 
