@@ -36,40 +36,40 @@ function Stories() {
                 <button onClick={createStory}>Make a story</button>
             </div>
             <div className='each_story'>
-                {storiesArr.map(story => {
-                    if (selectedCharArr.length) {
-                        return (
-                            <div key={story.id}>
-                                <div className='story_container'>
-                                    <div className='story_title_desc'>
-                                        <div className='story_title_desc_link'>
-                                            <Link to={`/stories/${story.id}`}>
-                                                <h3 className='story_title'>{story.title}</h3>
-                                                <div className='story_desc'>{story.description}</div>
-                                            </Link>
+                {selectedCharArr.length ?
+                    <div>
+                        {storiesArr.map(story => {
+                            return (
+                                <div key={story.id}>
+                                    <div className='story_container'>
+                                        <div className='story_title_desc'>
+                                            <div className='story_title_desc_link'>
+                                                <Link to={`/stories/${story.id}`}>
+                                                    <h3 className='story_title'>{story.title}</h3>
+                                                    <div className='story_desc'>{story.description}</div>
+                                                </Link>
+                                            </div>
+                                            <div className='story_writer_edit'>
+                                                <div className='written_by'>Written By: {story.User.username}</div>
+                                                {userId === story.userId ?
+                                                    <Link to={`/create/${story.id}`}>Edit</Link>
+                                                    :
+                                                    null
+                                                }
+                                            </div>
                                         </div>
-                                        <div className='story_writer_edit'>
-                                            <div className='written_by'>Written By: {story.User.username}</div>
-                                            {userId === story.userId ?
-                                                <Link to={`/create/${story.id}`}>Edit</Link>
-                                                :
-                                                null
-                                            }
+                                        <div className='story_img_container'>
+                                            <img src={story.thumbnail} alt={story.title} className='story_img'></img>
                                         </div>
-                                    </div>
-                                    <div className='story_img_container'>
-                                        <img src={story.thumbnail} alt={story.title} className='story_img'></img>
                                     </div>
                                 </div>
-                            </div>
-                        )
-                    } else {
-                        return (
-                            <h2 className='story_header'>Please select a character.</h2>
-                        )
-                    }
+                            )
+                        }
+                        )}
+                    </div>
+                    :
+                    <h2 className='story_header'>Please select a character.</h2>
                 }
-                )}
             </div>
         </div>
     )

@@ -42,7 +42,7 @@ function Characters() {
                     <h2>
                         Characters:
                 </h2>
-                    <button disabled={true}>Add a character</button>
+                    <button className='button_disabled' disabled={true}>Add a character</button>
                 </div>
                 <div className='main_characters_container'>
                     {charactersArr.map(character => (

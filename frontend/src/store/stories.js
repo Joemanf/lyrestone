@@ -2,8 +2,9 @@ import { csrfFetch } from './csrf';
 
 // Actions
 const GET_STORIES = 'stories/getStories';
-const CLEAR_STORIES = 'stories/clearStories'
-const GET_THIS_STORY = 'stories/getThisStory'
+const CLEAR_CURRENT_STORY = 'stories/clearCurrentStory';
+const CLEAR_STORIES = 'stories/clearStories';
+const GET_THIS_STORY = 'stories/getThisStory';
 
 const getStories = (story) => {
     return {
@@ -22,6 +23,12 @@ const getThisStory = (story) => {
     return {
         type: GET_THIS_STORY,
         payload: story
+    }
+}
+
+export const clearCurrentStory = () => {
+    return {
+        type: CLEAR_CURRENT_STORY
     }
 }
 
@@ -74,7 +81,6 @@ export const editStory = (storyId, userId, title, description, thumbnail, publis
     })
     const data = await response.json();
     console.log(data)
-    dispatch()
     dispatch(getThisStory(data))
     return data
 }
@@ -92,6 +98,10 @@ const storiesReducer = (state = initialState, action) => {
                 newState.stories[story.id] = story;
             })
             return newState;
+        case CLEAR_CURRENT_STORY:
+            newState = Object.assign({}, state); // Always copy, never alter
+            newState.currentStory = {}
+            return newState
         case CLEAR_STORIES:
             newState = Object.assign({}, state); // Always copy, never alter
             newState.stories = {}
