@@ -74,7 +74,7 @@ export const createScene = (sceneId, storyId) => async (dispatch) => {
 
 //Update a scene
 export const updateScene = (
-    sceneId, choiceId, root,
+    sceneId, choiceId, root, // choiceId is the Id of the parent scene
     title, body, backgroundImage,
     victory, kill, health,
     strength, dexterity, constitution,

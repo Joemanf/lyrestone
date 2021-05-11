@@ -106,7 +106,7 @@ function ScenesInfo() {
         else {
             dispatch(updateScene(
                 currentScene.id,
-                null,
+                0,
                 currentScene.root,
                 title,
                 body,

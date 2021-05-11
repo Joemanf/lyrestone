@@ -102,7 +102,33 @@ router.put('/edit/:sceneId/:choiceId', asyncHandler(async (req, res, next) => {
     const sceneId = req.params.sceneId
     const choiceId = req.params.choiceId
 
+    let parentScene;
+    if (choiceId) {
+        parentScene = await Scene.findByPk(choiceId, {
+            include: Choice
+        })
+    }
+
+    // console.log("It's so hard..........................", parentScene)
+
     const scene = await Scene.findByPk(sceneId)
+
+    // const choice = parentScene.Choices[scene.id]
+    let realChoice;
+    if (parentScene) {
+        // console.log('JUST CONFIRMING^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^', typeof parentScene, parentScene)
+        parentScene.Choices.forEach(choice => {
+            console.log('The Choice.................................', choice)
+            console.log("its next scene", choice.nextSceneId)
+            console.log('Scene Id!!!', sceneId)
+            if (parseInt(choice.nextSceneId) === parseInt(sceneId)) { // check this, it's suppose to be the parent's next scene
+                console.log('HIT ONCE*******************************')
+                realChoice = choice
+            }
+        })
+    }
+
+    console.log('$$$$$$$$$$$$$$ REAL CHOICE $$$$$$$$$$$$$$$$$$', realChoice)
 
     // AWS stuff here?
 
@@ -122,25 +148,26 @@ router.put('/edit/:sceneId/:choiceId', asyncHandler(async (req, res, next) => {
 
     console.log('!!!!!!!!!!!!!! SCENE OBJ!!!!!!!!!!!!!!!!', req.body)
 
-    let choice;
+    // let choice;
     if (root) {
-        const choiceObj = {};
+        // const choiceObj = {};
         // choice = await Choice.findByPk(choiceId)
-        if (title !== undefined) {
-            choiceObj.body = title
-        }
-        if (sceneId) {
-            choiceObj.sceneId = sceneId
-        }
-        if (choiceId) {
-            choiceObj.choiceId = choiceId
-        }
+        // if (title !== undefined) {
+        //     choiceObj.body = title
+        // }
+        // if (sceneId) {
+        //     choiceObj.sceneId = sceneId
+        // }
+        // if (realChoice && realChoice.id) {
+        //     choiceObj.nextSceneId = realChoice.id
+        // }
         await scene.update(sceneObj)
+        // await realChoice.update(choiceObj)
         // await choice.update(choiceObj)
     }
     else {
         await scene.update(sceneObj)
-        choice = await Choice.findByPk(choiceId)
+        // choice = await Choice.findByPk(choiceId)
         const choiceObj = {};
         if (title !== undefined) {
             choiceObj.body = title
@@ -148,8 +175,8 @@ router.put('/edit/:sceneId/:choiceId', asyncHandler(async (req, res, next) => {
         if (sceneId) {
             choiceObj.sceneId = sceneId
         }
-        if (choiceId) {
-            choiceObj.choiceId = choiceId
+        if (realChoice && realChoice.id) {
+            choiceObj.nextSceneId = realChoice.id
         }
         //find out sceneId and nextSceneId (probably the params)
         if (victory !== undefined) {
@@ -187,7 +214,7 @@ router.put('/edit/:sceneId/:choiceId', asyncHandler(async (req, res, next) => {
         }
         else (conditionalsString += '1')
         sceneObj.conditionals = conditionalsString
-        await choice.update(choiceObj)
+        await realChoice.update(choiceObj)
     }
 
     const currentScene = await Scene.findByPk(scene.id, {
