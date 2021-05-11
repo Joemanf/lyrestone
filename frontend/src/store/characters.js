@@ -67,24 +67,24 @@ export const getAllUserCharacters = () => async (dispatch) => {
 };
 
 
-const dummyChar = {
-    id: 1,
-    name: "Eugene",
-    class: "Explorer",
-    userId: 1,
-    strength: 8,
-    dexterity: 7,
-    constitution: 8,
-    intelligence: 3,
-    wisdom: 5,
-    charisma: 7,
-    avatar: "https://cdn.discordapp.com/attachments/661999012873764935/839327174892060697/EUGENE_shorter_neck.png",
-    createdAt: "2021-05-07T16:14:17.270Z",
-    updatedAt: "2021-05-07T16:14:17.270Z",
-}
+// const dummyChar = {
+//     id: 1,
+//     name: "Eugene",
+//     class: "Explorer",
+//     userId: 1,
+//     strength: 8,
+//     dexterity: 7,
+//     constitution: 8,
+//     intelligence: 3,
+//     wisdom: 5,
+//     charisma: 7,
+//     avatar: "https://cdn.discordapp.com/attachments/661999012873764935/839327174892060697/EUGENE_shorter_neck.png",
+//     createdAt: "2021-05-07T16:14:17.270Z",
+//     updatedAt: "2021-05-07T16:14:17.270Z",
+// }
 
 // Reducer
-const initialState = { characters: {}, selectedChar: dummyChar, currentHP: 18 };
+const initialState = { characters: {}, selectedChar: {}, currentHP: 18 };
 
 const charactersReducer = (state = initialState, action) => {
     let newState;
