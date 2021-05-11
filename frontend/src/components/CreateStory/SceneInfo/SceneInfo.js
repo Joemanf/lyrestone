@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { csrfFetch } from '../../../store/csrf';
-import { updateScene } from '../../../store/scenes';
+import { getParents, updateScene } from '../../../store/scenes';
 
 import './SceneInfo.css';
 
@@ -9,27 +9,24 @@ function ScenesInfo() {
     const dispatch = useDispatch()
 
     const currentScene = useSelector(state => state.scenes.currentScene)
+    const parentsArr = useSelector(state => state.scenes.parents)
     // const currentChoices = currentScene.Choices
 
-
-    let parentsArr = [];
-    if (currentScene.id) {
-        // parentsArr = getParents();
-    }
     console.log('The parents?', parentsArr)
-    const filteredArr = []
-    if (parentsArr.length) {
-        parentsArr.forEach(parent => {
-            if (parent.nextSceneId === currentScene.id) filteredArr.push(parent)
-        })
-    }
+    // const filteredArr = []
+    // if (parentsArr.length) {
+    //     parentsArr.forEach(parent => {
+    //         if (parent.nextSceneId === currentScene.id) filteredArr.push(parent)
+    //     })
+    // }
 
     // set all of these to the info coming in
-    const [title, setTitle] = useState();
-    const [body, setBody] = useState();
-    const [backgroundImage, setBackgroundImage] = useState();
-    const [victory, setVictory] = useState(false);
-    const [kill, setKill] = useState(false);
+    const [title, setTitle] = useState(currentScene.title);
+    const [body, setBody] = useState(currentScene.body);
+    const [backgroundImage, setBackgroundImage] = useState(currentScene.backgroundImage);
+    // useStates below have to do with parent, don't test until scene change available
+    const [victory, setVictory] = useState();
+    const [kill, setKill] = useState();
     const [health, setHealth] = useState();
     const [strength, setStrength] = useState();
     const [dexterity, setDexterity] = useState();
@@ -38,9 +35,95 @@ function ScenesInfo() {
     const [wisdom, setWisdom] = useState();
     const [charisma, setCharisma] = useState();
 
+    useEffect(() => {
+        setTitle(currentScene.title)
+        setBody(currentScene.body)
+        setBackgroundImage(currentScene.backgroundImage)
+    }, [currentScene])
+
     const handleSubmit = (e) => {
         e.preventDefault()
-        dispatch(updateScene())
+        // const validated = [];
+        // if (title !== undefined) {
+        //     validated.push(title)
+        // }
+        // if (body !== undefined) {
+        //     validated.push(body)
+        // }
+        // if (backgroundImage !== undefined) {
+        //     validated.push(backgroundImage)
+        // }
+        // if (victory !== undefined) {
+        //     validated.push(victory)
+        // }
+        // if (kill !== undefined) {
+        //     validated.push(kill)
+        // }
+        // if (health !== undefined) {
+        //     validated.push(health)
+        // }
+        // if (strength !== undefined) {
+        //     validated.push(strength)
+        // }
+        // if (dexterity !== undefined) {
+        //     validated.push(dexterity)
+        // }
+        // if (constitution !== undefined) {
+        //     validated.push(constitution)
+        // }
+        // if (intelligence !== undefined) {
+        //     validated.push(intelligence)
+        // }
+        // if (wisdom !== undefined) {
+        //     validated.push(wisdom)
+        // }
+        // if (charisma !== undefined) {
+        //     validated.push(charisma)
+        // }
+        // console.log('Well it has to hit here...', validated)
+        dispatch(getParents(currentScene.id))
+        if (parentsArr.length) {
+            parentsArr.forEach(parent => (
+                dispatch(updateScene(
+                    currentScene.id,
+                    parent.id,
+                    currentScene.root,
+                    title,
+                    body,
+                    backgroundImage,
+                    victory,
+                    kill,
+                    health,
+                    strength,
+                    dexterity,
+                    constitution,
+                    intelligence,
+                    wisdom,
+                    charisma
+                )))
+            )
+        }
+        else {
+            dispatch(updateScene(
+                currentScene.id,
+                null,
+                currentScene.root,
+                title,
+                body,
+                backgroundImage,
+                victory,
+                kill,
+                health,
+                strength,
+                dexterity,
+                constitution,
+                intelligence,
+                wisdom,
+                charisma
+            ))
+        }
+        // takes sceneId, choiceId, and info
+        // I need the current scene's ID and the parentScene (choice) ID
     }
 
     return (

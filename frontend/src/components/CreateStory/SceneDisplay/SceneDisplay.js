@@ -13,6 +13,8 @@ function SceneDisplay() {
     const currentScene = useSelector(state => state.scenes.currentScene)
     const parentsArr = useSelector(state => state.scenes.parents)
 
+    const [thisSceneId, setThisSceneId] = useState(currentScene.id)
+
     function makeScene() {
         setSceneLoaded(false)
         dispatch(createScene(currentScene.id, currentStory.id))
@@ -20,17 +22,11 @@ function SceneDisplay() {
 
     useEffect(() => {
         dispatch(clearCurrentScene());
-        dispatch(getCurrentScene(currentScene.id)).then(() => setSceneLoaded(true))
-        dispatch(getParents(currentScene.id)).then(() => setParentsLoaded(true))
-    }, [sceneLoaded, parentsLoaded])
+        console.log('THIS, SCENE!!!!!!!', thisSceneId)
+        dispatch(getCurrentScene(thisSceneId)).then(() => setSceneLoaded(true))
+        dispatch(getParents(thisSceneId)).then(() => setParentsLoaded(true))
+    }, [sceneLoaded, parentsLoaded, thisSceneId])
 
-    // const getParents = () => async () => {
-    //     const response = await csrfFetch(`/api/scenes/parent/${currentScene.id}`)
-    //     const data = await response.json();
-    //     return data.parentScenes
-    // }
-
-    // const parentsArr = getParents();
     let i = 0;
 
     return parentsLoaded && sceneLoaded && (
@@ -41,7 +37,7 @@ function SceneDisplay() {
                         parentsArr.map(parent => {
                             i++;
                             return (
-                                <div key={`parent_${i}`}>{parent.body}</div>
+                                <div key={`parent_${i}`}>Parent: {parent.body}</div>
                             )
                         })
                         :
@@ -52,8 +48,9 @@ function SceneDisplay() {
                 <div>
                     {currentScene.Choices ? currentScene.Choices.map(scene => {
                         i++
+                        console.log('Here?', scene)
                         return (
-                            <div key={`scene_${i}`}>{scene.body}</div>
+                            <div onClick={() => setThisSceneId(scene.nextSceneId)} key={`scene_${i}`}>{scene.body}</div>
                         )
                     })
                         :

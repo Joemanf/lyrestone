@@ -81,7 +81,6 @@ export const editStory = (storyId, userId, title, description, thumbnail, publis
     })
     const data = await response.json();
     console.log(data)
-    dispatch()
     dispatch(getThisStory(data))
     return data
 }

@@ -18,8 +18,19 @@ router.get('/:sceneId', asyncHandler(async (req, res, next) => {
 // Grab the parent(s)
 router.get('/parent/:id', asyncHandler(async (req, res, next) => {
     const id = req.params.id;
-    const parentScenes = await Choice.findAll({
+    const parentChoices = await Choice.findAll({
         where: { nextSceneId: id }
+        // if the scene is "Into the Lair (15)", it will find
+        // all choices where the next scene id is 15, thus
+        // giving access to all scenes associated with it through
+        // sceneId (such as 11, 12, 13, 14)
+    })
+    const parentScenes = []
+    await parentChoices.forEach(async choice => {
+        // console.log('OOOOFFF!!!!!!!!!!!!!!!!!!!!!!!!!', choice)
+        const scene = await Scene.findByPk(choice.sceneId)
+        parentScenes.push(scene)
+        // console.log('A SCENE YES YES!!!!!!!!!!!!!!', scene)
     })
     console.log('YEAH!!!!!!!!!!!!!!!!!!!!!!!!!!', parentScenes)
     return res.json({ parentScenes })
@@ -68,7 +79,21 @@ router.post('/:currentSceneId', asyncHandler(async (req, res, next) => {
 // Edit a scene
 // Throw validators in here
 router.put('/edit/:sceneId/:choiceId', asyncHandler(async (req, res, next) => {
-    const { title, body, backgroundImg } = req.body // might not be background image here
+    const {
+        root,
+        title,
+        body,
+        backgroundImg,
+        victory,
+        kill,
+        health,
+        strength,
+        dexterity,
+        constitution,
+        intelligence,
+        wisdom,
+        charisma
+    } = req.body // might not be background image here
     const sceneId = req.params.sceneId
     const choiceId = req.params.choiceId
 
@@ -76,13 +101,77 @@ router.put('/edit/:sceneId/:choiceId', asyncHandler(async (req, res, next) => {
 
     // AWS stuff here?
 
-    await scene.update({
-        title,
-        body,
-        backgroundImg
+    const sceneObj = {}
+
+    if (title !== undefined) {
+        sceneObj.title = title
+    }
+
+    if (body !== undefined) {
+        sceneObj.body = body
+    }
+
+    if (backgroundImg !== undefined) {
+        sceneObj.backgroundImg = backgroundImg
+    }
+
+    console.log('!!!!!!!!!!!!!! SCENE OBJ!!!!!!!!!!!!!!!!', req.body)
+
+    let choice;
+    if (root) {
+        await scene.update(sceneObj)
+    }
+    else {
+        await scene.update(sceneObj)
+        choice = await Choice.findByPk(choiceId)
+        const choiceObj = {};
+        if (title !== undefined) {
+            choiceObj.body = title
+        }
+        //find out sceneId and nextSceneId (probably the params)
+        if (victory !== undefined) {
+            choiceObj.isWinning = victory
+        }
+        if (kill !== undefined) {
+            sceneObj.killsPlayer = kill
+        }
+        if (health !== undefined) {
+            sceneObj.changeHealth = health
+        }
+        let conditionalsString = '';
+        if (strength !== undefined) {
+            conditionalsString += strength.toString();
+        }
+        else (conditionalsString += '1')
+        if (dexterity !== undefined) {
+            conditionalsString += dexterity.toString();
+        }
+        else (conditionalsString += '1')
+        if (constitution !== undefined) {
+            conditionalsString += constitution.toString();
+        }
+        else (conditionalsString += '1')
+        if (intelligence !== undefined) {
+            conditionalsString += intelligence.toString();
+        }
+        else (conditionalsString += '1')
+        if (wisdom !== undefined) {
+            conditionalsString += wisdom.toString();
+        }
+        else (conditionalsString += '1')
+        if (charisma !== undefined) {
+            conditionalsString += charisma.toString();
+        }
+        else (conditionalsString += '1')
+        sceneObj.conditionals = conditionalsString
+        await choice.update(choiceObj)
+    }
+
+    const currentScene = await Scene.findByPk(scene.id, {
+        include: Choice
     })
 
-    return res.json({ scene });
+    return res.json({ currentScene });
 }))
 
 // Delete a scene

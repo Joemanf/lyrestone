@@ -60,8 +60,62 @@ export const createScene = (sceneId, storyId) => async (dispatch) => {
 };
 
 //Update a scene
-export const updateScene = (sceneId, choiceId) => async (dispatch) => {
-    const response = await csrfFetch(`/api/scenes/edit/${sceneId}/${choiceId}`)
+export const updateScene = (
+    sceneId, choiceId, root,
+    title, body, backgroundImage,
+    victory, kill, health,
+    strength, dexterity, constitution,
+    intelligence, wisdom, charisma
+) => async (dispatch) => {
+    // console.log('This is just a test', )
+
+    const newValidated = {};
+    if (title !== undefined) {
+        newValidated.title = title
+    }
+    if (body !== undefined) {
+        newValidated.body = body
+    }
+    if (backgroundImage !== undefined) {
+        newValidated.backgroundImage = backgroundImage
+    }
+    if (victory !== undefined) {
+        newValidated.victory = victory
+    }
+    if (kill !== undefined) {
+        newValidated.kill = kill
+    }
+    if (health !== undefined) {
+        newValidated.health = health
+    }
+    if (strength !== undefined) {
+        newValidated.strength = strength
+    }
+    if (dexterity !== undefined) {
+        newValidated.dexterity = dexterity
+    }
+    if (constitution !== undefined) {
+        newValidated.constitution = constitution
+    }
+    if (intelligence !== undefined) {
+        newValidated.intelligence = intelligence
+    }
+    if (wisdom !== undefined) {
+        newValidated.wisdom = wisdom
+    }
+    if (charisma !== undefined) {
+        newValidated.charisma = charisma
+    }
+
+    const response = await csrfFetch(`/api/scenes/edit/${sceneId}/${choiceId}`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ root, ...newValidated })
+    })
+
+    const data = await response.json()
+
+    dispatch(getThisScene(data.currentScene))
 }
 
 
