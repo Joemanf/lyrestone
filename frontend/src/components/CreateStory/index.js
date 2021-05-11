@@ -71,7 +71,7 @@ function CreateStory() {
                             </div>
                             <div>
                                 <label>Story Description</label>
-                                <input
+                                <textarea
                                     required
                                     value={description}
                                     onChange={e => setDescription(e.target.value)}

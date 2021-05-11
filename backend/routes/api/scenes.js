@@ -21,6 +21,7 @@ router.get('/parent/:id', asyncHandler(async (req, res, next) => {
     const parentScenes = await Choice.findAll({
         where: { nextSceneId: id }
     })
+    console.log('YEAH!!!!!!!!!!!!!!!!!!!!!!!!!!', parentScenes)
     return res.json({ parentScenes })
 }))
 
@@ -66,9 +67,10 @@ router.post('/:currentSceneId', asyncHandler(async (req, res, next) => {
 
 // Edit a scene
 // Throw validators in here
-router.put('/edit/:id', asyncHandler(async (req, res, next) => {
+router.put('/edit/:sceneId/:choiceId', asyncHandler(async (req, res, next) => {
     const { title, body, backgroundImg } = req.body // might not be background image here
-    const sceneId = req.params.id
+    const sceneId = req.params.sceneId
+    const choiceId = req.params.choiceId
 
     const scene = await Scene.findByPk(sceneId)
 
