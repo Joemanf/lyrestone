@@ -41,7 +41,20 @@ export const getCurrentScene = (sceneId) => async (dispatch) => {
 export const getParents = (sceneId) => async (dispatch) => {
     if (sceneId) {
         const response = await csrfFetch(`/api/scenes/parent/${sceneId}`)
-        const data = await response.json();
+        const choices = await response.json();
+        console.log('CHOICES!!!!!!!!!', choices)
+        const sender = choices.parentChoices
+        const sent = sender[0]
+        // const resArr = []
+        const response2 = await csrfFetch(`/api/scenes/parent`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ sent })
+        })
+        const data = await response2.json();
+        console.log('Data?????', data)
+        // resArr.push(data)
+        console.log('NOT CHOICES!!!!!!!!!!!!!!', data)
         dispatch(getTheParents(data.parentScenes))
         return data
     }

@@ -15,7 +15,7 @@ router.get('/:sceneId', asyncHandler(async (req, res, next) => {
     return res.json({ currentScene })
 }))
 
-// Grab the parent(s)
+// Grab the parent(s) Choice(es)
 router.get('/parent/:id', asyncHandler(async (req, res, next) => {
     const id = req.params.id;
     const parentChoices = await Choice.findAll({
@@ -25,13 +25,18 @@ router.get('/parent/:id', asyncHandler(async (req, res, next) => {
         // giving access to all scenes associated with it through
         // sceneId (such as 11, 12, 13, 14)
     })
+    return res.json({ parentChoices })
+}))
+
+// Grab the parents via their choices (it's a post to get access to req.body)
+router.post('/parent', asyncHandler(async (req, res, next) => {
+    const { sent } = req.body
     const parentScenes = []
-    await parentChoices.forEach(async choice => {
-        // console.log('OOOOFFF!!!!!!!!!!!!!!!!!!!!!!!!!', choice)
-        const scene = await Scene.findByPk(choice.sceneId)
-        parentScenes.push(scene)
-        // console.log('A SCENE YES YES!!!!!!!!!!!!!!', scene)
-    })
+    console.log('sent!!!!!!!!!', req.body)
+    // console.log('OOOOFFF!!!!!!!!!!!!!!!!!!!!!!!!!', choice)
+    const scene = await Scene.findByPk(sent.sceneId)
+    parentScenes.push(scene)
+    // console.log('A SCENE YES YES!!!!!!!!!!!!!!', scene)
     console.log('YEAH!!!!!!!!!!!!!!!!!!!!!!!!!!', parentScenes)
     return res.json({ parentScenes })
 }))
@@ -119,7 +124,19 @@ router.put('/edit/:sceneId/:choiceId', asyncHandler(async (req, res, next) => {
 
     let choice;
     if (root) {
+        const choiceObj = {};
+        // choice = await Choice.findByPk(choiceId)
+        if (title !== undefined) {
+            choiceObj.body = title
+        }
+        if (sceneId) {
+            choiceObj.sceneId = sceneId
+        }
+        if (choiceId) {
+            choiceObj.choiceId = choiceId
+        }
         await scene.update(sceneObj)
+        // await choice.update(choiceObj)
     }
     else {
         await scene.update(sceneObj)
@@ -127,6 +144,12 @@ router.put('/edit/:sceneId/:choiceId', asyncHandler(async (req, res, next) => {
         const choiceObj = {};
         if (title !== undefined) {
             choiceObj.body = title
+        }
+        if (sceneId) {
+            choiceObj.sceneId = sceneId
+        }
+        if (choiceId) {
+            choiceObj.choiceId = choiceId
         }
         //find out sceneId and nextSceneId (probably the params)
         if (victory !== undefined) {
@@ -177,13 +200,16 @@ router.put('/edit/:sceneId/:choiceId', asyncHandler(async (req, res, next) => {
 // Delete a scene
 router.delete(`/delete-scene`, asyncHandler(async (req, res) => {
     const { id } = req.body; // Check the ID
-    const deleteScene = await Scene.findByPk(id);
+    const deleteScene = await Scene.findByPk(id, {
+        order: ['createdAt', 'DESC'] // might need to change
+    });
     if (deleteScene.root) {
         return res.json("Cannot delete root scene")
     }
     if (deleteScene) {
         const deleteChoices = await Choice.findAll({
-            where: { sceneId: id }
+            where: { sceneId: id },
+            order: ['createdAt', 'DESC'] // might need to change
         })
         deleteChoices.forEach(async choice => await choice.destroy())
         await deleteScene.destroy();

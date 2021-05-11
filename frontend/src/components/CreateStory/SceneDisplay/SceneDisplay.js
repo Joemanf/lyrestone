@@ -20,6 +20,8 @@ function SceneDisplay() {
         dispatch(createScene(currentScene.id, currentStory.id))
     }
 
+
+
     useEffect(() => {
         dispatch(clearCurrentScene());
         console.log('THIS, SCENE!!!!!!!', thisSceneId)
@@ -29,7 +31,10 @@ function SceneDisplay() {
 
     let i = 0;
 
-    return parentsLoaded && sceneLoaded && (
+    console.log('just in case,', currentScene)
+
+    // parentsLoaded && sceneLoaded &&
+    return sceneLoaded && (
         <div>
             <div className='scene_view'>
                 <div>
@@ -37,20 +42,28 @@ function SceneDisplay() {
                         parentsArr.map(parent => {
                             i++;
                             return (
-                                <div key={`parent_${i}`}>Parent: {parent.body}</div>
+                                <div key={`parent_${i}`}>
+                                    <p>Parent: {parent.title}</p>
+                                </div>
                             )
                         })
                         :
                         null
                     }
                 </div>
-                <div>{currentScene.title}</div>
+                <div>
+                    <div>Current: {currentScene.title}</div>
+                    <div>x</div>
+                </div>
                 <div>
                     {currentScene.Choices ? currentScene.Choices.map(scene => {
                         i++
                         console.log('Here?', scene)
                         return (
-                            <div onClick={() => setThisSceneId(scene.nextSceneId)} key={`scene_${i}`}>{scene.body}</div>
+                            <div>
+                                <div onClick={() => setThisSceneId(scene.nextSceneId)} key={`scene_${i}`}>{scene.body}</div>
+                                <div>x</div>
+                            </div>
                         )
                     })
                         :
