@@ -28,7 +28,7 @@ function Splash() {
                 links.style.bottom = '0';
                 links.style.opacity = '1';
             }
-        }, 4000)
+        }, 3500)
     }, [])
 
     if (sessionUser) return <Redirect to="/home" />; // Change to history.push might fix the store
