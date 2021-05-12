@@ -73,6 +73,7 @@ export const signup = (user) => async (dispatch) => {
 
 // Log out
 export const logout = () => async (dispatch) => {
+    // console.log('PLEASE GOD')
     const response = await csrfFetch('/api/session', {
         method: 'DELETE',
         headers: { 'Content-Type': 'application/json' },

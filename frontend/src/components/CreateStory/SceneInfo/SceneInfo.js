@@ -5,14 +5,13 @@ import { getParents, updateScene } from '../../../store/scenes';
 
 import './SceneInfo.css';
 
-function ScenesInfo() {
+function ScenesInfo({ currentScene }) {
     const dispatch = useDispatch()
 
-    const currentScene = useSelector(state => state.scenes.currentScene)
+    // const currentScene = useSelector(state => state.scenes.currentScene)
     const parentsArr = useSelector(state => state.scenes.parents)
     // const currentChoices = currentScene.Choices
 
-    console.log('The parents?', parentsArr)
     // const filteredArr = []
     // if (parentsArr.length) {
     //     parentsArr.forEach(parent => {
@@ -137,7 +136,6 @@ function ScenesInfo() {
         // if (charisma !== undefined) {
         //     validated.push(charisma)
         // }
-        // console.log('Well it has to hit here...', validated)
         dispatch(getParents(currentScene.id))
         if (parentsArr.length) {
             parentsArr.forEach(parent => (
@@ -183,7 +181,6 @@ function ScenesInfo() {
         // I need the current scene's ID and the parentScene (choice) ID
     }
 
-    console.log('VICTORY!!!', victory, typeof victory)
     return (
         <form onSubmit={handleSubmit}>
             <div>

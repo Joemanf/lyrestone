@@ -3,10 +3,10 @@ import SceneDisplay from './SceneDisplay/SceneDisplay';
 import ScenesInfo from './SceneInfo/SceneInfo';
 import { useHistory, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { clearCurrentStory, editStory, getCurrentStory } from '../../store/stories';
+import { clearCurrentStory, deleteStory, editStory, getAllStories, clearStories, getCurrentStory } from '../../store/stories';
 
 import './CreateStory.css';
-import { clearCurrentScene, getCurrentScene } from '../../store/scenes';
+import { clearCurrentScene, getCurrentScene, getParents } from '../../store/scenes';
 
 function CreateStory() {
     const dispatch = useDispatch()
@@ -14,15 +14,18 @@ function CreateStory() {
     const { storyId } = useParams()
     const [storyLoaded, setStoryLoaded] = useState(false)
     const [sceneLoaded, setSceneLoaded] = useState(false)
+    const [parentsLoaded, setParentsLoaded] = useState(false);
+    const [firstLoad, setFirstLoad] = useState(false)
 
     const user = useSelector(state => state.session.user)
     const story = useSelector(state => state.stories.currentStory);
     const firstScene = useSelector(state => state.stories.currentStory.Scenes)
+    const currentScene = useSelector(state => state.scenes.currentScene)
+    const [thisSceneId, setThisSceneId] = useState(currentScene.id)
 
     const [title, setTitle] = useState(story.title);
     const [description, setDescription] = useState(story.description);
     const [published, setPublished] = useState(story.published);
-    console.log('The New Story Title: ', title)
 
     useEffect(() => {
         dispatch(clearCurrentStory())
@@ -38,10 +41,25 @@ function CreateStory() {
 
     useEffect(() => {
         dispatch(clearCurrentScene())
-        if (firstScene) {
-            dispatch(getCurrentScene(firstScene[0].id)).then(() => setSceneLoaded(true))
+        if (!firstLoad && firstScene) {
+            dispatch(getCurrentScene(firstScene[0].id)).then(() => setFirstLoad(true)).then(() => setSceneLoaded(true))
+        } else {
+            dispatch(getCurrentScene(thisSceneId)).then(() => setSceneLoaded(true))
+            if (currentScene.root) {
+                console.log('checking these,', thisSceneId)
+                dispatch(getParents(thisSceneId)).then(() => setParentsLoaded(true))
+            } else {
+                console.log('checking these,', thisSceneId)
+                dispatch(getParents(thisSceneId)).then(() => setParentsLoaded(true))
+            }
         }
-    }, [dispatch, firstScene])
+    }, [dispatch, firstScene, thisSceneId])
+
+    // useEffect(() => {
+    //     // dispatch(clearCurrentScene());
+    //     // dispatch(getCurrentScene(thisSceneId)).then(() => setSceneLoaded(true))
+    //     dispatch(getParents(thisSceneId)).then(() => setParentsLoaded(true))
+    // }, [parentsLoaded, thisSceneId])
 
     function handleSubmit(e) { // Double check this function and throw in validators
         e.preventDefault()
@@ -51,14 +69,31 @@ function CreateStory() {
         history.push('/home')
     }
 
+    function handleDeleteStory() {
+        dispatch(deleteStory(story.id))
+            .then(() => history.push('/home'))
+    }
+
     return storyLoaded && sceneLoaded && (
         <>
             <div className='top_create_story'>
                 <div>
-                    <ScenesInfo />
+                    <ScenesInfo
+                        currentScene={currentScene}
+                        sceneLoaded={sceneLoaded}
+                        setSceneLoaded={setSceneLoaded}
+                    />
                 </div>
                 <div>
-                    <SceneDisplay />
+                    <SceneDisplay
+                        currentScene={currentScene}
+                        sceneLoaded={sceneLoaded}
+                        setSceneLoaded={setSceneLoaded}
+                        thisSceneId={thisSceneId}
+                        setThisSceneId={setThisSceneId}
+                        parentsLoaded={parentsLoaded}
+                        setParentsLoaded={setParentsLoaded}
+                    />
                     <form onSubmit={handleSubmit} className='story_info_container'>
                         <div>
                             <div>
@@ -88,6 +123,9 @@ function CreateStory() {
                         {/* <div>
                             <button>Publish</button>
                         </div> */}
+                        <div>
+                            <button onClick={handleDeleteStory}>Delete</button>
+                        </div>
                     </form>
                 </div>
             </div>

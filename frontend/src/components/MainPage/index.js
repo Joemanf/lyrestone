@@ -5,7 +5,7 @@ import Stories from './Stories/Stories'
 import './MainPage.css'
 import { useDispatch, useSelector } from 'react-redux';
 import { Redirect } from 'react-router';
-import { clearCurrentStory, getAllStories } from '../../store/stories';
+import { clearCurrentStory, clearStories, getAllStories } from '../../store/stories';
 import { clearAllCharacters, getAllUserCharacters, setHP } from '../../store/characters';
 
 function MainPage() {
@@ -18,6 +18,7 @@ function MainPage() {
         dispatch(setHP(1))
         dispatch(clearAllCharacters())
         dispatch(clearCurrentStory())
+        dispatch(clearStories())
         dispatch(getAllStories()).then(() => setIsStoriesLoaded(true))
         dispatch(getAllUserCharacters()).then(() => setIsCharactersLoaded(true))
     }, [dispatch])

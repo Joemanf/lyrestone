@@ -61,7 +61,6 @@ export const clearHP = () => {
 export const getAllUserCharacters = () => async (dispatch) => {
     const response = await csrfFetch('/api/characters');
     const data = await response.json();
-    console.log('All Characters: ', data)
     dispatch(getCharacters(data.characters));
     return response;
 };
