@@ -20,16 +20,23 @@ function SceneDisplay() {
         dispatch(createScene(currentScene.id, currentStory.id))
     }
 
+    function handleSceneDelete() {
+        setSceneLoaded(false)
+        dispatch()
+    }
 
+    function handleCurrentSceneDelete() {
+        if (currentScene.Choices && currentScene.Choices.length) {
+            return // "Scene must not have any children"
+        }
+        setSceneLoaded(false)
+    }
 
     useEffect(() => {
         dispatch(clearCurrentScene());
         console.log('THIS, SCENE!!!!!!!', thisSceneId)
         dispatch(getCurrentScene(thisSceneId)).then(() => setSceneLoaded(true))
         dispatch(getParents(thisSceneId)).then(() => setParentsLoaded(true))
-        // if (currentScene && currentScene.root) {
-        //     parentsArr = [];
-        // }
     }, [sceneLoaded, parentsLoaded, thisSceneId])
 
     let i = 0;
@@ -45,32 +52,32 @@ function SceneDisplay() {
                         parentsArr.map(parent => {
                             i++;
                             return (
-                                <div key={`parent_${i}`} onClick={() => setThisSceneId(parent.id)}>
+                                <div className='scene_parents' key={`parent_${i}`} onClick={() => setThisSceneId(parent.id)}>
                                     <p>Parent: {parent.title}</p>
                                 </div>
                             )
                         })
                         :
-                        null
+                        <div className='scene_parents'></div>
                     }
                 </div>
                 <div>
                     <div>Current: {currentScene.title}</div>
-                    <div>x</div>
+                    <div onClick={handleCurrentSceneDelete}>x</div>
                 </div>
                 <div>
                     {currentScene.Choices ? currentScene.Choices.map(scene => {
                         i++
                         console.log('Here?', scene)
                         return (
-                            <div>
-                                <div onClick={() => setThisSceneId(scene.nextSceneId)} key={`scene_${i}`}>{scene.body}</div>
-                                <div>x</div>
+                            <div className='scene_children' key={`scene_${i}`}>
+                                <div onClick={() => setThisSceneId(scene.nextSceneId)}>{scene.body}</div>
+                                <div onClick={handleSceneDelete}>x</div>
                             </div>
                         )
                     })
                         :
-                        null}
+                        <div className='scene_children'></div>}
                 </div>
             </div>
             <div>
