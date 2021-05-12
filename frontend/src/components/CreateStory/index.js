@@ -3,7 +3,7 @@ import SceneDisplay from './SceneDisplay/SceneDisplay';
 import ScenesInfo from './SceneInfo/SceneInfo';
 import { useHistory, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { clearCurrentStory, editStory, getCurrentStory } from '../../store/stories';
+import { clearCurrentStory, deleteStory, editStory, getAllStories, clearStories, getCurrentStory } from '../../store/stories';
 
 import './CreateStory.css';
 import { clearCurrentScene, getCurrentScene, getParents } from '../../store/scenes';
@@ -69,6 +69,11 @@ function CreateStory() {
         history.push('/home')
     }
 
+    function handleDeleteStory() {
+        dispatch(deleteStory(story.id))
+            .then(() => history.push('/home'))
+    }
+
     return storyLoaded && sceneLoaded && (
         <>
             <div className='top_create_story'>
@@ -118,6 +123,9 @@ function CreateStory() {
                         {/* <div>
                             <button>Publish</button>
                         </div> */}
+                        <div>
+                            <button onClick={handleDeleteStory}>Delete</button>
+                        </div>
                     </form>
                 </div>
             </div>

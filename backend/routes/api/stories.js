@@ -81,18 +81,37 @@ router.delete(`/delete-story`, asyncHandler(async (req, res) => {
     if (deleteStory) {
         const deleteScenes = await Scene.findAll({
             where: { storyId: id },
-            order: [['createdAt', 'DESC']] // Might need to change
+            order: [['id', 'DESC']] // Might need to change
         })
-        deleteScenes.forEach(async scene => {
+        for (let i = 0; i < deleteScenes.length; i++) {
+            const scene = deleteScenes[i];
             if (scene) {
                 const deleteChoices = await Choice.findAll({
-                    where: { sceneId: scene.id },
-                    order: [['createdAt', 'DESC']] // Might need to change
+                    where: { nextSceneId: scene.id },
+                    order: [['id', 'DESC']] // Might need to change
                 })
-                deleteChoices.forEach(async choice => await choice.destroy())
+                console.log('WAAAAAAAAAAAAA%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%', scene)
+                console.log('EHEEEEEEEEEEEEEEEEEEEEE!!!!!!!!!!!!!!!!!!!!!!!', deleteChoices)
+                for (let j = 0; j < deleteChoices.length; j++) {
+                    const choice = deleteChoices[j];
+                    await choice.destroy()
+                }
                 await scene.destroy();
             }
-        })
+        }
+        // console.log('AWAWAWAWAWAWAWAW!!!!!!!!!!!!!!!!!!~~~~~~~~~~~~~~~', deleteScenes)
+        // deleteScenes.forEach(async scene => {
+        //     if (scene) {
+        //         const deleteChoices = await Choice.findAll({
+        //             where: { sceneId: scene.id },
+        //             order: [['id', 'DESC']] // Might need to change
+        //         })
+        //         console.log('EHEEEEEEEEEEEEEEEEEEEEE!!!!!!!!!!!!!!!!!!!!!!!', deleteChoices)
+        //         deleteChoices.forEach(async choice => await choice.destroy())
+        //         await scene.destroy();
+        //     }
+        // })
+
         await deleteStory.destroy()
     }
     else {

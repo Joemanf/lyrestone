@@ -13,7 +13,7 @@ const getStories = (story) => {
     };
 };
 
-const clearStories = () => {
+export const clearStories = () => {
     return {
         type: CLEAR_STORIES
     }
@@ -80,6 +80,22 @@ export const editStory = (storyId, userId, title, description, thumbnail, publis
     })
     const data = await response.json();
     dispatch(getThisStory(data))
+    return data
+}
+
+// Delete a story
+export const deleteStory = (id) => async (dispatch) => {
+    const response = await csrfFetch('/api/stories/delete-story', {
+        method: "DELETE",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ id })
+    })
+    const data = await response.json()
+    // console.log('Is parent null?', data.parent)
+    // getCurrentScene(parent)
+    // dispatch(getThisScene(data.parent))
+    clearStories()
+    getAllStories()
     return data
 }
 
