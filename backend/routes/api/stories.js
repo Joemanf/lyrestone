@@ -25,7 +25,6 @@ router.get('/:storyId', asyncHandler(async (req, res, next) => {
             [{ model: Scene }, 'id', 'ASC'], // THIS PIECE IS VERY, VERY IMPORTANT
         ],
     })
-    console.log('UGH STORY,,,,,,,,,,,,,,,,,,,,', story.Scenes)
     return res.json({ story })
 }))
 
@@ -36,8 +35,6 @@ router.post('/', asyncHandler(async (req, res, next) => {
 
     // Probably put some AWS stuff here
 
-    console.log('HEY THERE!!!!!!!!!!!!!!!!!!!!!!!'
-    )
     const story = await Story.create({
         userId,
         title: 'My Story',

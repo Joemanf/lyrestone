@@ -67,7 +67,6 @@ export const makeStory = (userId) => async (dispatch) => {
 //Edit a story's contents
 export const editStory = (storyId, userId, title, description, thumbnail, published) => async (dispatch) => {
     // Throw AWS stuff here
-    console.log('hit?????????', storyId, userId, title, description)
     const response = await csrfFetch(`/api/stories/edit/${storyId}`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
@@ -80,7 +79,6 @@ export const editStory = (storyId, userId, title, description, thumbnail, publis
         })
     })
     const data = await response.json();
-    console.log(data)
     dispatch(getThisStory(data))
     return data
 }

@@ -39,14 +39,10 @@ router.post('/parent', asyncHandler(async (req, res, next) => {
         return res.json({ parentScenes: [] })
     }
     const parentScenes = []
-    console.log('sent!!!!!!!!!', req.body)
-    // console.log('OOOOFFF!!!!!!!!!!!!!!!!!!!!!!!!!', choice)
     const scene = await Scene.findByPk(sent.sceneId, {
         include: Choice
     })
     parentScenes.push(scene)
-    // console.log('A SCENE YES YES!!!!!!!!!!!!!!', scene)
-    console.log('YEAH!!!!!!!!!!!!!!!!!!!!!!!!!!', parentScenes)
     return res.json({ parentScenes })
 }))
 
@@ -74,8 +70,6 @@ router.post('/:currentSceneId', asyncHandler(async (req, res, next) => {
         body: 'This is a new scene',
         backgroundImg: null
     })
-
-    console.log('CURRENT SCENE ID!!!!!!!!!!!!!!!!!!!!!!!!!!!!', currentSceneId)
 
     await Choice.create({
         body: scene.title, // Should be the same as title of new scene
@@ -118,26 +112,17 @@ router.put('/edit/:sceneId/:choiceId', asyncHandler(async (req, res, next) => {
         })
     }
 
-    // console.log("It's so hard..........................", parentScene)
-
     const scene = await Scene.findByPk(sceneId)
 
     // const choice = parentScene.Choices[scene.id]
     let realChoice;
     if (parentScene) {
-        // console.log('JUST CONFIRMING^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^', typeof parentScene, parentScene)
         parentScene.Choices.forEach(choice => {
-            console.log('The Choice.................................', choice)
-            console.log("its next scene", choice.nextSceneId)
-            console.log('Scene Id!!!', sceneId)
             if (parseInt(choice.nextSceneId) === parseInt(sceneId)) { // check this, it's suppose to be the parent's next scene
-                console.log('HIT ONCE*******************************')
                 realChoice = choice
             }
         })
     }
-
-    console.log('$$$$$$$$$$$$$$ REAL CHOICE $$$$$$$$$$$$$$$$$$', realChoice)
 
     // AWS stuff here?
 
@@ -154,8 +139,6 @@ router.put('/edit/:sceneId/:choiceId', asyncHandler(async (req, res, next) => {
     if (backgroundImg !== undefined) {
         sceneObj.backgroundImg = backgroundImg
     }
-
-    console.log('!!!!!!!!!!!!!! SCENE OBJ!!!!!!!!!!!!!!!!', req.body)
 
     // let choice;
     if (root) {
@@ -244,12 +227,16 @@ router.delete(`/delete-scene`, asyncHandler(async (req, res) => {
     }
     if (deleteScene) {
         const deleteChoices = await Choice.findAll({
-            where: { sceneId: id },
+            where: { nextSceneId: id }, // Grab the scene 
             order: [['createdAt', 'DESC']] // might need to change
         })
+        const parent = await Scene.findByPk(parseInt(deleteChoices[0].sceneId), {
+            include: Choice
+        })
+        // console.log(parent, '&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&')
         deleteChoices.forEach(async choice => await choice.destroy())
         await deleteScene.destroy();
-        return res.json(`Deleted`);
+        return res.json({ parent });
     } else {
         return res.json("Scene doesn't exists")
     }

@@ -39,10 +39,12 @@ export const getCurrentScene = (sceneId) => async (dispatch) => {
 
 // Get parents
 export const getParents = (sceneId) => async (dispatch) => {
-    if (sceneId) {
+    console.log('Is this worth it?', sceneId)
+    if (sceneId && !sceneId.length) {
+        console.log('It a scene id', sceneId)
         const response = await csrfFetch(`/api/scenes/parent/${sceneId}`)
         const choices = await response.json();
-        console.log('CHOICES!!!!!!!!!', choices)
+        console.log('CHOICES?', choices)
         const sender = choices.parentChoices
         const sent = sender[0]
         // const resArr = []
@@ -52,7 +54,6 @@ export const getParents = (sceneId) => async (dispatch) => {
             body: JSON.stringify({ sent })
         })
         const data = await response2.json();
-        console.log('Data?????', data)
         // resArr.push(data)
         console.log('NOT CHOICES!!!!!!!!!!!!!!', data)
         dispatch(getTheParents(data.parentScenes))
@@ -80,7 +81,6 @@ export const updateScene = (
     strength, dexterity, constitution,
     intelligence, wisdom, charisma
 ) => async (dispatch) => {
-    // console.log('This is just a test', )
 
     const newValidated = {};
     if (title !== undefined) {
@@ -131,6 +131,22 @@ export const updateScene = (
     dispatch(getThisScene(data.currentScene))
 }
 
+// Delete a scene
+export const deleteScene = (id, parent) => async (dispatch) => {
+    console.log('check the id', id)
+    if (id) {
+        const response = await csrfFetch('/api/scenes/delete-scene', {
+            method: "DELETE",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ id })
+        })
+        const data = await response.json()
+        console.log('Is parent null?', data.parent)
+        // getCurrentScene(parent)
+        dispatch(getThisScene(data.parent))
+        return data
+    }
+}
 
 // Reducer
 const initialState = { currentScene: {}, parents: {} };
@@ -139,9 +155,13 @@ const scenesReducer = (state = initialState, action) => {
     let newState;
     switch (action.type) {
         case GET_THIS_SCENE:
-            newState = Object.assign({}, state); // Always copy, never alter
-            newState.currentScene = action.payload
-            return newState;
+            if (action.payload) {
+                newState = Object.assign({}, state); // Always copy, never alter
+                console.log('Why break?', action.payload)
+                newState.currentScene = action.payload
+                return newState;
+            }
+            else return state;
         case CLEAR_THIS_SCENE:
             newState = Object.assign({}, state); // Always copy, never alter
             newState.currentScene = {}
