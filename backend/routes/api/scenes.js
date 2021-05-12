@@ -32,6 +32,9 @@ router.get('/parent/:id', asyncHandler(async (req, res, next) => {
 // Grab the parents via their choices (it's a post to get access to req.body)
 router.post('/parent', asyncHandler(async (req, res, next) => {
     const { sent } = req.body
+    if (!sent) {
+        return res.json({ parentScenes: [] })
+    }
     const parentScenes = []
     console.log('sent!!!!!!!!!', req.body)
     // console.log('OOOOFFF!!!!!!!!!!!!!!!!!!!!!!!!!', choice)

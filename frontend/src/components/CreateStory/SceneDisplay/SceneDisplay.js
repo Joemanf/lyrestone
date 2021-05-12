@@ -11,7 +11,7 @@ function SceneDisplay() {
     const [parentsLoaded, setParentsLoaded] = useState(false);
     const currentStory = useSelector(state => state.stories.currentStory)
     const currentScene = useSelector(state => state.scenes.currentScene)
-    const parentsArr = useSelector(state => state.scenes.parents)
+    let parentsArr = useSelector(state => state.scenes.parents)
 
     const [thisSceneId, setThisSceneId] = useState(currentScene.id)
 
@@ -27,6 +27,9 @@ function SceneDisplay() {
         console.log('THIS, SCENE!!!!!!!', thisSceneId)
         dispatch(getCurrentScene(thisSceneId)).then(() => setSceneLoaded(true))
         dispatch(getParents(thisSceneId)).then(() => setParentsLoaded(true))
+        // if (currentScene && currentScene.root) {
+        //     parentsArr = [];
+        // }
     }, [sceneLoaded, parentsLoaded, thisSceneId])
 
     let i = 0;
@@ -42,7 +45,7 @@ function SceneDisplay() {
                         parentsArr.map(parent => {
                             i++;
                             return (
-                                <div key={`parent_${i}`}>
+                                <div key={`parent_${i}`} onClick={() => setThisSceneId(parent.id)}>
                                     <p>Parent: {parent.title}</p>
                                 </div>
                             )
