@@ -84,13 +84,13 @@ router.delete(`/delete-story`, asyncHandler(async (req, res) => {
     if (deleteStory) {
         const deleteScenes = await Scene.findAll({
             where: { storyId: id },
-            order: ['createdAt', 'DESC'] // Might need to change
+            order: [['createdAt', 'DESC']] // Might need to change
         })
         deleteScenes.forEach(async scene => {
             if (scene) {
                 const deleteChoices = await Choice.findAll({
                     where: { sceneId: scene.id },
-                    order: ['createdAt', 'DESC'] // Might need to change
+                    order: [['createdAt', 'DESC']] // Might need to change
                 })
                 deleteChoices.forEach(async choice => await choice.destroy())
                 await scene.destroy();

@@ -11,6 +11,9 @@ router.get('/:sceneId', asyncHandler(async (req, res, next) => {
     const sceneId = req.params.sceneId;
     const currentScene = await Scene.findByPk(sceneId, {
         include: Choice,
+        order: [
+            ['id', 'ASC'], // THIS PIECE IS VERY, VERY IMPORTANT
+        ],
         // order: ['createdAt']
     })
     return res.json({ currentScene })
@@ -32,6 +35,9 @@ router.get('/parent/:id', asyncHandler(async (req, res, next) => {
 // Grab the parents via their choices (it's a post to get access to req.body)
 router.post('/parent', asyncHandler(async (req, res, next) => {
     const { sent } = req.body
+    if (!sent) {
+        return res.json({ parentScenes: [] })
+    }
     const parentScenes = []
     console.log('sent!!!!!!!!!', req.body)
     // console.log('OOOOFFF!!!!!!!!!!!!!!!!!!!!!!!!!', choice)
@@ -231,7 +237,7 @@ router.put('/edit/:sceneId/:choiceId', asyncHandler(async (req, res, next) => {
 router.delete(`/delete-scene`, asyncHandler(async (req, res) => {
     const { id } = req.body; // Check the ID
     const deleteScene = await Scene.findByPk(id, {
-        order: ['createdAt', 'DESC'] // might need to change
+        order: [['createdAt', 'DESC']] // might need to change
     });
     if (deleteScene.root) {
         return res.json("Cannot delete root scene")
@@ -239,7 +245,7 @@ router.delete(`/delete-scene`, asyncHandler(async (req, res) => {
     if (deleteScene) {
         const deleteChoices = await Choice.findAll({
             where: { sceneId: id },
-            order: ['createdAt', 'DESC'] // might need to change
+            order: [['createdAt', 'DESC']] // might need to change
         })
         deleteChoices.forEach(async choice => await choice.destroy())
         await deleteScene.destroy();
