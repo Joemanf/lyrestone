@@ -31,6 +31,7 @@ function CreateStory() {
     useEffect(() => {
         dispatch(clearCurrentStory())
         dispatch(getCurrentStory(storyId))
+            // .then(() => dispatch(getParents(firstScene[0])))
             .then(() => setStoryLoaded(true))
     }, [dispatch])
 
@@ -43,7 +44,9 @@ function CreateStory() {
     useEffect(() => {
         dispatch(clearCurrentScene())
         if (!firstLoad && firstScene) {
-            dispatch(getCurrentScene(firstScene[0].id)).then(() => setFirstLoad(true)).then(() => setSceneLoaded(true))
+            dispatch(getCurrentScene(firstScene[0].id))
+                .then(() => dispatch(getParents(firstScene[0].id)))
+                .then(() => setFirstLoad(true)).then(() => setSceneLoaded(true))
         } else {
             dispatch(getCurrentScene(thisSceneId)).then(() => setSceneLoaded(true))
             if (currentScene.root) {
