@@ -91,9 +91,6 @@ export const deleteStory = (id) => async (dispatch) => {
         body: JSON.stringify({ id })
     })
     const data = await response.json()
-    // console.log('Is parent null?', data.parent)
-    // getCurrentScene(parent)
-    // dispatch(getThisScene(data.parent))
     clearStories()
     getAllStories()
     return data

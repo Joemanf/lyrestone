@@ -1,9 +1,7 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { clearSelectedCharacter, getAllUserCharacters, selectACharacter } from '../../../store/characters';
+import { clearSelectedCharacter, selectACharacter } from '../../../store/characters';
 import * as sessionActions from '../../../store/session';
-// import { Link } from 'react-router-dom';
-// import { getAllStories } from '../../../store/stories';
 
 import './Characters.css'
 

@@ -13,7 +13,7 @@ function Story() {
     useEffect(() => {
         dispatch(clearCurrentStory())
         dispatch(getCurrentStory(storyId)).then(() => setStoryLoaded(true))
-    }, [dispatch])
+    }, [dispatch, storyId])
 
     let firstScene = { id: Infinity };
     if (story.Scenes) {

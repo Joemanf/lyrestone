@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { csrfFetch } from '../../../store/csrf';
 import { getParents, updateScene } from '../../../store/scenes';
 
 import './SceneInfo.css';
@@ -37,7 +36,6 @@ function ScenesInfo({
     let tempCha;
 
     if (stateChoice) {
-        console.log('CONDITIONALS!!!', stateChoice.conditionals)
         let conditionals = stateChoice.conditionals
         tempStr = parseInt(conditionals[0]);
         tempDex = parseInt(conditionals[1]);
@@ -83,9 +81,9 @@ function ScenesInfo({
 
 
     useEffect(() => {
-        setTitle(currentScene.title)
-        setBody(currentScene.body)
-        setBackgroundImage(currentScene.backgroundImage)
+        setTitle(currentScene.title ? currentScene.title : '')
+        setBody(currentScene.body ? currentScene.body : '')
+        setBackgroundImage(currentScene.backgroundImage ? currentScene.backgroundImage : '')
         setVictory(stateChoice ? stateChoice.isWinning : false)
         setKill(stateChoice ? stateChoice.killsPlayer : false)
         setHealth(stateChoice ? stateChoice.changeHealth : 0)
@@ -95,24 +93,7 @@ function ScenesInfo({
         setIntelligence(tempInt)
         setWisdom(tempWis)
         setCharisma(tempCha)
-
-        // console.log('Fat Albert', currentScene.title)
-        // if (currentScene && currentScene.title) {
-        //     setTitle(currentScene.title)
-        //         .then(() => setBody(currentScene.body))
-        //         .then(() => setBackgroundImage(currentScene.backgroundImage))
-        //         .then(() => setVictory(stateChoice.isWinning))
-        //         .then(() => setKill(stateChoice.killsPlayer))
-        //         .then(() => setHealth(stateChoice.changeHealth))
-        //         .then(() => setStrength(tempStr))
-        //         .then(() => setDexterity(tempDex))
-        //         .then(() => setConstitution(tempCon))
-        //         .then(() => setIntelligence(tempInt))
-        //         .then(() => setWisdom(tempWis))
-        //         .then(() => setCharisma(tempCha))
-        //         .then(() => setConditionsLoaded(true))
-        // }
-    }, [currentScene, parentsArr])
+    }, [currentScene, parentsArr, tempStr, tempDex, tempCon, tempInt, tempWis, tempCha, stateChoice])
 
     const handleSubmit = (e) => {
         e.preventDefault()
@@ -149,7 +130,6 @@ function ScenesInfo({
         if (!unvalidated.length) {
             dispatch(getParents(currentScene.id))
             if (parentsArr.length) {
-                console.log('Strength in SceneInfo', strength)
                 parentsArr.forEach(parent => (
                     dispatch(updateScene(
                         currentScene.id,
@@ -214,7 +194,6 @@ function ScenesInfo({
                             checked={victory}
                             value={victory}
                             onChange={e => {
-                                // console.log(e.target.value, typeof e.target.value)
                                 if (e.target.value === 'true') {
                                     setVictory(false)
                                 } else {
@@ -231,7 +210,6 @@ function ScenesInfo({
                             checked={kill}
                             value={kill}
                             onChange={e => {
-                                // console.log(e.target.value, typeof e.target.value)
                                 if (e.target.value === 'true') {
                                     setKill(false)
                                 } else {

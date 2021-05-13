@@ -45,7 +45,7 @@ function Scene() {
         dispatch(clearCurrentScene())
         dispatch(getCurrentScene(parseInt(param.sceneId))).then(() => setSceneLoaded(true))
         setSceneChange(false)
-    }, [dispatch, sceneChange, HP])
+    }, [dispatch, sceneChange, HP, param.sceneId])
 
     useEffect(() => {
         if (currentHP && !currentHP.length) {
@@ -61,7 +61,7 @@ function Scene() {
         return sceneLoaded && (
             <div>
                 <div>
-                    <img></img>
+                    {/* <img alt='unsure'></img> */}
                     <div>Unfortunately, your wounds are too much to sustain your life, and you fall to the floor, dead.</div>
                 </div>
                 <div>
@@ -80,7 +80,7 @@ function Scene() {
             <Health />
             <div>{scene.title}</div>
             <div>
-                <img></img>
+                {/* <img alt='unsure'></img> */}
                 <div>{scene.body}</div>
             </div>
             <div>
@@ -113,8 +113,9 @@ function Scene() {
                             </Link>
                         )
                     } else {
+                        i++
                         return (
-                            <div>
+                            <div key={i}>
                                 {choice.body}
                             </div>
                         )

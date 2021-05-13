@@ -39,12 +39,9 @@ export const getCurrentScene = (sceneId) => async (dispatch) => {
 
 // Get parents
 export const getParents = (sceneId) => async (dispatch) => {
-    console.log('Is this worth it?', sceneId)
     if (sceneId && !sceneId.length) {
-        console.log('It a scene id', sceneId)
         const response = await csrfFetch(`/api/scenes/parent/${sceneId}`)
         const choices = await response.json();
-        console.log('CHOICES?', choices)
         const sender = choices.parentChoices
         const sent = sender[0]
         // const resArr = []
@@ -55,7 +52,6 @@ export const getParents = (sceneId) => async (dispatch) => {
         })
         const data = await response2.json();
         // resArr.push(data)
-        console.log('NOT CHOICES!!!!!!!!!!!!!!', data)
         dispatch(getTheParents(data.parentScenes))
         return data
     }
@@ -81,7 +77,6 @@ export const updateScene = (
     strength, dexterity, constitution,
     intelligence, wisdom, charisma
 ) => async (dispatch) => {
-    // console.log('hit?', strength)
     const newValidated = {};
     if (root) {
         newValidated.root = true
@@ -108,7 +103,6 @@ export const updateScene = (
         newValidated.health = health
     }
     if (strength !== undefined) {
-        console.log('Strength is defined', strength)
         newValidated.strength = strength
     }
     if (dexterity !== undefined) {
@@ -140,7 +134,6 @@ export const updateScene = (
 
 // Delete a scene
 export const deleteScene = (id, parent) => async (dispatch) => {
-    console.log('check the id', id)
     if (id) {
         const response = await csrfFetch('/api/scenes/delete-scene', {
             method: "DELETE",
@@ -148,7 +141,6 @@ export const deleteScene = (id, parent) => async (dispatch) => {
             body: JSON.stringify({ id })
         })
         const data = await response.json()
-        console.log('Is parent null?', data.parent)
         // getCurrentScene(parent)
         dispatch(getThisScene(data.parent))
         return data
@@ -164,7 +156,6 @@ const scenesReducer = (state = initialState, action) => {
         case GET_THIS_SCENE:
             if (action.payload) {
                 newState = Object.assign({}, state); // Always copy, never alter
-                console.log('Why break?', action.payload)
                 newState.currentScene = action.payload
                 return newState;
             }

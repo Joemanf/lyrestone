@@ -90,8 +90,6 @@ router.delete(`/delete-story`, asyncHandler(async (req, res) => {
                     where: { nextSceneId: scene.id },
                     order: [['id', 'DESC']] // Might need to change
                 })
-                console.log('WAAAAAAAAAAAAA%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%', scene)
-                console.log('EHEEEEEEEEEEEEEEEEEEEEE!!!!!!!!!!!!!!!!!!!!!!!', deleteChoices)
                 for (let j = 0; j < deleteChoices.length; j++) {
                     const choice = deleteChoices[j];
                     await choice.destroy()
@@ -99,18 +97,6 @@ router.delete(`/delete-story`, asyncHandler(async (req, res) => {
                 await scene.destroy();
             }
         }
-        // console.log('AWAWAWAWAWAWAWAW!!!!!!!!!!!!!!!!!!~~~~~~~~~~~~~~~', deleteScenes)
-        // deleteScenes.forEach(async scene => {
-        //     if (scene) {
-        //         const deleteChoices = await Choice.findAll({
-        //             where: { sceneId: scene.id },
-        //             order: [['id', 'DESC']] // Might need to change
-        //         })
-        //         console.log('EHEEEEEEEEEEEEEEEEEEEEE!!!!!!!!!!!!!!!!!!!!!!!', deleteChoices)
-        //         deleteChoices.forEach(async choice => await choice.destroy())
-        //         await scene.destroy();
-        //     }
-        // })
 
         await deleteStory.destroy()
     }

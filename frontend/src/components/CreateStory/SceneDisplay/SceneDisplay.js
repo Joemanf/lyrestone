@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { clearCurrentScene, createScene, deleteScene, getCurrentScene, getParents } from '../../../store/scenes';
+import { createScene, deleteScene, getCurrentScene, getParents } from '../../../store/scenes';
 
 import './SceneDisplay.css'
 
