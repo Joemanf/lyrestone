@@ -26,6 +26,7 @@ function CreateStory() {
     const [title, setTitle] = useState(story.title);
     const [description, setDescription] = useState(story.description);
     const [published, setPublished] = useState(story.published);
+    const [infoErrors, setInfoErrors] = useState([])
 
     useEffect(() => {
         dispatch(clearCurrentStory())
@@ -55,6 +56,37 @@ function CreateStory() {
         }
     }, [dispatch, firstScene, thisSceneId])
 
+    // // set all of these to the info coming in
+    // const [title, setTitle] = useState(currentScene.title ? currentScene.title : '');
+    // const [body, setBody] = useState(currentScene.body ? currentScene.body : '');
+    // const [backgroundImage, setBackgroundImage] = useState(currentScene.backgroundImage ? currentScene.backgroundImage : '');
+    // // useStates below have to do with parent
+    // const [victory, setVictory] = useState(stateChoice ? stateChoice.isWinning : false);
+    // const [kill, setKill] = useState(stateChoice ? stateChoice.killsPlayer : false);
+    // const [health, setHealth] = useState(stateChoice ? stateChoice.changeHealth : 0);
+    // const [strength, setStrength] = useState(tempStr ? tempStr : 1);
+    // const [dexterity, setDexterity] = useState(tempDex ? tempDex : 1);
+    // const [constitution, setConstitution] = useState(tempCon ? tempCon : 1);
+    // const [intelligence, setIntelligence] = useState(tempInt ? tempInt : 1);
+    // const [wisdom, setWisdom] = useState(tempWis ? tempWis : 1);
+    // const [charisma, setCharisma] = useState(tempCha ? tempCha : 1);
+
+
+    // useEffect(() => {
+    //     setTitle(currentScene.title)
+    //     setBody(currentScene.body)
+    //     setBackgroundImage(currentScene.backgroundImage)
+    //     setVictory(stateChoice ? stateChoice.isWinning : false)
+    //     setKill(stateChoice ? stateChoice.killsPlayer : false)
+    //     setHealth(stateChoice ? stateChoice.changeHealth : 0)
+    //     setStrength(tempStr)
+    //     setDexterity(tempDex)
+    //     setConstitution(tempCon)
+    //     setIntelligence(tempInt)
+    //     setWisdom(tempWis)
+    //     setCharisma(tempCha)
+    // }, [currentScene])
+
     // useEffect(() => {
     //     // dispatch(clearCurrentScene());
     //     // dispatch(getCurrentScene(thisSceneId)).then(() => setSceneLoaded(true))
@@ -82,6 +114,8 @@ function CreateStory() {
                         currentScene={currentScene}
                         sceneLoaded={sceneLoaded}
                         setSceneLoaded={setSceneLoaded}
+                        infoErrors={infoErrors}
+                        setInfoErrors={setInfoErrors}
                     />
                 </div>
                 <div>

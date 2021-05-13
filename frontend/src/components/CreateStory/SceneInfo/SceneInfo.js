@@ -5,19 +5,16 @@ import { getParents, updateScene } from '../../../store/scenes';
 
 import './SceneInfo.css';
 
-function ScenesInfo({ currentScene }) {
+function ScenesInfo({
+    currentScene, infoErrors, setInfoErrors,
+    // title, body, backgroundImage,
+    // victory, kill, health,
+    // strength, dexterity, constitution,
+    // intelligence, wisdom, charisma
+}) {
     const dispatch = useDispatch()
 
-    // const currentScene = useSelector(state => state.scenes.currentScene)
     const parentsArr = useSelector(state => state.scenes.parents)
-    // const currentChoices = currentScene.Choices
-
-    // const filteredArr = []
-    // if (parentsArr.length) {
-    //     parentsArr.forEach(parent => {
-    //         if (parent.nextSceneId === currentScene.id) filteredArr.push(parent)
-    //     })
-    // }
 
     let stateChoice;
 
@@ -40,6 +37,7 @@ function ScenesInfo({ currentScene }) {
     let tempCha;
 
     if (stateChoice) {
+        console.log('CONDITIONALS!!!', stateChoice.conditionals)
         let conditionals = stateChoice.conditionals
         tempStr = parseInt(conditionals[0]);
         tempDex = parseInt(conditionals[1]);
@@ -71,7 +69,7 @@ function ScenesInfo({ currentScene }) {
     const [title, setTitle] = useState(currentScene.title ? currentScene.title : '');
     const [body, setBody] = useState(currentScene.body ? currentScene.body : '');
     const [backgroundImage, setBackgroundImage] = useState(currentScene.backgroundImage ? currentScene.backgroundImage : '');
-    // useStates below have to do with parent, don't test until scene change available
+    // useStates below have to do with parent
     const [victory, setVictory] = useState(stateChoice ? stateChoice.isWinning : false);
     const [kill, setKill] = useState(stateChoice ? stateChoice.killsPlayer : false);
     const [health, setHealth] = useState(stateChoice ? stateChoice.changeHealth : 0);
@@ -81,6 +79,8 @@ function ScenesInfo({ currentScene }) {
     const [intelligence, setIntelligence] = useState(tempInt ? tempInt : 1);
     const [wisdom, setWisdom] = useState(tempWis ? tempWis : 1);
     const [charisma, setCharisma] = useState(tempCha ? tempCha : 1);
+    // const [conditionsLoaded, setConditionsLoaded] = useState(false)
+
 
     useEffect(() => {
         setTitle(currentScene.title)
@@ -95,94 +95,101 @@ function ScenesInfo({ currentScene }) {
         setIntelligence(tempInt)
         setWisdom(tempWis)
         setCharisma(tempCha)
-    }, [currentScene])
+
+        // console.log('Fat Albert', currentScene.title)
+        // if (currentScene && currentScene.title) {
+        //     setTitle(currentScene.title)
+        //         .then(() => setBody(currentScene.body))
+        //         .then(() => setBackgroundImage(currentScene.backgroundImage))
+        //         .then(() => setVictory(stateChoice.isWinning))
+        //         .then(() => setKill(stateChoice.killsPlayer))
+        //         .then(() => setHealth(stateChoice.changeHealth))
+        //         .then(() => setStrength(tempStr))
+        //         .then(() => setDexterity(tempDex))
+        //         .then(() => setConstitution(tempCon))
+        //         .then(() => setIntelligence(tempInt))
+        //         .then(() => setWisdom(tempWis))
+        //         .then(() => setCharisma(tempCha))
+        //         .then(() => setConditionsLoaded(true))
+        // }
+    }, [currentScene, parentsArr])
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        // const validated = [];
-        // if (title !== undefined) {
-        //     validated.push(title)
-        // }
-        // if (body !== undefined) {
-        //     validated.push(body)
-        // }
-        // if (backgroundImage !== undefined) {
-        //     validated.push(backgroundImage)
-        // }
-        // if (victory !== undefined) {
-        //     validated.push(victory)
-        // }
-        // if (kill !== undefined) {
-        //     validated.push(kill)
-        // }
-        // if (health !== undefined) {
-        //     validated.push(health)
-        // }
-        // if (strength !== undefined) {
-        //     validated.push(strength)
-        // }
-        // if (dexterity !== undefined) {
-        //     validated.push(dexterity)
-        // }
-        // if (constitution !== undefined) {
-        //     validated.push(constitution)
-        // }
-        // if (intelligence !== undefined) {
-        //     validated.push(intelligence)
-        // }
-        // if (wisdom !== undefined) {
-        //     validated.push(wisdom)
-        // }
-        // if (charisma !== undefined) {
-        //     validated.push(charisma)
-        // }
-        dispatch(getParents(currentScene.id))
-        if (parentsArr.length) {
-            parentsArr.forEach(parent => (
+        setInfoErrors([])
+        const unvalidated = [];
+        if (title.length > 100) {
+            unvalidated.push('Title must be 100 characters or less.')
+        }
+        if (title.length === 0) {
+            unvalidated.push('Title must not be empty')
+        }
+        if (body.length === 0) {
+            unvalidated.push("Body must not be empty")
+        }
+        if (strength > 9 || strength < 1) {
+            unvalidated.push('Strength must be between 1 and 9')
+        }
+        if (dexterity > 9 || dexterity < 1) {
+            unvalidated.push('Dexterity must be between 1 and 9')
+        }
+        if (constitution > 9 || constitution < 1) {
+            unvalidated.push('Constitution must be between 1 and 9')
+        }
+        if (intelligence > 9 || intelligence < 1) {
+            unvalidated.push('Intelligence must be between 1 and 9')
+        }
+        if (wisdom > 9 || wisdom < 1) {
+            unvalidated.push('Wisdom must be between 1 and 9')
+        }
+        if (charisma > 9 || charisma < 1) {
+            unvalidated.push('Charisma must be between 1 and 9')
+        }
+        setInfoErrors(unvalidated)
+        if (!unvalidated.length) {
+            dispatch(getParents(currentScene.id))
+            if (parentsArr.length) {
+                console.log('Strength in SceneInfo', strength)
+                parentsArr.forEach(parent => (
+                    dispatch(updateScene(
+                        currentScene.id,
+                        parent.id,
+                        currentScene.root,
+                        title,
+                        body,
+                        backgroundImage,
+                        victory,
+                        kill,
+                        health,
+                        strength,
+                        dexterity,
+                        constitution,
+                        intelligence,
+                        wisdom,
+                        charisma
+                    )))
+                )
+            }
+            else { // else it's the root scene, and no conditionals should be changed
                 dispatch(updateScene(
                     currentScene.id,
-                    parent.id,
+                    0,
                     currentScene.root,
                     title,
                     body,
                     backgroundImage,
-                    victory,
-                    kill,
-                    health,
-                    strength,
-                    dexterity,
-                    constitution,
-                    intelligence,
-                    wisdom,
-                    charisma
-                )))
-            )
+                ))
+            }
         }
-        else {
-            dispatch(updateScene(
-                currentScene.id,
-                0,
-                currentScene.root,
-                title,
-                body,
-                backgroundImage,
-                victory,
-                kill,
-                health,
-                strength,
-                dexterity,
-                constitution,
-                intelligence,
-                wisdom,
-                charisma
-            ))
-        }
-        // takes sceneId, choiceId, and info
-        // I need the current scene's ID and the parentScene (choice) ID
     }
 
     return (
         <form onSubmit={handleSubmit}>
+            <div>
+                {infoErrors.map(err => (
+                    <div>{err}</div>
+                ))}
+            </div>
             <div>
                 <label>Title</label>
                 <input type='text' value={title} onChange={e => setTitle(e.target.value)} />

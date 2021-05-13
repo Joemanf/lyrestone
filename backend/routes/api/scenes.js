@@ -101,7 +101,7 @@ router.put('/edit/:sceneId/:choiceId', asyncHandler(async (req, res, next) => {
         intelligence,
         wisdom,
         charisma
-    } = req.body // might not be background image here
+    } = req.body.newValidated // might not be background image here
     const sceneId = req.params.sceneId
     const choiceId = req.params.choiceId
 
@@ -142,20 +142,7 @@ router.put('/edit/:sceneId/:choiceId', asyncHandler(async (req, res, next) => {
 
     // let choice;
     if (root) {
-        // const choiceObj = {};
-        // choice = await Choice.findByPk(choiceId)
-        // if (title !== undefined) {
-        //     choiceObj.body = title
-        // }
-        // if (sceneId) {
-        //     choiceObj.sceneId = sceneId
-        // }
-        // if (realChoice && realChoice.id) {
-        //     choiceObj.nextSceneId = realChoice.id
-        // }
         await scene.update(sceneObj)
-        // await realChoice.update(choiceObj)
-        // await choice.update(choiceObj)
     }
     else {
         await scene.update(sceneObj)
@@ -175,10 +162,10 @@ router.put('/edit/:sceneId/:choiceId', asyncHandler(async (req, res, next) => {
             choiceObj.isWinning = victory
         }
         if (kill !== undefined) {
-            sceneObj.killsPlayer = kill
+            choiceObj.killsPlayer = kill
         }
         if (health !== undefined) {
-            sceneObj.changeHealth = health
+            choiceObj.changeHealth = health
         }
         let conditionalsString = '';
         if (strength !== undefined) {
@@ -205,7 +192,7 @@ router.put('/edit/:sceneId/:choiceId', asyncHandler(async (req, res, next) => {
             conditionalsString += charisma.toString();
         }
         else (conditionalsString += '1')
-        sceneObj.conditionals = conditionalsString
+        choiceObj.conditionals = conditionalsString
         await realChoice.update(choiceObj)
     }
 
@@ -233,7 +220,6 @@ router.delete(`/delete-scene`, asyncHandler(async (req, res) => {
         const parent = await Scene.findByPk(parseInt(deleteChoices[0].sceneId), {
             include: Choice
         })
-        // console.log(parent, '&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&')
         deleteChoices.forEach(async choice => await choice.destroy())
         await deleteScene.destroy();
         return res.json({ parent });
