@@ -81,8 +81,14 @@ export const updateScene = (
     strength, dexterity, constitution,
     intelligence, wisdom, charisma
 ) => async (dispatch) => {
-
+    // console.log('hit?', strength)
     const newValidated = {};
+    if (root) {
+        newValidated.root = true
+    }
+    else {
+        newValidated.root = false
+    }
     if (title !== undefined) {
         newValidated.title = title
     }
@@ -102,6 +108,7 @@ export const updateScene = (
         newValidated.health = health
     }
     if (strength !== undefined) {
+        console.log('Strength is defined', strength)
         newValidated.strength = strength
     }
     if (dexterity !== undefined) {
@@ -123,7 +130,7 @@ export const updateScene = (
     const response = await csrfFetch(`/api/scenes/edit/${sceneId}/${choiceId}`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ root, ...newValidated })
+        body: JSON.stringify({ newValidated })
     })
 
     const data = await response.json()
