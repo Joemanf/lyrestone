@@ -1,12 +1,10 @@
 .login_form{
     border: 1px solid white;
     width: 50%;
-    height: 50vh;
+    height: 30em;
     margin: 0 auto;
     display: flex;
     flex-direction: column;
-    /* display: grid;
-    grid-template-rows: 1fr 3fr; */
 }
 
 .inputs_container{
