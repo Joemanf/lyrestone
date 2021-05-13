@@ -80,7 +80,10 @@ function Characters() {
                     ))}
                 </div>
                 <div className='user_bar'>
-                    <div>{user.username}</div>
+                    <div className='user_section'>
+                        <img className='user_profile_picture' alt='user avatar' src={user.avatar} />
+                        <div>{user.username}</div>
+                    </div>
                     <button onClick={logout}>Log Out</button>
                 </div>
             </div>

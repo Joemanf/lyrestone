@@ -58,7 +58,7 @@ router.post(
         if (req.file) {
             profileImageUrl = await singlePublicFileUpload(req.file); // Grab the image uploaded b y the user
         }
-        else profileImageUrl = 'https://lyrestone.s3.amazonaws.com/lyrestone_anon.png';
+        else profileImageUrl = 'https://lyrestone.s3.amazonaws.com/lyrestone_anon_2.png';
         const user = await User.signup({ email, username, password, avatar: profileImageUrl }); // Make yourself
         await setTokenCookie(res, user);
 

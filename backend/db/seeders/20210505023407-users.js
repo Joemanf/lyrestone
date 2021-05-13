@@ -9,19 +9,19 @@ module.exports = {
         username: 'Demo-lition',
         email: 'demo@user.io',
         hashedPassword: bcrypt.hashSync('password'),
-        avatar: 'https://lyrestone.s3.amazonaws.com/lyrestone_anon.png'
+        avatar: 'https://lyrestone.s3.amazonaws.com/lyrestone_anon_2.png'
       },
       {
         username: 'Fire',
         email: faker.internet.email(),
         hashedPassword: bcrypt.hashSync(faker.internet.password()),
-        avatar: 'https://lyrestone.s3.amazonaws.com/lyrestone_anon.png'
+        avatar: 'https://lyrestone.s3.amazonaws.com/lyrestone_anon_2.png'
       },
       {
         username: 'Ice',
         email: faker.internet.email(),
         hashedPassword: bcrypt.hashSync(faker.internet.password()),
-        avatar: 'https://lyrestone.s3.amazonaws.com/lyrestone_anon.png'
+        avatar: 'https://lyrestone.s3.amazonaws.com/lyrestone_anon_2.png'
       },
     ], {});
   },

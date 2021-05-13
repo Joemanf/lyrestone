@@ -63,13 +63,15 @@ router.put('/edit/:storyId', asyncHandler(async (req, res, next) => {
 
     const story = await Story.findByPk(storyId)
 
-    await story.update({
-        userId,
-        title,
-        description,
-        thumbnail,
-        published,
-    })
+    if (story) {
+        await story.update({
+            userId,
+            title,
+            description,
+            thumbnail,
+            published,
+        })
+    }
 
     return res.json({ story });
 }))

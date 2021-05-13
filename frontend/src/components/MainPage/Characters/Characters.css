@@ -53,3 +53,16 @@
 .character_img{
     width: 100%;
 }
+
+.user_section {
+    display: flex;
+    align-items: center;
+    padding: .2em;
+}
+
+.user_profile_picture{
+    max-width: 2em;
+    max-height: 2em;
+    border-radius: 50%;
+    margin-right: .5em;
+}
