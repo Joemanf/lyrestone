@@ -37,7 +37,7 @@ function Stories() {
             </div>
             <div className='each_story'>
                 {selectedCharArr.length ?
-                    <div>
+                    <>
                         {storiesArr.map(story => {
                             return (
                                 <div key={story.id}>
@@ -66,7 +66,7 @@ function Stories() {
                             )
                         }
                         )}
-                    </div>
+                    </>
                     :
                     <h2 className='story_header'>Please select a character.</h2>
                 }

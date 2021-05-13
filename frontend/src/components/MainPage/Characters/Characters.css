@@ -4,6 +4,9 @@
 }
 
 .characters_container {
+    display: grid;
+    grid-template-rows: 1fr 7fr 1fr;
+    height: 86vh;
     border: 1px solid green;
     margin: .5em;
 }
@@ -18,12 +21,13 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    height: 6%;
+    border: 1px solid teal;
+    /* height: 6%; */
     padding: .5em;
 }
 
 .main_characters_container{
-    height: 84%;
+    /* height: 84%; */
     overflow-y: auto;
 }
 

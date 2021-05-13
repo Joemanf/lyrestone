@@ -1,6 +1,9 @@
 .stories_container {
     border: 1px solid red;
+    display: grid;
+    grid-template-rows: 1fr 8fr;
     margin: .5em;
+    height: 86vh;
 }
 
 .story_header{
@@ -10,7 +13,6 @@
 }
 
 .each_story {
-    height: 77.3vh;
     overflow-y: auto;
 }
 

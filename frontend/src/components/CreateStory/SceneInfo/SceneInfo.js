@@ -182,12 +182,12 @@ function ScenesInfo({
         <form onSubmit={handleSubmit}>
             <div>
                 {infoErrors.map(err => (
-                    <div key={err}>{err}</div>
+                    <div required={true} key={err}>{err}</div>
                 ))}
             </div>
             <div>
                 <label>Title</label>
-                <input type='text' value={title} onChange={e => setTitle(e.target.value)} />
+                <input type='text' required={true} value={title} onChange={e => setTitle(e.target.value)} />
             </div>
             <div>
                 <label>Body</label>
@@ -195,10 +195,10 @@ function ScenesInfo({
             </div>
             <div className='other_options'>
                 <div>
-                    <div>
+                    {/* <div>
                         <label>Background Image</label>
                         <input type='file' value={backgroundImage} onChange={e => setBackgroundImage(e.target.value)} />
-                    </div>
+                    </div> */}
                     {/* <div>
                         <label>Previous Scene: </label>
                     </div> */}
@@ -235,7 +235,7 @@ function ScenesInfo({
                     </div> */}
                     <div>
                         <label>HP Change</label>
-                        <input type='number' value={health} onChange={e => setHealth(parseInt(e.target.value))} />
+                        <input type='number' disabled={currentScene.root ? true : false} value={health} onChange={e => setHealth(parseInt(e.target.value))} />
                     </div>
                     <div>
                         <button type='submit'>Save</button>
@@ -244,27 +244,27 @@ function ScenesInfo({
                 <div>
                     <div>
                         <label>Strength?</label>
-                        <input type='number' min={1} max={9} value={strength} onChange={e => setStrength(parseInt(e.target.value))} />
+                        <input type='number' disabled={currentScene.root ? true : false} min={1} max={9} value={strength} onChange={e => setStrength(parseInt(e.target.value))} />
                     </div>
                     <div>
                         <label>Dexerity?</label>
-                        <input type='number' min={1} max={9} value={dexterity} onChange={e => setDexterity(parseInt(e.target.value))} />
+                        <input type='number' disabled={currentScene.root ? true : false} min={1} max={9} value={dexterity} onChange={e => setDexterity(parseInt(e.target.value))} />
                     </div>
                     <div>
                         <label>Constitution?</label>
-                        <input type='number' min={1} max={9} value={constitution} onChange={e => setConstitution(parseInt(e.target.value))} />
+                        <input type='number' disabled={currentScene.root ? true : false} min={1} max={9} value={constitution} onChange={e => setConstitution(parseInt(e.target.value))} />
                     </div>
                     <div>
                         <label>Intelligence?</label>
-                        <input type='number' min={1} max={9} value={intelligence} onChange={e => setIntelligence(parseInt(e.target.value))} />
+                        <input type='number' disabled={currentScene.root ? true : false} min={1} max={9} value={intelligence} onChange={e => setIntelligence(parseInt(e.target.value))} />
                     </div>
                     <div>
                         <label>Wisdom?</label>
-                        <input type='number' min={1} max={9} value={wisdom} onChange={e => setWisdom(parseInt(e.target.value))} />
+                        <input type='number' disabled={currentScene.root ? true : false} min={1} max={9} value={wisdom} onChange={e => setWisdom(parseInt(e.target.value))} />
                     </div>
                     <div>
                         <label>Charisma?</label>
-                        <input type='number' min={1} max={9} value={charisma} onChange={e => setCharisma(parseInt(e.target.value))} />
+                        <input type='number' disabled={currentScene.root ? true : false} min={1} max={9} value={charisma} onChange={e => setCharisma(parseInt(e.target.value))} />
                     </div>
                 </div>
             </div>

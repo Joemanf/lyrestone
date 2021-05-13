@@ -39,45 +39,47 @@ function Characters() {
                 <div className='character_header'>
                     <h2>
                         Characters:
-                </h2>
+                    </h2>
                     <button className='button_disabled' disabled={true}>Add a character</button>
                 </div>
                 <div className='main_characters_container'>
-                    {charactersArr.map(character => (
-                        <div key={character.id} className='character_container_greater'>
-                            {character.id === selected ?
-                                <div
-                                    className='character_container selected'
-                                    value={character.id}
-                                    onClick={e => selectCharacter(character.id)}
-                                >
-                                    <div className='character_name_class'>
-                                        <div>view</div>
-                                        <h3 className='character_name'>{character.name}</h3>
-                                        <div className='character_class'>{character.class}</div>
+                    <div>
+                        {charactersArr.map(character => (
+                            <div key={character.id} className='character_container_greater'>
+                                {character.id === selected ?
+                                    <div
+                                        className='character_container selected'
+                                        value={character.id}
+                                        onClick={e => selectCharacter(character.id)}
+                                    >
+                                        <div className='character_name_class'>
+                                            <div>view</div>
+                                            <h3 className='character_name'>{character.name}</h3>
+                                            <div className='character_class'>{character.class}</div>
+                                        </div>
+                                        <div className='character_img_container'>
+                                            <img src={character.avatar} alt={character.name} className='character_img'></img>
+                                        </div>
                                     </div>
-                                    <div className='character_img_container'>
-                                        <img src={character.avatar} alt={character.name} className='character_img'></img>
+                                    :
+                                    <div
+                                        className='character_container'
+                                        value={character.id}
+                                        onClick={e => selectCharacter(character.id)}
+                                    >
+                                        <div className='character_name_class'>
+                                            <div>view</div>
+                                            <h3 className='character_name'>{character.name}</h3>
+                                            <div className='character_class'>{character.class}</div>
+                                        </div>
+                                        <div className='character_img_container'>
+                                            <img src={character.avatar} alt={character.name} className='character_img'></img>
+                                        </div>
                                     </div>
-                                </div>
-                                :
-                                <div
-                                    className='character_container'
-                                    value={character.id}
-                                    onClick={e => selectCharacter(character.id)}
-                                >
-                                    <div className='character_name_class'>
-                                        <div>view</div>
-                                        <h3 className='character_name'>{character.name}</h3>
-                                        <div className='character_class'>{character.class}</div>
-                                    </div>
-                                    <div className='character_img_container'>
-                                        <img src={character.avatar} alt={character.name} className='character_img'></img>
-                                    </div>
-                                </div>
-                            }
-                        </div>
-                    ))}
+                                }
+                            </div>
+                        ))}
+                    </div>
                 </div>
                 <div className='user_bar'>
                     <div className='user_section'>
