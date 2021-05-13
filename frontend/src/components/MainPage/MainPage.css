@@ -1,5 +1,6 @@
 .greater_border {
     border: 1px solid white;
+    border-radius: .2em;
     margin: 0 auto;
     padding: .5em;
     display: grid;

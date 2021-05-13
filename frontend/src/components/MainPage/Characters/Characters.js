@@ -48,7 +48,7 @@ function Characters() {
                             <div key={character.id} className='character_container_greater'>
                                 {character.id === selected ?
                                     <div
-                                        className='character_container selected'
+                                        className='selected'
                                         value={character.id}
                                         onClick={e => selectCharacter(character.id)}
                                     >

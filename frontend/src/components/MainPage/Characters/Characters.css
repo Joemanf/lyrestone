@@ -7,7 +7,10 @@
     display: grid;
     grid-template-rows: 1fr 7fr 1fr;
     height: 86vh;
-    border: 1px solid green;
+    border-radius: .5em;
+    box-shadow: 0 0 8px gray;
+    /* border: 1px solid gray; */
+    /* border: 1px solid #e50914; */
     margin: .5em;
 }
 
@@ -20,8 +23,8 @@
 .user_bar {
     display: flex;
     justify-content: space-between;
-    align-items: center;
-    border: 1px solid teal;
+    align-items: flex-end;
+    /* border: 1px solid teal; */
     /* height: 6%; */
     padding: .5em;
 }
@@ -32,14 +35,27 @@
 }
 
 .character_container{
-    border: 1px solid orchid;
+    border: 1px solid white;
+    border-radius: .2em;
     margin: 1em;
     display: flex;
     justify-content: space-between;
+    box-shadow: none;
+    transition: box-shadow .2s ease-in-out;
+}
+
+.character_container:hover {
+    box-shadow: 0 0 8px #dd686e;
 }
 
 .selected {
-    box-shadow: 0 0 8px red;
+    border: 1px solid white;
+    border-radius: .2em;
+    margin: 1em;
+    display: flex;
+    justify-content: space-between;
+    box-shadow: 0 0 8px #e50914;
+    transition: box-shadow .2s ease-in-out;
 }
 
 .character_name_class{
