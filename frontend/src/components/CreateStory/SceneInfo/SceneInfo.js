@@ -108,23 +108,38 @@ function ScenesInfo({
         if (body.length === 0) {
             unvalidated.push("Body must not be empty")
         }
-        if (strength > 9 || strength < 1) {
-            unvalidated.push('Strength must be between 1 and 9')
+        if (currentScene.root) {
+            if (
+                strength !== 1 ||
+                dexterity !== 1 ||
+                constitution !== 1 ||
+                intelligence !== 1 ||
+                wisdom !== 1 ||
+                charisma !== 1 ||
+                health !== 0
+            ) {
+                unvalidated.push("Only change the title and body in the root scene")
+            }
         }
-        if (dexterity > 9 || dexterity < 1) {
-            unvalidated.push('Dexterity must be between 1 and 9')
-        }
-        if (constitution > 9 || constitution < 1) {
-            unvalidated.push('Constitution must be between 1 and 9')
-        }
-        if (intelligence > 9 || intelligence < 1) {
-            unvalidated.push('Intelligence must be between 1 and 9')
-        }
-        if (wisdom > 9 || wisdom < 1) {
-            unvalidated.push('Wisdom must be between 1 and 9')
-        }
-        if (charisma > 9 || charisma < 1) {
-            unvalidated.push('Charisma must be between 1 and 9')
+        if (!currentScene.root) {
+            if (strength > 9 || strength < 1) {
+                unvalidated.push('Strength must be between 1 and 9')
+            }
+            if (dexterity > 9 || dexterity < 1) {
+                unvalidated.push('Dexterity must be between 1 and 9')
+            }
+            if (constitution > 9 || constitution < 1) {
+                unvalidated.push('Constitution must be between 1 and 9')
+            }
+            if (intelligence > 9 || intelligence < 1) {
+                unvalidated.push('Intelligence must be between 1 and 9')
+            }
+            if (wisdom > 9 || wisdom < 1) {
+                unvalidated.push('Wisdom must be between 1 and 9')
+            }
+            if (charisma > 9 || charisma < 1) {
+                unvalidated.push('Charisma must be between 1 and 9')
+            }
         }
         setInfoErrors(unvalidated)
         if (!unvalidated.length) {
@@ -167,7 +182,7 @@ function ScenesInfo({
         <form onSubmit={handleSubmit}>
             <div>
                 {infoErrors.map(err => (
-                    <div>{err}</div>
+                    <div key={err}>{err}</div>
                 ))}
             </div>
             <div>
