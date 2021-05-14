@@ -1,7 +1,23 @@
+div, input, textarea {
+    border-radius: .2em;
+}
+
 .top_create_story{
     display: flex;
     border: 1px solid white;
     justify-content: space-around;
+    /* align-items: center; */
+    height: 95vh;
+}
+
+.greater_scenes_info {
+    border: 1px solid darkgreen;
+    width: 50%;
+}
+
+.greater_scene_display_and_name {
+    /* border: 1px solid teal; */
+    width: 50%;
 }
 
 .story_info_container{

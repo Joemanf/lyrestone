@@ -10,8 +10,6 @@
 .scene_container_sans_health {
     display: flex;
     flex-direction: column;
-
-    /* position: relative; */
 }
 
 .image_container {

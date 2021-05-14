@@ -179,19 +179,19 @@ function ScenesInfo({
     }
 
     return (
-        <form onSubmit={handleSubmit}>
-            <div>
+        <form className='scene_info_container' onSubmit={handleSubmit}>
+            <div className='scene_info_errors'>
                 {infoErrors.map(err => (
                     <div required={true} key={err}>{err}</div>
                 ))}
             </div>
-            <div>
+            <div className='scene_info_title_container'>
                 <label>Title</label>
-                <input type='text' required={true} value={title} onChange={e => setTitle(e.target.value)} />
+                <input className='scene_info_title' type='text' required={true} value={title} onChange={e => setTitle(e.target.value)} />
             </div>
-            <div>
+            <div className='scene_info_body_container'>
                 <label>Body</label>
-                <textarea value={body} onChange={e => setBody(e.target.value)} />
+                <textarea className='scene_info_body' value={body} onChange={e => setBody(e.target.value)} />
             </div>
             <div className='other_options'>
                 <div>
@@ -233,39 +233,41 @@ function ScenesInfo({
                             }}
                         />
                     </div> */}
-                    <div>
+                    <div className='scene_info_hp_container'>
                         <label>HP Change</label>
-                        <input type='number' disabled={currentScene.root ? true : false} value={health} onChange={e => setHealth(parseInt(e.target.value))} />
-                    </div>
-                    <div>
-                        <button type='submit'>Save</button>
+                        <input className='scene_input_numbers' type='number' disabled={currentScene.root ? true : false} value={health} onChange={e => setHealth(parseInt(e.target.value))} />
                     </div>
                 </div>
-                <div>
-                    <div>
+                <div className='scene_info_physicals'>
+                    <div className='scene_info_stats'>
                         <label>Strength?</label>
-                        <input type='number' disabled={currentScene.root ? true : false} min={1} max={9} value={strength} onChange={e => setStrength(parseInt(e.target.value))} />
+                        <input className='scene_input_numbers' type='number' disabled={currentScene.root ? true : false} min={1} max={9} value={strength} onChange={e => setStrength(parseInt(e.target.value))} />
                     </div>
-                    <div>
+                    <div className='scene_info_stats'>
                         <label>Dexerity?</label>
-                        <input type='number' disabled={currentScene.root ? true : false} min={1} max={9} value={dexterity} onChange={e => setDexterity(parseInt(e.target.value))} />
+                        <input className='scene_input_numbers' type='number' disabled={currentScene.root ? true : false} min={1} max={9} value={dexterity} onChange={e => setDexterity(parseInt(e.target.value))} />
                     </div>
-                    <div>
+                    <div className='scene_info_stats'>
                         <label>Constitution?</label>
-                        <input type='number' disabled={currentScene.root ? true : false} min={1} max={9} value={constitution} onChange={e => setConstitution(parseInt(e.target.value))} />
+                        <input className='scene_input_numbers' type='number' disabled={currentScene.root ? true : false} min={1} max={9} value={constitution} onChange={e => setConstitution(parseInt(e.target.value))} />
                     </div>
-                    <div>
+                </div>
+                <div className='scene_info_mentals'>
+                    <div className='scene_info_stats'>
                         <label>Intelligence?</label>
-                        <input type='number' disabled={currentScene.root ? true : false} min={1} max={9} value={intelligence} onChange={e => setIntelligence(parseInt(e.target.value))} />
+                        <input className='scene_input_numbers' type='number' disabled={currentScene.root ? true : false} min={1} max={9} value={intelligence} onChange={e => setIntelligence(parseInt(e.target.value))} />
                     </div>
-                    <div>
+                    <div className='scene_info_stats'>
                         <label>Wisdom?</label>
-                        <input type='number' disabled={currentScene.root ? true : false} min={1} max={9} value={wisdom} onChange={e => setWisdom(parseInt(e.target.value))} />
+                        <input className='scene_input_numbers' type='number' disabled={currentScene.root ? true : false} min={1} max={9} value={wisdom} onChange={e => setWisdom(parseInt(e.target.value))} />
                     </div>
-                    <div>
+                    <div className='scene_info_stats'>
                         <label>Charisma?</label>
-                        <input type='number' disabled={currentScene.root ? true : false} min={1} max={9} value={charisma} onChange={e => setCharisma(parseInt(e.target.value))} />
+                        <input className='scene_input_numbers' type='number' disabled={currentScene.root ? true : false} min={1} max={9} value={charisma} onChange={e => setCharisma(parseInt(e.target.value))} />
                     </div>
+                </div>
+                <div className='scene_info_button_container'>
+                    <button className='scene_info_button' type='submit'>Save Scene Info</button>
                 </div>
             </div>
         </form>

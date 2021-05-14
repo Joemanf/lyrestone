@@ -73,7 +73,7 @@ function CreateStory() {
     return storyLoaded && sceneLoaded && (
         <>
             <div className='top_create_story'>
-                <div>
+                <div className='greater_scenes_info'>
                     <ScenesInfo
                         currentScene={currentScene}
                         sceneLoaded={sceneLoaded}
@@ -82,7 +82,7 @@ function CreateStory() {
                         setInfoErrors={setInfoErrors}
                     />
                 </div>
-                <div>
+                <div className='greater_scene_display_and_name'>
                     <SceneDisplay
                         currentScene={currentScene}
                         sceneLoaded={sceneLoaded}
