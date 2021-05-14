@@ -22,29 +22,33 @@ function App() {
     <>
       {/* <Navigation isLoaded={isLoaded} /> */}
       {isLoaded && (
-        <Switch>
-          <Route exact path='/' >
-            <Splash />
-          </Route>
-          <Route path="/login">
-            <LoginFormPage />
-          </Route>
-          <Route path="/signup">
-            <SignupFormPage />
-          </Route>
-          <Route path="/home">
-            <MainPage />
-          </Route>
-          <Route exact path="/stories/:storyId">
-            <Story />
-          </Route>
-          <Route path="/stories/:storyId/:sceneId">
-            <Scene />
-          </Route>
-          <Route path="/create/:storyId">
-            <CreateStory />
-          </Route>
-        </Switch>
+        <div className='son_of_root'>
+          <div className='page_transition'>
+            <Switch>
+              <Route exact path='/' >
+                <Splash />
+              </Route>
+              <Route path="/login">
+                <LoginFormPage />
+              </Route>
+              <Route path="/signup">
+                <SignupFormPage />
+              </Route>
+              <Route path="/home">
+                <MainPage />
+              </Route>
+              <Route exact path="/stories/:storyId">
+                <Story />
+              </Route>
+              <Route path="/stories/:storyId/:sceneId">
+                <Scene />
+              </Route>
+              <Route path="/create/:storyId">
+                <CreateStory />
+              </Route>
+            </Switch>
+          </div>
+        </div>
       )}
     </>
   );

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { Link, Redirect, useParams } from 'react-router-dom'
+import { Link, Redirect, useHistory, useParams } from 'react-router-dom'
 import { setHP, setOriginalCurrentHp } from '../../../store/characters'
 import { clearCurrentScene, getCurrentScene } from '../../../store/scenes'
 import Health from '../../Tests/TestDummyHp'
@@ -9,6 +9,7 @@ import "./Scene.css"
 
 function Scene() {
     const dispatch = useDispatch()
+    const history = useHistory()
     const param = useParams()
     const [sceneLoaded, setSceneLoaded] = useState(false)
     const [sceneChange, setSceneChange] = useState(false)
@@ -43,6 +44,13 @@ function Scene() {
     }
 
     useEffect(() => {
+        const pageTransition = document.querySelector('.page_transition')
+        setTimeout(() => {
+            pageTransition.style.opacity = '1'
+        }, 1500)
+    }, [scene])
+
+    useEffect(() => {
         dispatch(setHP(HP))
         dispatch(clearCurrentScene())
         dispatch(getCurrentScene(parseInt(param.sceneId))).then(() => setSceneLoaded(true))
@@ -59,6 +67,16 @@ function Scene() {
         return <Redirect to='/' />
     }
 
+    const handleGameOverTransition = () => {
+        const pageTransition = document.querySelector('.page_transition')
+        setTimeout(() => {
+            pageTransition.style.opacity = '0'
+        }, 0)
+        setTimeout(() => {
+            history.push('/home')
+        }, 1000)
+    }
+
     if (currentHP <= 0) {
         return sceneLoaded && (
             <div className='scene_gameover_container'>
@@ -67,9 +85,9 @@ function Scene() {
                     <div>Unfortunately, your wounds are too much to sustain your life, and you fall to the floor, dead.</div>
                 </div>
                 <div>
-                    <Link to='/home'>
+                    <div className='link' onClick={handleGameOverTransition}>
                         <h2 className='scene_choice gameover'>Game Over</h2>
-                    </Link>
+                    </div>
                 </div>
             </div>
         )
@@ -97,6 +115,16 @@ function Scene() {
                     <div className='scene_choices_container'>
                         {/* <h2>Choices: </h2> */}
                         {choicesArr && choicesArr.length ? choicesArr.map(choice => {
+                            const handleClickTransition = () => {
+                                const pageTransition = document.querySelector('.page_transition')
+                                setTimeout(() => {
+                                    pageTransition.style.opacity = '0'
+                                }, 0)
+                                setTimeout(() => {
+                                    history.push(`/stories/${scene.storyId}/${choice.nextSceneId}`)
+                                }, 1000)
+                            }
+
                             const conditionalsArr = choice.conditionals.split('')
                             const str = parseInt(conditionalsArr[0]);
                             const dex = parseInt(conditionalsArr[1]);
@@ -114,7 +142,7 @@ function Scene() {
                             ) {
                                 i++
                                 return (
-                                    <Link key={i} to={`/stories/${scene.storyId}/${choice.nextSceneId}`}>
+                                    <div key={i} className='link' onClick={handleClickTransition}>
                                         <div onClick={() => {
                                             currentHealth(currentHP, choice.changeHealth)
                                             setSceneChange(true)
@@ -123,7 +151,7 @@ function Scene() {
                                         >
                                             {choice.body}
                                         </div>
-                                    </Link>
+                                    </div>
                                 )
                             } else {
                                 i++
@@ -135,11 +163,18 @@ function Scene() {
                             }
                         })
                             :
-                            <Link to='/home'>
-                                <h2 className='scene_choice'>
-                                    Game Over.
+                            <div>
+                                {scene.body ?
+                                    <div onClick={handleGameOverTransition} className='link'>
+                                        <h2 className='scene_choice'>
+                                            Game Over.
                         </h2>
-                            </Link>
+                                    </div>
+                                    :
+                                    null
+                                }
+
+                            </div>
                         }
                     </div>
                 </div>

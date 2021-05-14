@@ -22,10 +22,22 @@ function Stories() {
         selectedCharArr.push(selectedCharacter[key])
     }
 
+    const handleCreateStoryTransition = (story) => {
+        const pageTransition = document.querySelector('.page_transition')
+        setTimeout(() => {
+            pageTransition.style.opacity = '0'
+        }, 0)
+        setTimeout(() => {
+            history.push(`/create/${story.story.id}`)
+        }, 1000)
+    }
+
     const createStory = async () => {
         const story = await dispatch(makeStory(userId))
-        return history.push(`/create/${story.story.id}`)
+        handleCreateStoryTransition(story)
     }
+
+
 
     return (
         <div className='stories_container'>
@@ -39,20 +51,40 @@ function Stories() {
                 {selectedCharArr.length ?
                     <>
                         {storiesArr.map(story => {
+                            const handlePlayStoryTransition = () => {
+                                const pageTransition = document.querySelector('.page_transition')
+                                setTimeout(() => {
+                                    pageTransition.style.opacity = '0'
+                                }, 0)
+                                setTimeout(() => {
+                                    history.push(`/stories/${story.id}`)
+                                }, 1000)
+                            }
+
+                            const handleEditStoryTransition = () => {
+                                const pageTransition = document.querySelector('.page_transition')
+                                setTimeout(() => {
+                                    pageTransition.style.opacity = '0'
+                                }, 0)
+                                setTimeout(() => {
+                                    history.push(`/create/${story.id}`)
+                                }, 1000)
+                            }
+
                             return (
                                 <div key={story.id}>
                                     <div className='story_container'>
                                         <div className='story_title_desc'>
                                             <div className='story_title_desc_link'>
-                                                <Link to={`/stories/${story.id}`}>
+                                                <div className='link' onClick={handlePlayStoryTransition}>
                                                     <h3 className='story_title'>{story.title}</h3>
                                                     <div className='story_desc'>{story.description}</div>
-                                                </Link>
+                                                </div>
                                             </div>
                                             <div className='story_writer_edit'>
                                                 <div className='written_by'>Written By: {story.User.username}</div>
                                                 {userId === story.userId ?
-                                                    <Link to={`/create/${story.id}`}>Edit</Link>
+                                                    <div className='link' onClick={handleEditStoryTransition}>Edit</div>
                                                     :
                                                     null
                                                 }

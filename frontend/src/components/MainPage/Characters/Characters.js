@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useHistory } from 'react-router';
 import { clearSelectedCharacter, selectACharacter } from '../../../store/characters';
 import * as sessionActions from '../../../store/session';
 
@@ -7,6 +8,7 @@ import './Characters.css'
 
 function Characters() {
     const dispatch = useDispatch()
+    const history = useHistory()
 
     const [selected, setSelected] = useState(0)
 
@@ -28,9 +30,22 @@ function Characters() {
         dispatch(selectACharacter(characters[characterId]))
     }
 
+    const handleLogoutTransition = () => {
+        const pageTransition = document.querySelector('.page_transition')
+        setTimeout(() => {
+            pageTransition.style.opacity = '0'
+        }, 0)
+        setTimeout(() => {
+            history.push('/')
+        }, 1000)
+    }
+
     const logout = (e) => {
         e.preventDefault();
-        dispatch(sessionActions.logout());
+        handleLogoutTransition()
+        setTimeout(() => {
+            dispatch(sessionActions.logout());
+        }, 1000)
     };
 
     return (

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Redirect } from "react-router-dom";
 import * as sessionActions from "../../store/session";
@@ -14,6 +14,13 @@ function SignupFormPage() {
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
     const [errors, setErrors] = useState([]);
+
+    useEffect(() => {
+        const pageTransition = document.querySelector('.page_transition')
+        setTimeout(() => {
+            pageTransition.style.opacity = '1'
+        }, 500)
+    }, [])
 
     if (sessionUser) return <Redirect to="/home" />; // Change to history.push might fix the store
 

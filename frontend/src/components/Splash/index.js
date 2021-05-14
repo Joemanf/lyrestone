@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { NavLink, Redirect } from 'react-router-dom';
+import { NavLink, Redirect, useHistory } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
 import './Splash.css'
@@ -8,8 +8,13 @@ import logo from '../../images/lyrestone.png'
 
 function Splash() {
     const sessionUser = useSelector((state) => state.session.user); // Grabbing logged in user
+    const history = useHistory();
 
     useEffect(() => {
+        const pageTransition = document.querySelector('.page_transition')
+        setTimeout(() => {
+            pageTransition.style.opacity = '1'
+        }, 0)
         const text = document.querySelector('.logo_text')
         const image = document.querySelector('.logo_container_inner');
         const links = document.querySelector('.inner_links');
@@ -31,6 +36,26 @@ function Splash() {
         }, 3500)
     }, [])
 
+    const handleLoginTransition = () => {
+        const pageTransition = document.querySelector('.page_transition')
+        setTimeout(() => {
+            pageTransition.style.opacity = '0'
+        }, 0)
+        setTimeout(() => {
+            history.push('/login')
+        }, 1000)
+    }
+
+    const handleSignupTransition = () => {
+        const pageTransition = document.querySelector('.page_transition')
+        setTimeout(() => {
+            pageTransition.style.opacity = '0'
+        }, 0)
+        setTimeout(() => {
+            history.push('/signup')
+        }, 1000)
+    }
+
     if (sessionUser) return <Redirect to="/home" />; // Change to history.push might fix the store
 
     return (
@@ -43,11 +68,11 @@ function Splash() {
                     <h1 className='logo_text'>Lyrestone</h1>
                 </div>
                 <div className='inner_links'>
-                    <button>
-                        <NavLink to='/login'>Log In</NavLink>
+                    <button onClick={handleLoginTransition}>
+                        <div>Log In</div>
                     </button>
-                    <button>
-                        <NavLink to='/signup'>Sign Up</NavLink>
+                    <button onClick={handleSignupTransition}>
+                        <div>Sign Up</div>
                     </button>
                 </div>
             </div>

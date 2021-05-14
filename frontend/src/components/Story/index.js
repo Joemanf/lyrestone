@@ -11,6 +11,13 @@ function Story() {
     const story = useSelector(state => state.stories.currentStory)
 
     useEffect(() => {
+        const pageTransition = document.querySelector('.page_transition')
+        setTimeout(() => {
+            pageTransition.style.opacity = '1'
+        }, 500)
+    }, [])
+
+    useEffect(() => {
         dispatch(clearCurrentStory())
         dispatch(getCurrentStory(storyId)).then(() => setStoryLoaded(true))
     }, [dispatch, storyId])

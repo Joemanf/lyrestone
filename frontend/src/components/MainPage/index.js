@@ -15,6 +15,13 @@ function MainPage() {
     const [isCharactersLoaded, setIsCharactersLoaded] = useState(false);
 
     useEffect(() => {
+        const pageTransition = document.querySelector('.page_transition')
+        setTimeout(() => {
+            pageTransition.style.opacity = '1'
+        }, 500)
+    }, [])
+
+    useEffect(() => {
         dispatch(setHP(1))
         dispatch(clearAllCharacters())
         dispatch(clearCurrentStory())

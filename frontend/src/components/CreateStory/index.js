@@ -29,6 +29,13 @@ function CreateStory() {
     const [infoErrors, setInfoErrors] = useState([])
 
     useEffect(() => {
+        const pageTransition = document.querySelector('.page_transition')
+        setTimeout(() => {
+            pageTransition.style.opacity = '1'
+        }, 500)
+    }, [])
+
+    useEffect(() => {
         dispatch(clearCurrentStory())
         dispatch(getCurrentStory(storyId))
             // .then(() => dispatch(getParents(firstScene[0])))
@@ -57,17 +64,27 @@ function CreateStory() {
         }
     }, [dispatch, firstScene, thisSceneId])
 
+    const handleCreateStoryTransition = () => {
+        const pageTransition = document.querySelector('.page_transition')
+        setTimeout(() => {
+            pageTransition.style.opacity = '0'
+        }, 0)
+        setTimeout(() => {
+            history.push('/home')
+        }, 1000)
+    }
+
     function handleSubmit(e) { // Double check this function and throw in validators
         e.preventDefault()
         //Make thumbnail dynamic in the future
         const thumbnail = 'https://lyrestone.s3.amazonaws.com/lyrestone-dragon.png';
         dispatch(editStory(story.id, user.id, title, description, thumbnail, published))
-        history.push('/home')
+        handleCreateStoryTransition()
     }
 
     function handleDeleteStory() {
         dispatch(deleteStory(story.id))
-            .then(() => history.push('/home'))
+            .then(() => handleCreateStoryTransition())
     }
 
     return storyLoaded && sceneLoaded && (
