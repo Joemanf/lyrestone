@@ -1,5 +1,7 @@
 /* TODO Add site wide styles */
 @import url('https://fonts.googleapis.com/css2?family=Girassol&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Goblin+One&family=Nanum+Gothic&display=swap');
+
 * {
     box-sizing: border-box;
     /* margin: 0; */

@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { setHP } from '../../store/characters';
 
+import './Health.css'
+
 export default function Health() {
     const dispatch = useDispatch()
 

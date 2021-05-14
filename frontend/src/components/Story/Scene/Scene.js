@@ -5,6 +5,8 @@ import { setHP, setOriginalCurrentHp } from '../../../store/characters'
 import { clearCurrentScene, getCurrentScene } from '../../../store/scenes'
 import Health from '../../Tests/TestDummyHp'
 
+import "./Scene.css"
+
 function Scene() {
     const dispatch = useDispatch()
     const param = useParams()
@@ -59,14 +61,14 @@ function Scene() {
 
     if (currentHP <= 0) {
         return sceneLoaded && (
-            <div>
-                <div>
+            <div className='scene_gameover_container'>
+                <div className='scene_body_container'>
                     {/* <img alt='unsure'></img> */}
                     <div>Unfortunately, your wounds are too much to sustain your life, and you fall to the floor, dead.</div>
                 </div>
                 <div>
                     <Link to='/home'>
-                        <h2>Game Over</h2>
+                        <h2 className='scene_choice gameover'>Game Over</h2>
                     </Link>
                 </div>
             </div>
@@ -76,60 +78,73 @@ function Scene() {
     let i = 0;
 
     return sceneLoaded && (
-        <div>
-            <Health />
-            <div>{scene.title}</div>
-            <div>
-                {/* <img alt='unsure'></img> */}
-                <div>{scene.body}</div>
+        <div className='scene_greater_container'>
+            <div className='image_container'></div>
+            <div className='health_outer'>
+                <Health />
             </div>
-            <div>
-                <h2>Choices: </h2>
-                {choicesArr && choicesArr.length ? choicesArr.map(choice => {
-                    const conditionalsArr = choice.conditionals.split('')
-                    const str = parseInt(conditionalsArr[0]);
-                    const dex = parseInt(conditionalsArr[1]);
-                    const con = parseInt(conditionalsArr[2]);
-                    const int = parseInt(conditionalsArr[3]);
-                    const wis = parseInt(conditionalsArr[4]);
-                    const cha = parseInt(conditionalsArr[5]);
-                    if (
-                        selectedCharacter.strength >= str &&
-                        selectedCharacter.dexterity >= dex &&
-                        selectedCharacter.constitution >= con &&
-                        selectedCharacter.intelligence >= int &&
-                        selectedCharacter.wisdom >= wis &&
-                        selectedCharacter.charisma >= cha
-                    ) {
-                        i++
-                        return (
-                            <Link key={i} to={`/stories/${scene.storyId}/${choice.nextSceneId}`}>
-                                <div onClick={() => {
-                                    currentHealth(currentHP, choice.changeHealth)
-                                    setSceneChange(true)
-                                }}>
-                                    {choice.body}
-                                </div>
-                            </Link>
-                        )
-                    } else {
-                        i++
-                        return (
-                            <div key={i}>
-                                {choice.body}
-                            </div>
-                        )
-                    }
-                })
-                    :
-                    <Link to='/home'>
-                        <h2>
-                            Game Over.
+            <div className='scene_container_sans_health'>
+                <div className='scene_container'>
+                    <div className='scene_filler'></div>
+                    <div className='scene_filler'></div>
+                    <div className='scene_title_body_container'>
+                        <div className='scene_title'>{scene.title}</div>
+                        <div className='scene_body_container'>
+                            {/* <img alt='unsure'></img> */}
+                            <div className='scene_body'>{scene.body}</div>
+                        </div>
+                    </div>
+                    <div className='scene_choices_container'>
+                        {/* <h2>Choices: </h2> */}
+                        {choicesArr && choicesArr.length ? choicesArr.map(choice => {
+                            const conditionalsArr = choice.conditionals.split('')
+                            const str = parseInt(conditionalsArr[0]);
+                            const dex = parseInt(conditionalsArr[1]);
+                            const con = parseInt(conditionalsArr[2]);
+                            const int = parseInt(conditionalsArr[3]);
+                            const wis = parseInt(conditionalsArr[4]);
+                            const cha = parseInt(conditionalsArr[5]);
+                            if (
+                                selectedCharacter.strength >= str &&
+                                selectedCharacter.dexterity >= dex &&
+                                selectedCharacter.constitution >= con &&
+                                selectedCharacter.intelligence >= int &&
+                                selectedCharacter.wisdom >= wis &&
+                                selectedCharacter.charisma >= cha
+                            ) {
+                                i++
+                                return (
+                                    <Link key={i} to={`/stories/${scene.storyId}/${choice.nextSceneId}`}>
+                                        <div onClick={() => {
+                                            currentHealth(currentHP, choice.changeHealth)
+                                            setSceneChange(true)
+                                        }}
+                                            className='scene_choice'
+                                        >
+                                            {choice.body}
+                                        </div>
+                                    </Link>
+                                )
+                            } else {
+                                i++
+                                return (
+                                    <div key={i} className='scene_choice'>
+                                        {choice.body}
+                                    </div>
+                                )
+                            }
+                        })
+                            :
+                            <Link to='/home'>
+                                <h2 className='scene_choice'>
+                                    Game Over.
                         </h2>
-                    </Link>
-                }
+                            </Link>
+                        }
+                    </div>
+                </div>
             </div>
-        </div >
+        </div>
     )
 }
 

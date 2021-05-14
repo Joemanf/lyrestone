@@ -1,0 +1,103 @@
+.scene_greater_container {
+    font-family: 'Nanum Gothic', sans-serif;
+    /* font-size: .75em; */
+    /* font-weight: 500; */
+    border: 1px solid white;
+    padding: 1.5em;
+    height: 95vh;
+}
+
+.scene_container_sans_health {
+    display: flex;
+    flex-direction: column;
+
+    /* position: relative; */
+}
+
+.image_container {
+    background-color: darkcyan;
+    opacity: 0;
+    min-height: 85vh;
+    width: 100%;
+    position: absolute;
+}
+
+.health_outer {
+    position: absolute;
+}
+
+.scene_container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    /* border: 1px solid orange; */
+    position: absolute;
+    /* align-self: center; */
+    /* justify-self: center; */
+    /* margin-top: 20%; */
+    width: 96.5%;
+    height: 90%;
+    /* min-height: 85vh; */
+}
+
+.scene_gameover_container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    /* height: 100%; */
+}
+
+.scene_title_body_container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* border: 1px solid orange; */
+    /* background-color: darkblue; */
+    /* opacity: .8; */
+    width: 80%;
+    text-align: center;
+    padding: 1em;
+}
+
+.scene_title {
+    border: 1px solid white;
+    font-size: 2.5em;
+    font-weight: bold;
+    padding: .5em;
+    margin-bottom: 1em;
+    opacity: 1;
+}
+
+.scene_body_container {
+    border: 1px solid gray;
+    padding: 1.5em 2.5em;
+    font-size: 1.5em;
+}
+
+.scene_choices_container {
+    /* border: 1px solid gray; */
+    padding: .5em;
+    width: 40%;
+    display: flex;
+    flex-direction: column;
+}
+
+.scene_choice{
+    border: 1px solid lightgray;
+    padding: .25em;
+    margin: .5em;
+    text-align: center;
+    font-size: 1.5em;
+    transition: box-shadow .2s ease-in-out;
+    box-shadow: none;
+}
+
+.gameover {
+    width: 80%;
+}
+
+.scene_choice:hover {
+    box-shadow: 0 0 8px white;
+}
