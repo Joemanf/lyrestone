@@ -44,11 +44,11 @@ function SceneDisplay({ currentScene, sceneLoaded, setSceneLoaded, thisSceneId, 
 
     // parentsLoaded && sceneLoaded &&
     return sceneLoaded && (
-        <div>
+        <div className='scene_display_container'>
             <div className='scene_view'>
                 <div className='scene_view_errors'>
                     {errors.map(err => (
-                        <div>
+                        <div key={err}>
                             {err}
                         </div>
                     ))}
@@ -58,12 +58,12 @@ function SceneDisplay({ currentScene, sceneLoaded, setSceneLoaded, thisSceneId, 
                         parentsArr.map(parent => {
                             i++;
                             return (
-                                <div className='scene_parents' key={`parent_${i}`} onClick={() => {
+                                <div className='scene_parents_displayed' key={`parent_${i}`} onClick={() => {
                                     setErrors([])
                                     setThisSceneId(parent.id)
                                 }
                                 } >
-                                    <p>Parent: {parent.title}</p>
+                                    <div>Parent: {parent.title}</div>
                                 </div>
                             )
                         })
@@ -71,11 +71,11 @@ function SceneDisplay({ currentScene, sceneLoaded, setSceneLoaded, thisSceneId, 
                         <div className='scene_parents'></div>
                     }
                 </div>
-                <div>
+                <div className='current_scene'>
                     <div>Current: {currentScene.title}</div>
-                    <div onClick={handleCurrentSceneDelete}>x</div>
+                    <div className='delete_scene' onClick={handleCurrentSceneDelete}>x</div>
                 </div>
-                <div>
+                <div className='scene_children_container'>
                     {currentScene.Choices ? currentScene.Choices.map(scene => {
                         i++
                         return (
@@ -92,7 +92,7 @@ function SceneDisplay({ currentScene, sceneLoaded, setSceneLoaded, thisSceneId, 
                         <div className='scene_children'></div>}
                 </div>
             </div>
-            <div>
+            <div className='add_scene_button_container'>
                 {currentScene.Choices && currentScene.Choices.length < 4 ?
                     <button onClick={makeScene}>Add a scene</button>
                     :

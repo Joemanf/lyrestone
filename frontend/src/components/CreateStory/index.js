@@ -93,8 +93,8 @@ function CreateStory() {
                         setParentsLoaded={setParentsLoaded}
                     />
                     <form onSubmit={handleSubmit} className='story_info_container'>
-                        <div>
-                            <div>
+                        <div className='story_create_name_desc_container'>
+                            <div className='story_create_inputs'>
                                 <label>Story Name</label>
                                 <input
                                     required
@@ -102,7 +102,7 @@ function CreateStory() {
                                     onChange={e => setTitle(e.target.value)}
                                 />
                             </div>
-                            <div>
+                            <div className='story_create_inputs'>
                                 <label>Story Description</label>
                                 <textarea
                                     required
@@ -114,15 +114,13 @@ function CreateStory() {
                         {/* <div>
                             <input type='checkbox' value={published} onClick={e => setPublished(!e.target.value)}>Publish?</input>
                         </div> */}
-                        <div>
-                            <button type='submit'>Save</button>
-                        </div>
-                        {/* I'll deal with publishing later, will require another DB  */}
-                        {/* <div>
+                        <div className='story_create_buttons'>
+                            <button type='submit'>Save Story</button>
+                            {/* I'll deal with publishing later, will require another DB  */}
+                            {/*
                             <button>Publish</button>
-                        </div> */}
-                        <div>
-                            <button onClick={handleDeleteStory}>Delete</button>
+                        */}
+                            <button onClick={handleDeleteStory}>Delete Story</button>
                         </div>
                     </form>
                 </div>

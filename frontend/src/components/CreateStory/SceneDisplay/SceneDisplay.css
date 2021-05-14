@@ -1,3 +1,56 @@
+.scene_display_container {
+    height: 100%;
+    position: relative;
+}
+
 .scene_view{
-    border: 1px solid blueviolet;
+    border: 1px solid white;
+    background-color: #202020;
+    margin: 1em;
+    height: 95%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.scene_parents_displayed, .current_scene, .scene_children {
+    display: flex;
+    border: 1px solid white;
+    background-color: #111111;
+    box-shadow: none;
+    transition: box-shadow .2s ease-in-out;
+    cursor: pointer;
+    padding: 1em;
+    font-size: 1.25em;
+}
+
+.scene_parents_displayed:hover, .current_scene:hover, .scene_children:hover {
+    box-shadow: 0 0 8px #dd686e;
+}
+
+.current_scene {
+    position: relative;
+}
+
+.delete_scene{
+    position: absolute;
+    top: 0;
+    right: .2em;
+    /* border: 1px solid white; */
+    /* padding: .1em .3em; */
+    /* margin: .1em; */
+    /* font-size: .75em; */
+}
+
+.scene_children_container{
+    display: flex;
+    width: 80%;
+    justify-content: space-around;
+}
+
+.add_scene_button_container {
+    position: absolute;
+    top: 2em;
+    right: 2em;
 }
