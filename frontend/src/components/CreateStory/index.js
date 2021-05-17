@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import SceneDisplay from './SceneDisplay/SceneDisplay';
 import ScenesInfo from './SceneInfo/SceneInfo';
-import { useHistory, useParams } from 'react-router-dom';
+import { Redirect, useHistory, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { clearCurrentStory, deleteStory, editStory, getCurrentStory } from '../../store/stories';
 
@@ -85,6 +85,10 @@ function CreateStory() {
     function handleDeleteStory() {
         dispatch(deleteStory(story.id))
             .then(() => handleCreateStoryTransition())
+    }
+
+    if (storyLoaded && sceneLoaded && user.id !== story.userId) {
+        return <Redirect to='/home' />
     }
 
     return storyLoaded && sceneLoaded && (
