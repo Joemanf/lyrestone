@@ -92,6 +92,22 @@
     box-shadow: none;
 }
 
+.choice_and_reqs{
+    position: relative;
+}
+
+.story_reqs_container{
+    position: absolute;
+    display: flex;
+    right: -8em;
+    top: .75em;
+    font-size: .75em;
+}
+
+.story_reqs_container>div{
+    margin: .25em;
+}
+
 .gameover {
     width: 80%;
 }
