@@ -70,7 +70,7 @@ function LoginFormPage() {
             </div>
             <div className='login_container'>
                 <button type="submit">Log In</button>
-                <button onClick={loginAsDemo}>Try it out</button>
+                {/* <button onClick={loginAsDemo}>Try it out</button> */}
             </div>
         </form>
     );
