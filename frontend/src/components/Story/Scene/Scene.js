@@ -13,7 +13,8 @@ function Scene() {
     const param = useParams()
     const [sceneLoaded, setSceneLoaded] = useState(false)
     const [sceneChange, setSceneChange] = useState(false)
-    const [first, setFirst] = useState(false)
+    const [charHidden, setCharHidden] = useState(false)
+    // const [first, setFirst] = useState(false)
     // const [showReqs, setShowReqs] = useState(0)
 
     const currentHP = useSelector(state => state.characters.currentHP)
@@ -83,6 +84,17 @@ function Scene() {
         }, 1000)
     }
 
+    const showCharacter = () => {
+        const charInfo = document.querySelector('.char_info_container');
+        setCharHidden(!charHidden);
+        if (charHidden) {
+            charInfo.className = 'hidden char_info_container'
+        }
+        else {
+            charInfo.className = 'char_info_container'
+        }
+    }
+
     if (currentHP <= 0) {
         return sceneLoaded && (
             <div className='scene_gameover_container'>
@@ -107,6 +119,50 @@ function Scene() {
             <div className='health_outer'>
                 <Health />
             </div>
+            <div className='character_outer'>
+                <button onClick={showCharacter}>Character</button>
+                <div className='hidden char_info_container'>
+                    <div className='character_info_singular'>
+                        <div>Name:</div>
+                        <div>{selectedCharacter.name}</div>
+                    </div>
+                    <div className='character_info_singular'>
+                        <div>Class:</div>
+                        <div>{selectedCharacter.class}</div>
+                    </div>
+                    <div className='character_info_singular'>
+                        <div>Strength:</div>
+                        <div>{selectedCharacter.strength}</div>
+                    </div>
+                    <div className='character_info_singular'>
+                        <div>Dexterity:</div>
+                        <div>{selectedCharacter.dexterity}</div>
+                    </div>
+                    <div className='character_info_singular'>
+                        <div>Constitution:</div>
+                        <div>{selectedCharacter.constitution}</div>
+                    </div>
+                    <div className='character_info_singular'>
+                        <div>Intelligence:</div>
+                        <div>{selectedCharacter.intelligence}</div>
+                    </div>
+                    <div className='character_info_singular'>
+                        <div>Wisdom:</div>
+                        <div>{selectedCharacter.wisdom}</div>
+                    </div>
+                    <div className='character_info_singular'>
+                        <div>Charisma:</div>
+                        <div>{selectedCharacter.charisma}</div>
+                    </div>
+                </div>
+            </div>
+            {/* <div className='scene_display_instructions' onClick={e => setHidden(!hidden)}> Help
+                        <div id='instructions_container_1' className='instructions_container'>
+                    <div id='instructions_1' className='hidden'>To add a scene, click the button at the top right.</div>
+                    <div id='instructions_2' className='hidden'>To delete a scene, click the x.</div>
+                    <div id='instructions_3' className='hidden'>To switch between scenes, simply click on them.</div>
+                </div>
+            </div> */}
             <div className='scene_container_sans_health'>
                 <div className='scene_container'>
                     <div className='scene_filler'></div>
