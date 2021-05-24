@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
+import * as sessionActions from '../../store/session';
 import { NavLink, Redirect, useHistory } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import './Splash.css'
 import logo from '../../images/lyrestone.png'
@@ -9,6 +10,7 @@ import logo from '../../images/lyrestone.png'
 function Splash() {
     const sessionUser = useSelector((state) => state.session.user); // Grabbing logged in user
     const history = useHistory();
+    const dispatch = useDispatch();
 
     useEffect(() => {
         const pageTransition = document.querySelector('.page_transition')
@@ -56,6 +58,10 @@ function Splash() {
         }, 1000)
     }
 
+    const loginAsDemo = (e) => {
+        return dispatch(sessionActions.login({ credential: 'Demo-lition', password: 'password' }))
+    }
+
     if (sessionUser) return <Redirect to="/home" />; // Change to history.push might fix the store
 
     return (
@@ -70,6 +76,9 @@ function Splash() {
                 <div className='inner_links'>
                     <button onClick={handleLoginTransition}>
                         <div>Log In</div>
+                    </button>
+                    <button onClick={loginAsDemo}>
+                        <div className='login_as_demo'>Log In as Demo</div>
                     </button>
                     <button onClick={handleSignupTransition}>
                         <div>Sign Up</div>

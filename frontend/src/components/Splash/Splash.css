@@ -126,7 +126,7 @@ body{
 .inner_links{
     display: flex;
     justify-content: space-between;
-    width: 10em;
+    width: 18em;
     font-size: 3em;
     /* animation-name: lyrestone_links_intro; */
     /* animation-duration: 3s; */
@@ -146,6 +146,11 @@ body{
 .inner_links button {
     font-size: 1em;
     padding: .5em;
+    /* margin: 0 1em; */
+}
+
+.login_as_demo{
+    font-size: .85em;
 }
 
 .inner_links a {
