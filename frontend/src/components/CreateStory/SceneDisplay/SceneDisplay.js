@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { createScene, deleteScene, getCurrentScene, getParents } from '../../../store/scenes';
 
@@ -11,6 +11,27 @@ function SceneDisplay({ currentScene, sceneLoaded, setSceneLoaded, thisSceneId, 
     const [errors, setErrors] = useState([])
     // const currentScene = useSelector(state => state.scenes.currentScene)
     let parentsArr = useSelector(state => state.scenes.parents)
+
+    const [hidden, setHidden] = useState(true)
+
+    useEffect(() => {
+        const inst1 = document.querySelector('#instructions_1');
+        const inst2 = document.querySelector('#instructions_2');
+        const inst3 = document.querySelector('#instructions_3');
+        const container = document.querySelector('#instructions_container_1')
+        if (hidden) {
+            inst1.className = 'hidden'
+            inst2.className = 'hidden'
+            inst3.className = 'hidden'
+            container.className = 'hidden instructions_container'
+        }
+        else {
+            inst1.className = ''
+            inst2.className = ''
+            inst3.className = ''
+            container.className = 'instructions_container'
+        }
+    }, [hidden])
 
     function makeScene() {
         setSceneLoaded(false)
@@ -74,6 +95,13 @@ function SceneDisplay({ currentScene, sceneLoaded, setSceneLoaded, thisSceneId, 
                 <div className='current_scene'>
                     <div>Current: {currentScene.title}</div>
                     <div className='delete_scene' onClick={handleCurrentSceneDelete}>x</div>
+                    <div className='scene_display_instructions' onClick={e => setHidden(!hidden)}> Help
+                        <div id='instructions_container_1' className='instructions_container'>
+                            <div id='instructions_1' className='hidden'>To add a scene, click the button at the top right.</div>
+                            <div id='instructions_2' className='hidden'>To delete a scene, click the x.</div>
+                            <div id='instructions_3' className='hidden'>To switch between scenes, simply click on them.</div>
+                        </div>
+                    </div>
                 </div>
                 <div className='scene_children_container'>
                     {currentScene.Choices ? currentScene.Choices.map(scene => {
@@ -104,95 +132,3 @@ function SceneDisplay({ currentScene, sceneLoaded, setSceneLoaded, thisSceneId, 
 }
 
 export default SceneDisplay
-
-// import React, { useEffect, useState } from 'react';
-// import { useDispatch, useSelector } from 'react-redux';
-// import { csrfFetch } from '../../../store/csrf';
-// import { clearCurrentScene, createScene, deleteScene, getCurrentScene, getParents } from '../../../store/scenes';
-
-// import './SceneDisplay.css'
-
-// function SceneDisplay() {
-//     const dispatch = useDispatch()
-//     const [sceneLoaded, setSceneLoaded] = useState(false);
-//     const [parentsLoaded, setParentsLoaded] = useState(false);
-//     const currentStory = useSelector(state => state.stories.currentStory)
-//     const currentScene = useSelector(state => state.scenes.currentScene)
-//     let parentsArr = useSelector(state => state.scenes.parents)
-
-//     const [thisSceneId, setThisSceneId] = useState(currentScene.id)
-
-//     function makeScene() {
-//         setSceneLoaded(false)
-//         dispatch(createScene(currentScene.id, currentStory.id))
-//     }
-
-//     // function handleSceneDelete(id) {
-//     //     setSceneLoaded(false)
-//     //     dispatch(deleteScene(id))
-//     // }
-
-//     // function handleCurrentSceneDelete() {
-//     //     if (currentScene.Choices && currentScene.Choices.length) {
-//     //         return // "Scene must not have any children"
-//     //     }
-//     //     setSceneLoaded(false)
-//     //     dispatch(deleteScene(currentScene.id))
-//     // }
-
-//     useEffect(() => {
-//         dispatch(clearCurrentScene());
-//         dispatch(getCurrentScene(thisSceneId)).then(() => setSceneLoaded(true))
-//         dispatch(getParents(thisSceneId)).then(() => setParentsLoaded(true))
-//     }, [sceneLoaded, parentsLoaded, thisSceneId])
-
-//     let i = 0;
-
-//     // parentsLoaded && sceneLoaded &&
-//     return sceneLoaded && (
-//         <div>
-//             <div className='scene_view'>
-//                 <div>
-//                     {parentsArr && parentsArr.length ?
-//                         parentsArr.map(parent => {
-//                             i++;
-//                             return (
-//                                 <div className='scene_parents' key={`parent_${i}`} onClick={() => setThisSceneId(parent.id)}>
-//                                     <p>Parent: {parent.title}</p>
-//                                 </div>
-//                             )
-//                         })
-//                         :
-//                         <div className='scene_parents'></div>
-//                     }
-//                 </div>
-//                 <div>
-//                     <div>Current: {currentScene.title}</div>
-//                     <div onClick={handleCurrentSceneDelete}>x</div>
-//                 </div>
-//                 <div>
-//                     {currentScene.Choices ? currentScene.Choices.map(scene => {
-//                         i++
-//                         return (
-//                             <div className='scene_children' key={`scene_${i}`}>
-//                                 <div onClick={() => setThisSceneId(scene.nextSceneId)}>{scene.body}</div>
-//                                 <div onClick={handleSceneDelete}>x</div>
-//                             </div>
-//                         )
-//                     })
-//                         :
-//                         <div className='scene_children'></div>}
-//                 </div>
-//             </div>
-//             <div>
-//                 {currentScene.Choices && currentScene.Choices.length < 4 ?
-//                     <button onClick={makeScene}>Add a scene</button>
-//                     :
-//                     <button className='button_disabled'>Add a scene</button>
-//                 }
-//             </div>
-//         </div>
-//     )
-// }
-
-// export default SceneDisplay

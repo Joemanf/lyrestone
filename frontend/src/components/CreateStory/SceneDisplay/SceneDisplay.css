@@ -43,6 +43,24 @@
     /* font-size: .75em; */
 }
 
+.instructions_container{
+    background-color: #141414;
+    border: 1px solid black;
+    padding: 1em;
+}
+
+.scene_display_instructions{
+    font-size: .7em;
+    text-align: center;
+    position: fixed;
+    right: 2em;
+    top: 29%;
+}
+
+.hidden {
+    opacity: 0;
+}
+
 .scene_children_container{
     display: flex;
     width: 80%;
