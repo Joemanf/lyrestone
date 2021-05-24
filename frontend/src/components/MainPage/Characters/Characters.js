@@ -11,6 +11,7 @@ function Characters() {
     const history = useHistory()
 
     const [selected, setSelected] = useState(0)
+    const [charHidden, setCharHidden] = useState(false)
 
     const user = useSelector(state => state.session.user)
     const characters = useSelector(state => state.characters.characters)
@@ -40,6 +41,17 @@ function Characters() {
         }, 1000)
     }
 
+    const showCharacter = (characterId) => {
+        const charInfo = document.querySelector(`#main_page_char_${characterId}`);
+        setCharHidden(!charHidden);
+        if (charHidden) {
+            charInfo.className = 'hidden char_info_container'
+        }
+        else {
+            charInfo.className = 'char_info_container'
+        }
+    }
+
     const logout = (e) => {
         e.preventDefault();
         handleLogoutTransition()
@@ -55,7 +67,7 @@ function Characters() {
                     <h2>
                         Characters:
                     </h2>
-                    <button className='button_disabled' disabled={true}>Add a character</button>
+                    {/* <button className='button_disabled' disabled={true}>Add a character</button> */}
                 </div>
                 <div className='main_characters_container'>
                     <div>
@@ -68,7 +80,43 @@ function Characters() {
                                         onClick={e => selectCharacter(character.id)}
                                     >
                                         <div className='character_name_class'>
-                                            <div>view</div>
+                                            <div className='view_outer' >
+                                                <div onClick={e => showCharacter(character.id)}>view</div>
+                                                <div id={`main_page_char_${character.id}`} className='hidden char_info_container'>
+                                                    <div className='character_info_singular'>
+                                                        <div>Name:</div>
+                                                        <div>{character.name}</div>
+                                                    </div>
+                                                    <div className='character_info_singular'>
+                                                        <div>Class:</div>
+                                                        <div>{character.class}</div>
+                                                    </div>
+                                                    <div className='character_info_singular'>
+                                                        <div>Strength:</div>
+                                                        <div>{character.strength}</div>
+                                                    </div>
+                                                    <div className='character_info_singular'>
+                                                        <div>Dexterity:</div>
+                                                        <div>{character.dexterity}</div>
+                                                    </div>
+                                                    <div className='character_info_singular'>
+                                                        <div>Constitution:</div>
+                                                        <div>{character.constitution}</div>
+                                                    </div>
+                                                    <div className='character_info_singular'>
+                                                        <div>Intelligence:</div>
+                                                        <div>{character.intelligence}</div>
+                                                    </div>
+                                                    <div className='character_info_singular'>
+                                                        <div>Wisdom:</div>
+                                                        <div>{character.wisdom}</div>
+                                                    </div>
+                                                    <div className='character_info_singular'>
+                                                        <div>Charisma:</div>
+                                                        <div>{character.charisma}</div>
+                                                    </div>
+                                                </div>
+                                            </div>
                                             <h3 className='character_name'>{character.name}</h3>
                                             <div className='character_class'>{character.class}</div>
                                         </div>
@@ -83,7 +131,43 @@ function Characters() {
                                         onClick={e => selectCharacter(character.id)}
                                     >
                                         <div className='character_name_class'>
-                                            <div>view</div>
+                                            <div className='view_outer'>
+                                                <div onClick={e => showCharacter(character.id)}>view</div>
+                                                <div id={`main_page_char_${character.id}`} className='hidden char_info_container'>
+                                                    <div className='character_info_singular'>
+                                                        <div>Name:</div>
+                                                        <div>{character.name}</div>
+                                                    </div>
+                                                    <div className='character_info_singular'>
+                                                        <div>Class:</div>
+                                                        <div>{character.class}</div>
+                                                    </div>
+                                                    <div className='character_info_singular'>
+                                                        <div>Strength:</div>
+                                                        <div>{character.strength}</div>
+                                                    </div>
+                                                    <div className='character_info_singular'>
+                                                        <div>Dexterity:</div>
+                                                        <div>{character.dexterity}</div>
+                                                    </div>
+                                                    <div className='character_info_singular'>
+                                                        <div>Constitution:</div>
+                                                        <div>{character.constitution}</div>
+                                                    </div>
+                                                    <div className='character_info_singular'>
+                                                        <div>Intelligence:</div>
+                                                        <div>{character.intelligence}</div>
+                                                    </div>
+                                                    <div className='character_info_singular'>
+                                                        <div>Wisdom:</div>
+                                                        <div>{character.wisdom}</div>
+                                                    </div>
+                                                    <div className='character_info_singular'>
+                                                        <div>Charisma:</div>
+                                                        <div>{character.charisma}</div>
+                                                    </div>
+                                                </div>
+                                            </div>
                                             <h3 className='character_name'>{character.name}</h3>
                                             <div className='character_class'>{character.class}</div>
                                         </div>

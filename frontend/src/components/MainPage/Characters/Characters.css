@@ -60,6 +60,27 @@
 
 .character_name_class{
     margin: .5em;
+    /* display: flex; */
+    /* flex-direction: column; */
+    /* justify-content: center; */
+    /* margin-top: 4em; */
+}
+
+.character_name {
+    margin-top: 2em;
+}
+
+.view_outer{
+    position: absolute;
+    /* top: 1em; */
+    cursor: pointer;
+}
+
+.char_info_container{
+    background-color: #141414;
+    position: relative;
+    right: -3em;
+    top: -2em;
 }
 
 .character_img_container {
