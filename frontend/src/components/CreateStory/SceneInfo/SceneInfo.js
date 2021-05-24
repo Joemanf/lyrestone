@@ -194,6 +194,10 @@ function ScenesInfo({
                 <textarea className='scene_info_body' value={body} onChange={e => setBody(e.target.value)} />
             </div>
             <div className='other_options'>
+                {currentScene.root ?
+                    <div>The root scene's HP and stats cannot be changed.</div>
+                    : null
+                }
                 <div>
                     {/* <div>
                         <label>Background Image</label>
