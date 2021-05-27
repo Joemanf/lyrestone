@@ -29,9 +29,12 @@
 }
 
 .char_info_container {
+    position: absolute;
+    top: 1em;
+    left: -8em;
     border: 1px solid white;
     width: 15em;
-    margin-top: .5em;
+    margin-top: 1.5em;
     padding: .5em;
 }
 
