@@ -76,8 +76,11 @@
     cursor: pointer;
 }
 
-.char_info_container{
+.char_info_container_characters{
     background-color: #141414;
+    border: 1px solid white;
+    width: 15em;
+    padding: .75em;
     position: relative;
     right: -3em;
     top: -2em;

@@ -45,10 +45,10 @@ function Characters() {
         const charInfo = document.querySelector(`#main_page_char_${characterId}`);
         setCharHidden(!charHidden);
         if (charHidden) {
-            charInfo.className = 'hidden char_info_container'
+            charInfo.className = 'hidden char_info_container_characters'
         }
         else {
-            charInfo.className = 'char_info_container'
+            charInfo.className = 'char_info_container_characters'
         }
     }
 
@@ -82,7 +82,7 @@ function Characters() {
                                         <div className='character_name_class'>
                                             <div className='view_outer' >
                                                 <div onClick={e => showCharacter(character.id)}>view</div>
-                                                <div id={`main_page_char_${character.id}`} className='hidden char_info_container'>
+                                                <div id={`main_page_char_${character.id}`} className='hidden char_info_container_characters'>
                                                     <div className='character_info_singular'>
                                                         <div>Name:</div>
                                                         <div>{character.name}</div>
@@ -133,7 +133,7 @@ function Characters() {
                                         <div className='character_name_class'>
                                             <div className='view_outer'>
                                                 <div onClick={e => showCharacter(character.id)}>view</div>
-                                                <div id={`main_page_char_${character.id}`} className='hidden char_info_container'>
+                                                <div id={`main_page_char_${character.id}`} className='hidden char_info_container_characters'>
                                                     <div className='character_info_singular'>
                                                         <div>Name:</div>
                                                         <div>{character.name}</div>
