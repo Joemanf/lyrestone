@@ -38,16 +38,18 @@ function MainPage() {
                 <Characters />
                 <Stories />
             </div>
-            {/* {sessionUser.id === 1 ? */}
-            <div>
+            <div className='info_artists_container'>
+                <div className='info_container'>
+                    <p className='info_title'>My links:</p>
+                    <a href='https://github.com/Joemanf'>Github</a>
+                    <a href='https://www.linkedin.com/in/bryan-thomas-108b891b5/'>Linkedin</a>
+                </div>
                 <div className={'artists_container'}>
-                    <p className={'artists_title'}>Like the characters' artists?</p>
+                    <p className={'info_title'}>Like the characters' artists?</p>
                     <a href='https://www.ochrogaster.com/'>Jay Kim's Art</a>
                     <a href='https://joeisdead.com/'>Read "Joe is Dead" by Lev Levinson</a>
                 </div>
             </div>
-            {/* : null */}
-            {/* } */}
         </>
     )
 }
