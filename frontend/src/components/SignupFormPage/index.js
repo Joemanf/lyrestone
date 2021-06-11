@@ -26,14 +26,20 @@ function SignupFormPage() {
 
     const handleSubmit = (e) => {
         e.preventDefault();
+        // if (email.includes("@") && email.includes("."))
         if (password === confirmPassword) {
             setErrors([]);
             return dispatch(sessionActions.signup({ email, username, password, image, }))
-                .then(() => {
+                .then((data) => {
                     setUsername("");
                     setEmail("");
                     setPassword("");
+                    setConfirmPassword("");
                     setImage(null);
+                    if (data.valErrs.length) {
+                        setErrors(data.valErrs)
+                    }
+                    // console.log('DATA HERE!!!!!!!!!!', data)
                 })
                 .catch(async (res) => {
                     const data = await res.json(); // Bug here (Maybe), fix later

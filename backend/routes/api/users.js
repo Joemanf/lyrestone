@@ -39,7 +39,7 @@ router.post(
         const { email, password, username } = req.body; // Grab the info from the req
 
         const valErrs = []
-        if (!email.split('').includes('@') && !email.split('').includes('.') && email.length < 1) {
+        if (!email.split('').includes('@') || !email.split('').includes('.') || email.length < 1) {
             valErrs.push('Please provide a valid email.')
         }
         if (username.length < 4) {
@@ -53,7 +53,8 @@ router.post(
         }
         let profileImageUrl;
         if (valErrs.length) {
-            return res.json({ valErrs })
+            // res.status(403)
+            return res.send({ valErrs })
         }
         if (req.file) {
             profileImageUrl = await singlePublicFileUpload(req.file); // Grab the image uploaded b y the user
@@ -89,6 +90,7 @@ router.post(
 
         return res.json({
             user,
+            valErrs
         });
     }),
 );
