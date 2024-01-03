@@ -10,6 +10,9 @@
     "start:development": "nodemon -r dotenv/config ./bin/www",
     "start:production": "node ./bin/www"
   },
+  "engines": {
+    "node": "18.13.0"
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",
