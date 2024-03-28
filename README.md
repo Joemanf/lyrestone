@@ -22,3 +22,22 @@ When a user is logged in, it takes them to the main story page, where a selectio
 ## Story Creation (MVP #2)
 Users can create their own stories as well by selecting the "Make a story" button at the top-right of the main page. When selected, it will take the user to a newly created story that has basic information already implemented. The user starts with a "Root" of the story, which has limited editing capabilites and cannot be deleted. The title and the body of the root, however, can be. The title is what will show up as the bold text in a story, while the body will be the text that is displayed below that. The title is also what the text of the "next choice" will be. The user can click the "Add a Scene" button at the top-right of the screen, which will add a scene as a child to the current scene (maximum of 4 scenes). If the scene is not the root, the player can edit the section to change HP, as well as the requirements to enter that scene (noted by the 6 stats). To switch between scenes, a player should click on them. If a scene has no children, it is considered the end of the story, and the text "Game Over" will be displayed. When a user is satisfied with their story, they should change the story name and dexription and hit "Save Story" (all at the bottom right). The user who is the owner of said story can edit the story any time they wish by clicking the "edit" button on the main page next to their story. <br />
 ![edit story](https://user-images.githubusercontent.com/58833052/121407261-1e0fdf00-c92d-11eb-9b07-f9d70613427d.png)
+
+## Run Locally
+To run this app locally, follow these steps:
+- Open your terminal and clone down this repo
+- Install node v14.15.4
+- Install postgresql v16
+- Navigate to both frontend and backend and run npm i
+- Open up psql (by typing psql into the command line)
+  - If you do not have a superuser, create one
+  - Run the command CREATE DATABASE lyrestone;
+  - Exit psql by typing \q
+- Create an .env file using the .env.example (you can just duplicate this file and remove the .example from the file name)
+- In the backend folder, run these commands:
+  - npx dotenv sequelize db:migrate
+  - npx dotenv sequelize db\:seed:all (no \ in the command)
+- Run npm start
+- Open a new terminal window and navigate to the frontend folder
+- Run npm start
+- Enjoy!
