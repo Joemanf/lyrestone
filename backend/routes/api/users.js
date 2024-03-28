@@ -73,7 +73,7 @@ router.post(
             intelligence: 3,
             wisdom: 5,
             charisma: 7,
-            avatar: `https://cdn.discordapp.com/attachments/661999012873764935/839327174892060697/EUGENE_shorter_neck.png`,
+            avatar: `https://i.imgur.com/dL0B2IR.png`,
         })
         await Character.create({
             name: 'Frogmouth',
@@ -85,7 +85,7 @@ router.post(
             intelligence: 6,
             wisdom: 6,
             charisma: 8,
-            avatar: 'https://cdn.discordapp.com/attachments/487051902379622421/839608831528796220/unknown.png',
+            avatar: 'https://i.imgur.com/jTXqpP9.png',
         })
 
         return res.json({
