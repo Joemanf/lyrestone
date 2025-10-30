@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Redirect } from "react-router-dom";
+import { Navigate } from "react-router-dom";
 import * as sessionActions from "../../store/session";
 
 import './SignupForm.css'
@@ -22,7 +22,7 @@ function SignupFormPage() {
         }, 500)
     }, [])
 
-    if (sessionUser) return <Redirect to="/home" />; // Change to history.push might fix the store
+    if (sessionUser) return <Navigate to="/home" replace />; // Change to history.push might fix the store
 
     const handleSubmit = (e) => {
         e.preventDefault();

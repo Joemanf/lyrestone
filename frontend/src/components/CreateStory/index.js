@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import SceneDisplay from './SceneDisplay/SceneDisplay';
 import ScenesInfo from './SceneInfo/SceneInfo';
-import { Redirect, useHistory, useParams } from 'react-router-dom';
+import { useParams, useNavigate, Navigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { clearCurrentStory, deleteStory, editStory, getCurrentStory } from '../../store/stories';
 
@@ -10,7 +10,7 @@ import { clearCurrentScene, getCurrentScene, getParents } from '../../store/scen
 
 function CreateStory() {
     const dispatch = useDispatch()
-    const history = useHistory()
+    const navigate = useNavigate();
     const { storyId } = useParams()
     const [storyLoaded, setStoryLoaded] = useState(false)
     const [sceneLoaded, setSceneLoaded] = useState(false)
@@ -70,7 +70,7 @@ function CreateStory() {
             pageTransition.style.opacity = '0'
         }, 0)
         setTimeout(() => {
-            history.push('/home')
+            navigate('/home');
         }, 1000)
     }
 
@@ -88,7 +88,7 @@ function CreateStory() {
     }
 
     if (storyLoaded && sceneLoaded && user.id !== story.userId) {
-        return <Redirect to='/home' />
+        return <Navigate to="/" replace />;
     }
 
     return storyLoaded && sceneLoaded && (

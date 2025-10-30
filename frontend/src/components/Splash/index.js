@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import * as sessionActions from '../../store/session';
-import { NavLink, Redirect, useHistory } from 'react-router-dom';
+import { useNavigate, Navigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 
 import './Splash.css'
@@ -9,7 +9,7 @@ import logo from '../../images/lyrestone.png'
 
 function Splash() {
     const sessionUser = useSelector((state) => state.session.user); // Grabbing logged in user
-    const history = useHistory();
+    const navigate = useNavigate();
     const dispatch = useDispatch();
 
     useEffect(() => {
@@ -44,7 +44,7 @@ function Splash() {
             pageTransition.style.opacity = '0'
         }, 0)
         setTimeout(() => {
-            history.push('/login')
+            navigate('/login')
         }, 1000)
     }
 
@@ -54,7 +54,7 @@ function Splash() {
             pageTransition.style.opacity = '0'
         }, 0)
         setTimeout(() => {
-            history.push('/signup')
+            navigate('/signup')
         }, 1000)
     }
 
@@ -62,7 +62,7 @@ function Splash() {
         return dispatch(sessionActions.login({ credential: 'Demo-lition', password: 'password' }))
     }
 
-    if (sessionUser) return <Redirect to="/home" />; // Change to history.push might fix the store
+    if (sessionUser) return <Navigate to="/home" replace />; // Change to navigate might fix the store
 
     return (
         <div className='wrap'>

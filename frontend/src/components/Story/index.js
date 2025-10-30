@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { Redirect, useParams } from 'react-router-dom'
+import { Navigate, useParams } from 'react-router-dom'
 import { clearCurrentStory, getCurrentStory } from '../../store/stories'
 
 function Story() {
@@ -29,7 +29,7 @@ function Story() {
                 firstScene = scene
             }
         })
-        return <Redirect to={`/stories/${story.id}/${firstScene.id}`} />
+        return <Navigate to={`/stories/${story.id}/${firstScene.id}`} replace />
     }
 
     return storyLoaded && (

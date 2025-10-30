@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import * as sessionActions from '../../store/session';
 import { useDispatch, useSelector } from 'react-redux';
-import { Redirect } from 'react-router-dom';
+import { Navigate } from 'react-router-dom';
 
 import './LoginForm.css';
 
@@ -20,7 +20,7 @@ function LoginFormPage() {
     }, [])
 
     if (sessionUser) return (
-        <Redirect to="/home" />
+        <Navigate to="/home" replace />
     );
 
     const handleSubmit = (e) => {

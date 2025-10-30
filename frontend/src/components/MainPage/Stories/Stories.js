@@ -1,13 +1,13 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link, useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { makeStory } from '../../../store/stories';
 
 import './Stories.css'
 
 function Stories() {
     const dispatch = useDispatch()
-    const history = useHistory();
+    const navigate = useNavigate();
     const userId = useSelector(state => state.session.user.id);
     const stories = useSelector(state => state.stories.stories);
     const selectedCharacter = useSelector(state => state.characters.selectedChar);
@@ -28,7 +28,7 @@ function Stories() {
             pageTransition.style.opacity = '0'
         }, 0)
         setTimeout(() => {
-            history.push(`/create/${story.story.id}`)
+            navigate(`/create/${story.story.id}`)
         }, 1000)
     }
 
@@ -57,7 +57,7 @@ function Stories() {
                                     pageTransition.style.opacity = '0'
                                 }, 0)
                                 setTimeout(() => {
-                                    history.push(`/stories/${story.id}`)
+                                    navigate(`/stories/${story.id}`)
                                 }, 1000)
                             }
 
@@ -67,7 +67,7 @@ function Stories() {
                                     pageTransition.style.opacity = '0'
                                 }, 0)
                                 setTimeout(() => {
-                                    history.push(`/create/${story.id}`)
+                                    navigate(`/create/${story.id}`)
                                 }, 1000)
                             }
 

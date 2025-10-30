@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { Link, Redirect, useHistory, useParams } from 'react-router-dom'
+import { useParams, useNavigate, Navigate } from 'react-router-dom';
 import { setHP, setOriginalCurrentHp } from '../../../store/characters'
 import { clearCurrentScene, getCurrentScene } from '../../../store/scenes'
 import Health from '../../Tests/TestDummyHp'
@@ -9,7 +9,7 @@ import "./Scene.css"
 
 function Scene() {
     const dispatch = useDispatch()
-    const history = useHistory()
+    const navigate = useNavigate()
     const param = useParams()
     const [sceneLoaded, setSceneLoaded] = useState(false)
     const [sceneChange, setSceneChange] = useState(false)
@@ -30,7 +30,7 @@ function Scene() {
     const selectedCharacter = selectedCharacterTemp[characterId];
 
     // if (!selectedCharacter) {
-    //     return (<Redirect to='/' />)
+    //     return (<Navigate to="/" replace />)
     // }
 
     const choicesArr = scene.Choices;
@@ -71,7 +71,7 @@ function Scene() {
     // })
 
     if (!selectedCharacter) {
-        return <Redirect to='/' />
+        return <Navigate to="/" replace />
     }
 
     const handleGameOverTransition = () => {
@@ -80,7 +80,7 @@ function Scene() {
             pageTransition.style.opacity = '0'
         }, 0)
         setTimeout(() => {
-            history.push('/home')
+            navigate('/home')
         }, 1000)
     }
 
@@ -185,7 +185,7 @@ function Scene() {
                                     pageTransition.style.opacity = '0'
                                 }, 0)
                                 setTimeout(() => {
-                                    history.push(`/stories/${scene.storyId}/${choice.nextSceneId}`)
+                                    navigate(`/stories/${scene.storyId}/${choice.nextSceneId}`)
                                 }, 1000)
                             }
 

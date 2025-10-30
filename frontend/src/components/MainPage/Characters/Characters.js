@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useHistory } from 'react-router';
+import {  useNavigate } from 'react-router-dom';
 import { clearSelectedCharacter, selectACharacter } from '../../../store/characters';
 import * as sessionActions from '../../../store/session';
 
@@ -8,7 +8,7 @@ import './Characters.css'
 
 function Characters() {
     const dispatch = useDispatch()
-    const history = useHistory()
+    const navigate = useNavigate();
 
     const [selected, setSelected] = useState(0)
     const [charHidden, setCharHidden] = useState(false)
@@ -37,7 +37,7 @@ function Characters() {
             pageTransition.style.opacity = '0'
         }, 0)
         setTimeout(() => {
-            history.push('/')
+            navigate('/');
         }, 1000)
     }
 

@@ -4,7 +4,7 @@ import Stories from './Stories/Stories'
 
 import './MainPage.css'
 import { useDispatch, useSelector } from 'react-redux';
-import { Redirect } from 'react-router';
+import { Navigate } from 'react-router';
 import { clearCurrentStory, clearStories, getAllStories } from '../../store/stories';
 import { clearAllCharacters, getAllUserCharacters, setHP } from '../../store/characters';
 
@@ -30,7 +30,7 @@ function MainPage() {
         dispatch(getAllUserCharacters()).then(() => setIsCharactersLoaded(true))
     }, [dispatch])
 
-    if (!sessionUser) return <Redirect to="/" />;
+    if (!sessionUser) return <Navigate to="/" replace />;
 
     return isStoriesLoaded && isCharactersLoaded && (
         <>

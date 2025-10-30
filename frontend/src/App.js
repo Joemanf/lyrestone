@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { Route, Switch } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import LoginFormPage from "./components/LoginFormPage";
 import SignupFormPage from "./components/SignupFormPage";
 import * as sessionActions from "./store/session";
@@ -24,29 +24,15 @@ function App() {
       {isLoaded && (
         <div className='son_of_root'>
           <div className='page_transition'>
-            <Switch>
-              <Route exact path='/' >
-                <Splash />
-              </Route>
-              <Route path="/login">
-                <LoginFormPage />
-              </Route>
-              <Route path="/signup">
-                <SignupFormPage />
-              </Route>
-              <Route path="/home">
-                <MainPage />
-              </Route>
-              <Route exact path="/stories/:storyId">
-                <Story />
-              </Route>
-              <Route path="/stories/:storyId/:sceneId">
-                <Scene />
-              </Route>
-              <Route path="/create/:storyId">
-                <CreateStory />
-              </Route>
-            </Switch>
+            <Routes>
+              <Route path='/' element={<Splash />} />
+              <Route path="/login" element={<LoginFormPage />} />
+              <Route path="/signup" element={<SignupFormPage />} />
+              <Route path="/home" element={<MainPage />} />
+              <Route path="/stories/:storyId" element={<Story />} />
+              <Route path="/stories/:storyId/:sceneId" element={<Scene />} />
+              <Route path="/create/:storyId" element={<CreateStory />} />
+            </Routes>
           </div>
         </div>
       )}

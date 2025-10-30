@@ -26,8 +26,8 @@ Users can create their own stories as well by selecting the "Make a story" butto
 ## Run Locally
 To run this app locally, follow these steps:
 - Open your terminal and clone down this repo
-- Install node v14.15.4
-- Install postgresql v16
+- Install node v24.1.0
+- Install postgresql v17
 - Navigate to both frontend and backend and run npm i
 - Open up psql (by typing psql into the command line)
   - If you do not have a superuser, create one
